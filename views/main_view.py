@@ -6,7 +6,7 @@ import constants
 from dtos.message import Message
 from enums.message_type import MessageType
 from views.styles import menu_button_style
-from views.ui.ui_main_view import Ui_MainWindow
+from views.ui.converted.ui_main_view import Ui_MainWindow
 
 
 class MainView(QMainWindow, Ui_MainWindow):
