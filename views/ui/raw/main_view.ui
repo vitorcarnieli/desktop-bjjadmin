@@ -118,7 +118,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="btn_menu_account">
+           <widget class="QPushButton" name="btn_menu_lessons">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -149,7 +149,7 @@ QPushButton:hover {
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="btn_menu_group">
+           <widget class="QPushButton" name="btn_menu_student">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -686,7 +686,7 @@ QCalendarWidget QAbstractItemView::item:hover {
          <number>0</number>
         </property>
         <item>
-         <widget class="QLabel" name="label_manage_groups">
+         <widget class="QLabel" name="label_manage_students">
           <property name="font">
            <font>
             <pointsize>13</pointsize>
@@ -701,7 +701,7 @@ QCalendarWidget QAbstractItemView::item:hover {
          </widget>
         </item>
         <item>
-         <widget class="Line" name="line_manage_groups">
+         <widget class="Line" name="line_manage__students">
           <property name="styleSheet">
            <string notr="true"> border: none;
                         background: #4F9AFE;</string>
@@ -712,7 +712,7 @@ QCalendarWidget QAbstractItemView::item:hover {
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="layout_buttons_manage_groups">
+         <layout class="QHBoxLayout" name="layout_buttons_manage_students">
           <item>
            <spacer name="horizontalSpacer_9">
             <property name="orientation">
@@ -727,7 +727,7 @@ QCalendarWidget QAbstractItemView::item:hover {
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="btn_add_group">
+           <widget class="QPushButton" name="btn_add_student">
             <property name="minimumSize">
              <size>
               <width>130</width>
@@ -766,7 +766,7 @@ QCalendarWidget QAbstractItemView::item:hover {
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="btn_remove_group">
+           <widget class="QPushButton" name="btn_remove_student">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -823,7 +823,7 @@ QCalendarWidget QAbstractItemView::item:hover {
          </layout>
         </item>
         <item>
-         <widget class="QTableWidget" name="table_groups">
+         <widget class="QTableWidget" name="table_students">
           <property name="styleSheet">
            <string notr="true">QTableWidget{
                         background: #F0F3F6;

@@ -46,9 +46,9 @@ class Ui_MainWindow(object):
         self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout_2.addWidget(self.label)
-        self.btn_menu_account = QtWidgets.QPushButton(parent=self.layout_top_menu)
-        self.btn_menu_account.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_menu_account.setStyleSheet("QPushButton {\n"
+        self.btn_menu_lessons = QtWidgets.QPushButton(parent=self.layout_top_menu)
+        self.btn_menu_lessons.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_menu_lessons.setStyleSheet("QPushButton {\n"
 "    color: rgb(255, 255, 255);\n"
 "    border: 0px solid;\n"
 "    border-radius: 20px;\n"
@@ -62,12 +62,12 @@ class Ui_MainWindow(object):
 "}")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(".\\../icons/lesson.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_menu_account.setIcon(icon)
-        self.btn_menu_account.setObjectName("btn_menu_account")
-        self.verticalLayout_2.addWidget(self.btn_menu_account)
-        self.btn_menu_group = QtWidgets.QPushButton(parent=self.layout_top_menu)
-        self.btn_menu_group.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_menu_group.setStyleSheet("QPushButton {\n"
+        self.btn_menu_lessons.setIcon(icon)
+        self.btn_menu_lessons.setObjectName("btn_menu_lessons")
+        self.verticalLayout_2.addWidget(self.btn_menu_lessons)
+        self.btn_menu_student = QtWidgets.QPushButton(parent=self.layout_top_menu)
+        self.btn_menu_student.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_menu_student.setStyleSheet("QPushButton {\n"
 "    color: rgb(255, 255, 255);\n"
 "    border: 0px solid;\n"
 "    border-radius: 20px;\n"
@@ -81,9 +81,9 @@ class Ui_MainWindow(object):
 "}")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(".\\../icons/groups-white.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_menu_group.setIcon(icon1)
-        self.btn_menu_group.setObjectName("btn_menu_group")
-        self.verticalLayout_2.addWidget(self.btn_menu_group)
+        self.btn_menu_student.setIcon(icon1)
+        self.btn_menu_student.setObjectName("btn_menu_student")
+        self.verticalLayout_2.addWidget(self.btn_menu_student)
         self.btn_menu_message_forwarding = QtWidgets.QPushButton(parent=self.layout_top_menu)
         self.btn_menu_message_forwarding.setMinimumSize(QtCore.QSize(0, 40))
         self.btn_menu_message_forwarding.setStyleSheet("QPushButton {\n"
@@ -371,28 +371,28 @@ class Ui_MainWindow(object):
         self.verticalLayout_16 = QtWidgets.QVBoxLayout(self.page_student)
         self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_16.setObjectName("verticalLayout_16")
-        self.label_manage_groups = QtWidgets.QLabel(parent=self.page_student)
+        self.label_manage_students = QtWidgets.QLabel(parent=self.page_student)
         font = QtGui.QFont()
         font.setPointSize(13)
-        self.label_manage_groups.setFont(font)
-        self.label_manage_groups.setStyleSheet("color: #4F9AFE")
-        self.label_manage_groups.setObjectName("label_manage_groups")
-        self.verticalLayout_16.addWidget(self.label_manage_groups)
-        self.line_manage_groups = QtWidgets.QFrame(parent=self.page_student)
-        self.line_manage_groups.setStyleSheet(" border: none;\n"
+        self.label_manage_students.setFont(font)
+        self.label_manage_students.setStyleSheet("color: #4F9AFE")
+        self.label_manage_students.setObjectName("label_manage_students")
+        self.verticalLayout_16.addWidget(self.label_manage_students)
+        self.line_manage__students = QtWidgets.QFrame(parent=self.page_student)
+        self.line_manage__students.setStyleSheet(" border: none;\n"
 "                        background: #4F9AFE;")
-        self.line_manage_groups.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.line_manage_groups.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.line_manage_groups.setObjectName("line_manage_groups")
-        self.verticalLayout_16.addWidget(self.line_manage_groups)
-        self.layout_buttons_manage_groups = QtWidgets.QHBoxLayout()
-        self.layout_buttons_manage_groups.setObjectName("layout_buttons_manage_groups")
+        self.line_manage__students.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_manage__students.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_manage__students.setObjectName("line_manage__students")
+        self.verticalLayout_16.addWidget(self.line_manage__students)
+        self.layout_buttons_manage_students = QtWidgets.QHBoxLayout()
+        self.layout_buttons_manage_students.setObjectName("layout_buttons_manage_students")
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.layout_buttons_manage_groups.addItem(spacerItem3)
-        self.btn_add_group = QtWidgets.QPushButton(parent=self.page_student)
-        self.btn_add_group.setMinimumSize(QtCore.QSize(130, 30))
-        self.btn_add_group.setMaximumSize(QtCore.QSize(250, 30))
-        self.btn_add_group.setStyleSheet("QPushButton {\n"
+        self.layout_buttons_manage_students.addItem(spacerItem3)
+        self.btn_add_student = QtWidgets.QPushButton(parent=self.page_student)
+        self.btn_add_student.setMinimumSize(QtCore.QSize(130, 30))
+        self.btn_add_student.setMaximumSize(QtCore.QSize(250, 30))
+        self.btn_add_student.setStyleSheet("QPushButton {\n"
 "                            background: #4F9AFE;\n"
 "                            color: white;\n"
 "                            border-radius: 15px;\n"
@@ -406,14 +406,14 @@ class Ui_MainWindow(object):
 "                            QPushButton:disabled{\n"
 "                            background-color: rgb(222, 222, 222);\n"
 "                            }")
-        self.btn_add_group.setIcon(icon4)
-        self.btn_add_group.setObjectName("btn_add_group")
-        self.layout_buttons_manage_groups.addWidget(self.btn_add_group)
-        self.btn_remove_group = QtWidgets.QPushButton(parent=self.page_student)
-        self.btn_remove_group.setEnabled(False)
-        self.btn_remove_group.setMinimumSize(QtCore.QSize(130, 30))
-        self.btn_remove_group.setMaximumSize(QtCore.QSize(250, 30))
-        self.btn_remove_group.setStyleSheet("QPushButton {\n"
+        self.btn_add_student.setIcon(icon4)
+        self.btn_add_student.setObjectName("btn_add_student")
+        self.layout_buttons_manage_students.addWidget(self.btn_add_student)
+        self.btn_remove_student = QtWidgets.QPushButton(parent=self.page_student)
+        self.btn_remove_student.setEnabled(False)
+        self.btn_remove_student.setMinimumSize(QtCore.QSize(130, 30))
+        self.btn_remove_student.setMaximumSize(QtCore.QSize(250, 30))
+        self.btn_remove_student.setStyleSheet("QPushButton {\n"
 "                            background: #4F9AFE;\n"
 "                            color: white;\n"
 "                            border-radius: 15px;\n"
@@ -427,14 +427,14 @@ class Ui_MainWindow(object):
 "                            QPushButton:disabled{\n"
 "                            background-color: rgb(222, 222, 222);\n"
 "                            }")
-        self.btn_remove_group.setIcon(icon5)
-        self.btn_remove_group.setObjectName("btn_remove_group")
-        self.layout_buttons_manage_groups.addWidget(self.btn_remove_group)
+        self.btn_remove_student.setIcon(icon5)
+        self.btn_remove_student.setObjectName("btn_remove_student")
+        self.layout_buttons_manage_students.addWidget(self.btn_remove_student)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.layout_buttons_manage_groups.addItem(spacerItem4)
-        self.verticalLayout_16.addLayout(self.layout_buttons_manage_groups)
-        self.table_groups = QtWidgets.QTableWidget(parent=self.page_student)
-        self.table_groups.setStyleSheet("QTableWidget{\n"
+        self.layout_buttons_manage_students.addItem(spacerItem4)
+        self.verticalLayout_16.addLayout(self.layout_buttons_manage_students)
+        self.table_students = QtWidgets.QTableWidget(parent=self.page_student)
+        self.table_students.setStyleSheet("QTableWidget{\n"
 "                        background: #F0F3F6;\n"
 "                        border: none;\n"
 "                        border-radius: 20px;\n"
@@ -457,24 +457,24 @@ class Ui_MainWindow(object):
 "                        border-top-right-radius: 20px;\n"
 "                        }\n"
 "                      ")
-        self.table_groups.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
-        self.table_groups.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
-        self.table_groups.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
-        self.table_groups.setObjectName("table_groups")
-        self.table_groups.setColumnCount(4)
-        self.table_groups.setRowCount(0)
+        self.table_students.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.table_students.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
+        self.table_students.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
+        self.table_students.setObjectName("table_students")
+        self.table_students.setColumnCount(4)
+        self.table_students.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
-        self.table_groups.setHorizontalHeaderItem(0, item)
+        self.table_students.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.table_groups.setHorizontalHeaderItem(1, item)
+        self.table_students.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        self.table_groups.setHorizontalHeaderItem(2, item)
+        self.table_students.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        self.table_groups.setHorizontalHeaderItem(3, item)
-        self.table_groups.horizontalHeader().setStretchLastSection(True)
-        self.table_groups.verticalHeader().setVisible(False)
-        self.table_groups.verticalHeader().setDefaultSectionSize(45)
-        self.verticalLayout_16.addWidget(self.table_groups)
+        self.table_students.setHorizontalHeaderItem(3, item)
+        self.table_students.horizontalHeader().setStretchLastSection(True)
+        self.table_students.verticalHeader().setVisible(False)
+        self.table_students.verticalHeader().setDefaultSectionSize(45)
+        self.verticalLayout_16.addWidget(self.table_students)
         self.stacked_pages.addWidget(self.page_student)
         self.page_administrative = QtWidgets.QWidget()
         self.page_administrative.setObjectName("page_administrative")
@@ -903,8 +903,8 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "LOGO"))
-        self.btn_menu_account.setText(_translate("MainWindow", "Aulas"))
-        self.btn_menu_group.setText(_translate("MainWindow", "Alunos"))
+        self.btn_menu_lessons.setText(_translate("MainWindow", "Aulas"))
+        self.btn_menu_student.setText(_translate("MainWindow", "Alunos"))
         self.btn_menu_message_forwarding.setText(_translate("MainWindow", "Administrativo"))
         self.btn_menu_configuration.setText(_translate("MainWindow", "Configurações"))
         self.btn_change_license.setText(_translate("MainWindow", "Alterar Licença"))
@@ -912,14 +912,14 @@ class Ui_MainWindow(object):
         self.btn_add_account.setText(_translate("MainWindow", "Adicionar"))
         self.btn_remove_account.setText(_translate("MainWindow", "Remover"))
         self.btn_lesson_configuration.setText(_translate("MainWindow", "Configurar"))
-        self.label_manage_groups.setText(_translate("MainWindow", "Gerenciar Alunos"))
-        self.btn_add_group.setText(_translate("MainWindow", "Adicionar"))
-        self.btn_remove_group.setText(_translate("MainWindow", "Remover"))
-        item = self.table_groups.horizontalHeaderItem(1)
+        self.label_manage_students.setText(_translate("MainWindow", "Gerenciar Alunos"))
+        self.btn_add_student.setText(_translate("MainWindow", "Adicionar"))
+        self.btn_remove_student.setText(_translate("MainWindow", "Remover"))
+        item = self.table_students.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Nome"))
-        item = self.table_groups.horizontalHeaderItem(2)
+        item = self.table_students.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "Turma"))
-        item = self.table_groups.horizontalHeaderItem(3)
+        item = self.table_students.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Contato"))
         self.label_page_administrative.setText(_translate("MainWindow", "Administrativo"))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab), _translate("MainWindow", "Tab 1"))
