@@ -1,8 +1,8 @@
-from views.main_view import MainView
+from views.student.add_student_view import AddStudentView
 
 
 class MainStudentView:
-    def __init__(self, main_view: MainView):
+    def __init__(self, main_view):
         self.main_view = main_view
 
         self.main_view.btn_add_student.clicked.connect(self.on_click_btn_add_student)
@@ -13,6 +13,8 @@ class MainStudentView:
         self.start_thread_list_students()
 
     def on_click_btn_add_student(self):
+        add_student_view = AddStudentView(parent=self.main_view)
+        add_student_view.exec()
         """
         try:
             add_student_view = AddStudentView(parent=self.main_view)

@@ -37,7 +37,7 @@ class Ui_AddStudentView(object):
         self.horizontalLayout_4.addItem(spacerItem)
         self.label_user_photo = QtWidgets.QLabel(parent=self.frame_user_photo_2)
         self.label_user_photo.setMinimumSize(QtCore.QSize(200, 200))
-        self.label_user_photo.setMaximumSize(QtCore.QSize(300, 300))
+        self.label_user_photo.setMaximumSize(QtCore.QSize(200, 200))
         self.label_user_photo.setText("")
         self.label_user_photo.setObjectName("label_user_photo")
         self.horizontalLayout_4.addWidget(self.label_user_photo)
