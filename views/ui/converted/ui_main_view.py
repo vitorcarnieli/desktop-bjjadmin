@@ -435,7 +435,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_16.addLayout(self.layout_buttons_manage_students)
         self.table_students = QtWidgets.QTableWidget(parent=self.page_student)
         self.table_students.setStyleSheet("QTableWidget{\n"
-"                        background: #F0F3F6;\n"
+"                        background: #383838;\n"
 "                        border: none;\n"
 "                        border-radius: 20px;\n"
 "                        selection-background-color: #d5e3f2;\n"
@@ -443,7 +443,7 @@ class Ui_MainWindow(object):
 "                        }\n"
 "\n"
 "                        QHeaderView::section {\n"
-"                        background-color: #E3E9EF;\n"
+"                        background-color: #303030;\n"
 "                        border: none;\n"
 "                        height: 32px;\n"
 "                        }\n"
@@ -488,12 +488,11 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(13)
         self.label_page_administrative.setFont(font)
-        self.label_page_administrative.setStyleSheet("color: #4F9AFE")
+        self.label_page_administrative.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_page_administrative.setObjectName("label_page_administrative")
         self.verticalLayout_4.addWidget(self.label_page_administrative)
         self.line_page_administrative = QtWidgets.QFrame(parent=self.page_administrative)
-        self.line_page_administrative.setStyleSheet(" border: none;\n"
-"                            background: #4F9AFE;")
+        self.line_page_administrative.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.line_page_administrative.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_page_administrative.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_page_administrative.setObjectName("line_page_administrative")
@@ -501,12 +500,136 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addLayout(self.verticalLayout_4)
         self.tabWidget_2 = QtWidgets.QTabWidget(parent=self.page_administrative)
         self.tabWidget_2.setObjectName("tabWidget_2")
-        self.tab = QtWidgets.QWidget()
-        self.tab.setObjectName("tab")
-        self.tabWidget_2.addTab(self.tab, "")
-        self.tab_2 = QtWidgets.QWidget()
-        self.tab_2.setObjectName("tab_2")
-        self.tabWidget_2.addTab(self.tab_2, "")
+        self.tab_plan = QtWidgets.QWidget()
+        self.tab_plan.setObjectName("tab_plan")
+        self.verticalLayout_18 = QtWidgets.QVBoxLayout(self.tab_plan)
+        self.verticalLayout_18.setObjectName("verticalLayout_18")
+        self.verticalLayout_15 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_15.setObjectName("verticalLayout_15")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem5)
+        self.pushButton = QtWidgets.QPushButton(parent=self.tab_plan)
+        self.pushButton.setMinimumSize(QtCore.QSize(110, 30))
+        self.pushButton.setMaximumSize(QtCore.QSize(250, 30))
+        self.pushButton.setStyleSheet("QPushButton {\n"
+"                            background: #383838;\n"
+"                            color: white;\n"
+"                            border-radius: 15px;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:hover {\n"
+"                            background-color: #303030;\n"
+"                            color: white;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:disabled{\n"
+"                            background-color: rgb(222, 222, 222);\n"
+"                            }")
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout_3.addWidget(self.pushButton)
+        self.pushButton_2 = QtWidgets.QPushButton(parent=self.tab_plan)
+        self.pushButton_2.setMinimumSize(QtCore.QSize(110, 30))
+        self.pushButton_2.setMaximumSize(QtCore.QSize(250, 30))
+        self.pushButton_2.setStyleSheet("QPushButton {\n"
+"                            background: #383838;\n"
+"                            color: white;\n"
+"                            border-radius: 15px;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:hover {\n"
+"                            background-color: #303030;\n"
+"                            color: white;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:disabled{\n"
+"                            background-color: rgb(222, 222, 222);\n"
+"                            }")
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.horizontalLayout_3.addWidget(self.pushButton_2)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem6)
+        self.verticalLayout_15.addLayout(self.horizontalLayout_3)
+        self.tableWidget = QtWidgets.QTableWidget(parent=self.tab_plan)
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(4)
+        self.tableWidget.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(3, item)
+        self.verticalLayout_15.addWidget(self.tableWidget)
+        self.verticalLayout_18.addLayout(self.verticalLayout_15)
+        self.tabWidget_2.addTab(self.tab_plan, "")
+        self.tab_class = QtWidgets.QWidget()
+        self.tab_class.setObjectName("tab_class")
+        self.verticalLayout_19 = QtWidgets.QVBoxLayout(self.tab_class)
+        self.verticalLayout_19.setObjectName("verticalLayout_19")
+        self.verticalLayout_17 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_17.setObjectName("verticalLayout_17")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem7)
+        self.pushButton_3 = QtWidgets.QPushButton(parent=self.tab_class)
+        self.pushButton_3.setMinimumSize(QtCore.QSize(110, 30))
+        self.pushButton_3.setMaximumSize(QtCore.QSize(250, 30))
+        self.pushButton_3.setStyleSheet("QPushButton {\n"
+"                            background: #383838;\n"
+"                            color: white;\n"
+"                            border-radius: 15px;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:hover {\n"
+"                            background-color: #303030;\n"
+"                            color: white;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:disabled{\n"
+"                            background-color: rgb(222, 222, 222);\n"
+"                            }")
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.horizontalLayout_5.addWidget(self.pushButton_3)
+        self.pushButton_4 = QtWidgets.QPushButton(parent=self.tab_class)
+        self.pushButton_4.setMinimumSize(QtCore.QSize(110, 30))
+        self.pushButton_4.setMaximumSize(QtCore.QSize(250, 30))
+        self.pushButton_4.setStyleSheet("QPushButton {\n"
+"                            background: #383838;\n"
+"                            color: white;\n"
+"                            border-radius: 15px;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:hover {\n"
+"                            background-color: #303030;\n"
+"                            color: white;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:disabled{\n"
+"                            background-color: rgb(222, 222, 222);\n"
+"                            }")
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.horizontalLayout_5.addWidget(self.pushButton_4)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem8)
+        self.verticalLayout_17.addLayout(self.horizontalLayout_5)
+        self.tableWidget_2 = QtWidgets.QTableWidget(parent=self.tab_class)
+        self.tableWidget_2.setObjectName("tableWidget_2")
+        self.tableWidget_2.setColumnCount(3)
+        self.tableWidget_2.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget_2.setHorizontalHeaderItem(2, item)
+        self.verticalLayout_17.addWidget(self.tableWidget_2)
+        self.verticalLayout_19.addLayout(self.verticalLayout_17)
+        self.tabWidget_2.addTab(self.tab_class, "")
         self.verticalLayout_5.addWidget(self.tabWidget_2)
         self.stacked_pages.addWidget(self.page_administrative)
         self.page_configuration = QtWidgets.QWidget()
@@ -601,8 +724,8 @@ class Ui_MainWindow(object):
         self.btn_save_telegram_api.setIcon(icon)
         self.btn_save_telegram_api.setObjectName("btn_save_telegram_api")
         self.verticalLayout_9.addWidget(self.btn_save_telegram_api, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_9.addItem(spacerItem5)
+        spacerItem9 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_9.addItem(spacerItem9)
         self.tabWidget.addTab(self.tab_telegram_api, "")
         self.tab_general = QtWidgets.QWidget()
         self.tab_general.setObjectName("tab_general")
@@ -693,8 +816,8 @@ class Ui_MainWindow(object):
         self.btn_save_general_configs.setObjectName("btn_save_general_configs")
         self.verticalLayout_12.addWidget(self.btn_save_general_configs, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.verticalLayout_10.addWidget(self.frame_2)
-        spacerItem6 = QtWidgets.QSpacerItem(20, 678, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_10.addItem(spacerItem6)
+        spacerItem10 = QtWidgets.QSpacerItem(20, 678, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_10.addItem(spacerItem10)
         self.tabWidget.addTab(self.tab_general, "")
         self.tab_proxy = QtWidgets.QWidget()
         self.tab_proxy.setObjectName("tab_proxy")
@@ -702,8 +825,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem7)
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem11)
         self.btn_add_proxy = QtWidgets.QPushButton(parent=self.tab_proxy)
         self.btn_add_proxy.setMinimumSize(QtCore.QSize(130, 30))
         self.btn_add_proxy.setMaximumSize(QtCore.QSize(250, 16777215))
@@ -810,8 +933,8 @@ class Ui_MainWindow(object):
         self.btn_import_proxy.setIcon(icon8)
         self.btn_import_proxy.setObjectName("btn_import_proxy")
         self.horizontalLayout_4.addWidget(self.btn_import_proxy, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem8)
+        spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem12)
         self.verticalLayout_8.addLayout(self.horizontalLayout_4)
         self.table_proxy = QtWidgets.QTableWidget(parent=self.tab_proxy)
         self.table_proxy.setStyleSheet("QTableWidget{\n"
@@ -896,6 +1019,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stacked_pages.setCurrentIndex(0)
+        self.tabWidget_2.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -922,8 +1046,26 @@ class Ui_MainWindow(object):
         item = self.table_students.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Contato"))
         self.label_page_administrative.setText(_translate("MainWindow", "Administrativo"))
-        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab), _translate("MainWindow", "Tab 1"))
-        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_2), _translate("MainWindow", "Tab 2"))
+        self.pushButton.setText(_translate("MainWindow", "Adicionar"))
+        self.pushButton_2.setText(_translate("MainWindow", "Remover"))
+        item = self.tableWidget.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "Nome"))
+        item = self.tableWidget.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "Valor"))
+        item = self.tableWidget.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "N. de Alunos"))
+        item = self.tableWidget.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "Detalhes"))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_plan), _translate("MainWindow", "Planos"))
+        self.pushButton_3.setText(_translate("MainWindow", "Adicionar"))
+        self.pushButton_4.setText(_translate("MainWindow", "Remover"))
+        item = self.tableWidget_2.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "Nome"))
+        item = self.tableWidget_2.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "N. de Alunos"))
+        item = self.tableWidget_2.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Detalhes"))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_class), _translate("MainWindow", "Turmas"))
         self.label_page_configuration.setText(_translate("MainWindow", "Configurações"))
         self.label_title_telegram_api_id.setText(_translate("MainWindow", "API ID:"))
         self.label_title_telegram_api_hash.setText(_translate("MainWindow", "API HASH:"))

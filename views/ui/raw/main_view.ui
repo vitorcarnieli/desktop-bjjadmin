@@ -826,7 +826,7 @@ QCalendarWidget QAbstractItemView::item:hover {
          <widget class="QTableWidget" name="table_students">
           <property name="styleSheet">
            <string notr="true">QTableWidget{
-                        background: #F0F3F6;
+                        background: #383838;
                         border: none;
                         border-radius: 20px;
                         selection-background-color: #d5e3f2;
@@ -834,7 +834,7 @@ QCalendarWidget QAbstractItemView::item:hover {
                         }
 
                         QHeaderView::section {
-                        background-color: #E3E9EF;
+                        background-color: #303030;
                         border: none;
                         height: 32px;
                         }
@@ -918,7 +918,7 @@ QCalendarWidget QAbstractItemView::item:hover {
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">color: #4F9AFE</string>
+             <string notr="true">color: rgb(255, 255, 255);</string>
             </property>
             <property name="text">
              <string>Administrativo</string>
@@ -928,8 +928,7 @@ QCalendarWidget QAbstractItemView::item:hover {
           <item>
            <widget class="Line" name="line_page_administrative">
             <property name="styleSheet">
-             <string notr="true"> border: none;
-                            background: #4F9AFE;</string>
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
             </property>
             <property name="orientation">
              <enum>Qt::Orientation::Horizontal</enum>
@@ -940,15 +939,273 @@ QCalendarWidget QAbstractItemView::item:hover {
         </item>
         <item>
          <widget class="QTabWidget" name="tabWidget_2">
-          <widget class="QWidget" name="tab">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="tab_plan">
            <attribute name="title">
-            <string>Tab 1</string>
+            <string>Planos</string>
            </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_18">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_15">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <item>
+                 <spacer name="horizontalSpacer_3">
+                  <property name="orientation">
+                   <enum>Qt::Orientation::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton">
+                  <property name="minimumSize">
+                   <size>
+                    <width>110</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>250</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+                            background: #383838;
+                            color: white;
+                            border-radius: 15px;
+                            }
+
+                            QPushButton:hover {
+                            background-color: #303030;
+                            color: white;
+                            }
+
+                            QPushButton:disabled{
+                            background-color: rgb(222, 222, 222);
+                            }</string>
+                  </property>
+                  <property name="text">
+                   <string>Adicionar</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_2">
+                  <property name="minimumSize">
+                   <size>
+                    <width>110</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>250</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+                            background: #383838;
+                            color: white;
+                            border-radius: 15px;
+                            }
+
+                            QPushButton:hover {
+                            background-color: #303030;
+                            color: white;
+                            }
+
+                            QPushButton:disabled{
+                            background-color: rgb(222, 222, 222);
+                            }</string>
+                  </property>
+                  <property name="text">
+                   <string>Remover</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_4">
+                  <property name="orientation">
+                   <enum>Qt::Orientation::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QTableWidget" name="tableWidget">
+                <column>
+                 <property name="text">
+                  <string>Nome</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Valor</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>N. de Alunos</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Detalhes</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </widget>
-          <widget class="QWidget" name="tab_2">
+          <widget class="QWidget" name="tab_class">
            <attribute name="title">
-            <string>Tab 2</string>
+            <string>Turmas</string>
            </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_19">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_17">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_5">
+                <item>
+                 <spacer name="horizontalSpacer_7">
+                  <property name="orientation">
+                   <enum>Qt::Orientation::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_3">
+                  <property name="minimumSize">
+                   <size>
+                    <width>110</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>250</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+                            background: #383838;
+                            color: white;
+                            border-radius: 15px;
+                            }
+
+                            QPushButton:hover {
+                            background-color: #303030;
+                            color: white;
+                            }
+
+                            QPushButton:disabled{
+                            background-color: rgb(222, 222, 222);
+                            }</string>
+                  </property>
+                  <property name="text">
+                   <string>Adicionar</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_4">
+                  <property name="minimumSize">
+                   <size>
+                    <width>110</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>250</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QPushButton {
+                            background: #383838;
+                            color: white;
+                            border-radius: 15px;
+                            }
+
+                            QPushButton:hover {
+                            background-color: #303030;
+                            color: white;
+                            }
+
+                            QPushButton:disabled{
+                            background-color: rgb(222, 222, 222);
+                            }</string>
+                  </property>
+                  <property name="text">
+                   <string>Remover</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_8">
+                  <property name="orientation">
+                   <enum>Qt::Orientation::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QTableWidget" name="tableWidget_2">
+                <column>
+                 <property name="text">
+                  <string>Nome</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>N. de Alunos</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Detalhes</string>
+                 </property>
+                </column>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
