@@ -1,7 +1,8 @@
-from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QMainWindow
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QMainWindow
 
 import constants
+from views.administrative.administrative_main_view import AdministrativeMainView
 from views.styles import menu_button_style
 from views.ui.converted.ui_main_view import Ui_MainWindow
 from views.ui.headless.main_student_view import MainStudentView
@@ -26,7 +27,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.btn_menu_lessons.setIcon(QIcon("views/icons/phone-blue.png"))
 
         self.main_student_view = MainStudentView(self)
-
+        self.main_administrative_view = AdministrativeMainView(self)
         """
         self.main_account_view = MainAccountView(self)
         self.main_group_view = MainGroupView(self)

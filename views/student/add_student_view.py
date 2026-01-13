@@ -1,6 +1,6 @@
-from PyQt6.QtGui import QPixmap, QIcon
-from PyQt6.QtCore import Qt, QSize
-from PyQt6.QtWidgets import QDialog
+from PySide6.QtGui import QPixmap, QIcon
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtWidgets import QDialog
 
 from views.ui.converted.student.ui_add_student_view import Ui_AddStudentView
 

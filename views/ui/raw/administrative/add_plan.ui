@@ -36,7 +36,7 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: #4F9AFE</string>
+        <string notr="true">color: rgb(255, 255, 255);</string>
        </property>
        <property name="text">
         <string>Cadastrar Plano</string>
@@ -46,8 +46,7 @@
      <item>
       <widget class="Line" name="line_page_account">
        <property name="styleSheet">
-        <string notr="true"> border: none;
-                            background: #4F9AFE;</string>
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
        </property>
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
@@ -62,13 +61,31 @@
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QLabel" name="label">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>Nome</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="line_name">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit{
+	background:  rgb(255, 255, 255);
+	border-radius: 10px;
+	padding: 5px;
+}
+</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -76,13 +93,34 @@
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QLabel" name="label_2">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>Valor</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+        <widget class="QDoubleSpinBox" name="spin_value">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QDoubleSpinBox{
+	background:  rgb(255, 255, 255);
+	border-radius: 10px;
+	padding: 5px;
+}
+</string>
+         </property>
+         <property name="maximum">
+          <double>999999.989999999990687</double>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -90,17 +128,20 @@
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QLabel" name="label_3">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>Detalhes</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="textEdit">
+        <widget class="QTextEdit" name="textEdit_datails">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>0</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -108,6 +149,14 @@
            <width>16777215</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QTextEdit{
+	background:  rgb(255, 255, 255);
+	border-radius: 10px;
+	padding: 5px;
+}
+</string>
          </property>
         </widget>
        </item>
@@ -144,6 +193,28 @@
        </item>
        <item>
         <widget class="QPushButton" name="btn_save">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+                            background: #383838;
+                            color: white;
+                            border-radius: 15px;
+                            }
+
+                            QPushButton:hover {
+                            background-color: #303030;
+                            color: white;
+                            }
+
+                            QPushButton:disabled{
+                            background-color: rgb(222, 222, 222);
+                            }</string>
+         </property>
          <property name="text">
           <string>Salvar</string>
          </property>
