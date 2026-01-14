@@ -498,7 +498,44 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addWidget(self.line_page_administrative)
         self.verticalLayout_5.addLayout(self.verticalLayout_4)
         self.tabWidget_2 = QtWidgets.QTabWidget(parent=self.page_administrative)
-        self.tabWidget_2.setStyleSheet("")
+        self.tabWidget_2.setStyleSheet("\n"
+"QTabWidget::pane {\n"
+"    border: 1px solid #cfcfcf;\n"
+"    background: #f9f9f9;\n"
+"    border-radius: 4px;\n"
+"    top: -1px;\n"
+"}\n"
+"\n"
+"QTabBar::tab {\n"
+"    background: #e6e6e6;\n"
+"    border: 1px solid #cfcfcf;\n"
+"    border-bottom: none;\n"
+"    padding: 6px 14px;\n"
+"    margin-right: 2px;\n"
+"    border-top-left-radius: 4px;\n"
+"    border-top-right-radius: 4px;\n"
+"    color: #444;\n"
+"    font-size: 13px;\n"
+"}\n"
+"\n"
+"QTabBar::tab:selected {\n"
+"    background: #ffffff;\n"
+"    color: #222;\n"
+"    font-weight: 500;\n"
+"}\n"
+"\n"
+"QTabBar::tab:!selected {\n"
+"    margin-top: 2px;\n"
+"}\n"
+"\n"
+"QTabBar::tab:hover {\n"
+"    background: #f2f2f2;\n"
+"}\n"
+"\n"
+"QTabWidget::tab-bar {\n"
+"    alignment: left;\n"
+"}\n"
+"")
         self.tabWidget_2.setObjectName("tabWidget_2")
         self.tab_plan = QtWidgets.QWidget()
         self.tab_plan.setStyleSheet("")
@@ -577,6 +614,7 @@ class Ui_MainWindow(object):
 "                                }\n"
 "                              ")
         self.table_plan.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.table_plan.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
         self.table_plan.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
         self.table_plan.setObjectName("table_plan")
         self.table_plan.setColumnCount(5)
@@ -673,7 +711,9 @@ class Ui_MainWindow(object):
 "                                border-top-right-radius: 20px;\n"
 "                                }\n"
 "                              ")
-        self.table_class.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.EditKeyPressed)
+        self.table_class.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.table_class.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
+        self.table_class.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
         self.table_class.setObjectName("table_class")
         self.table_class.setColumnCount(4)
         self.table_class.setRowCount(0)

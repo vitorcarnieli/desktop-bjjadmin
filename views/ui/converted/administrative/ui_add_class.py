@@ -23,12 +23,11 @@ class Ui_AddClass(object):
         font = QtGui.QFont()
         font.setPointSize(13)
         self.label_page_account.setFont(font)
-        self.label_page_account.setStyleSheet("color: #4F9AFE")
+        self.label_page_account.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_page_account.setObjectName("label_page_account")
         self.verticalLayout.addWidget(self.label_page_account)
         self.line_page_account = QtWidgets.QFrame(parent=AddClass)
-        self.line_page_account.setStyleSheet(" border: none;\n"
-"                            background: #4F9AFE;")
+        self.line_page_account.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.line_page_account.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_page_account.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_page_account.setObjectName("line_page_account")
@@ -39,20 +38,34 @@ class Ui_AddClass(object):
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.label = QtWidgets.QLabel(parent=AddClass)
+        self.label.setStyleSheet("color: rgb(255, 255, 255);")
         self.label.setObjectName("label")
         self.verticalLayout_2.addWidget(self.label)
         self.lineEdit_name = QtWidgets.QLineEdit(parent=AddClass)
+        self.lineEdit_name.setStyleSheet("QLineEdit{\n"
+"    background:  rgb(255, 255, 255);\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
         self.lineEdit_name.setObjectName("lineEdit_name")
         self.verticalLayout_2.addWidget(self.lineEdit_name)
         self.verticalLayout_5.addLayout(self.verticalLayout_2)
         self.verticalLayout_4 = QtWidgets.QVBoxLayout()
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.label_3 = QtWidgets.QLabel(parent=AddClass)
+        self.label_3.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_3.setObjectName("label_3")
         self.verticalLayout_4.addWidget(self.label_3)
         self.textEdit_details = QtWidgets.QTextEdit(parent=AddClass)
         self.textEdit_details.setMinimumSize(QtCore.QSize(0, 0))
         self.textEdit_details.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.textEdit_details.setStyleSheet("QTextEdit{\n"
+"    background:  rgb(255, 255, 255);\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
         self.textEdit_details.setObjectName("textEdit_details")
         self.verticalLayout_4.addWidget(self.textEdit_details)
         self.verticalLayout_5.addLayout(self.verticalLayout_4)
@@ -60,6 +73,7 @@ class Ui_AddClass(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.label_status = QtWidgets.QLabel(parent=AddClass)
+        self.label_status.setMinimumSize(QtCore.QSize(0, 30))
         self.label_status.setText("")
         self.label_status.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_status.setObjectName("label_status")
@@ -69,6 +83,21 @@ class Ui_AddClass(object):
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.btn_save = QtWidgets.QPushButton(parent=AddClass)
+        self.btn_save.setMinimumSize(QtCore.QSize(150, 30))
+        self.btn_save.setStyleSheet("QPushButton {\n"
+"                            background: #383838;\n"
+"                            color: white;\n"
+"                            border-radius: 15px;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:hover {\n"
+"                            background-color: #303030;\n"
+"                            color: white;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:disabled{\n"
+"                            background-color: rgb(222, 222, 222);\n"
+"                            }")
         self.btn_save.setObjectName("btn_save")
         self.horizontalLayout.addWidget(self.btn_save)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
