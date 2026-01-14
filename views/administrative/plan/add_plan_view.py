@@ -52,6 +52,11 @@ class AddPlanView(QDialog, Ui_AddPlan):
             return
         self.line_name.setText(self.plan_to_edit_dto.name)
         self.textEdit_datails.setText(self.plan_to_edit_dto.observation)
+        try:
+            value = float(self.plan_to_edit_dto.value)
+        except Exception:
+            value = 0
+        self.spin_value.setValue(value)
 
     def get_plan_dto(self):
         name = self.line_name.text()
@@ -59,12 +64,14 @@ class AddPlanView(QDialog, Ui_AddPlan):
             self.update_status(Message(MessageType.ERROR, "O plano não pode ser cadastrado sem nome"))
             return None
 
-
         observation = self.textEdit_datails.toPlainText()
+        value_str = str(self.spin_value.value())
+        value =  value_str if value_str else "GRATUITO"
 
         plan_dto = PlanDto()
         plan_dto.name = name
         plan_dto.observation = observation
+        plan_dto.value = value
         if self.plan_to_edit_dto:
             plan_dto.id = self.plan_to_edit_dto.id
         return plan_dto
