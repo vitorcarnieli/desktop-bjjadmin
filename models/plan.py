@@ -10,8 +10,4 @@ class Plan(BaseModel):
     value = Column(String)
     observation = Column(String)
 
-    students = relationship(
-        "Student",
-        back_populates="plan",
-        cascade="all, delete-orphan"
-    )
+    students = relationship("Student")

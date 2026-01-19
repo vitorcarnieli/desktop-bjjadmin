@@ -4,6 +4,8 @@ class StudentDto:
         self.name = None
         self.phone = None
         self.belt = None
+        self.date_of_birth = None
+        self.sex = None
         self.plan_id = None
         self.class_id = None
         self.observation = None

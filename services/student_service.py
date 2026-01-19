@@ -16,8 +16,12 @@ class StudentService:
         dto.plan_id = model.plan_id
         dto.class_id = model.class_id
         dto.observation = model.observation
-        dto.plan = PlanService.get_dto(model.plan)
-        dto.lesson_class = ClassService.get_dto(dto.lesson_class)
+        if model.plan:
+            dto.plan = PlanService.get_dto(model.plan)
+        if model.lesson_class:
+            dto.lesson_class = ClassService.get_dto(model.lesson_class)
+        dto.sex = model.sex
+        dto.date_of_birth = model.date_of_birth
 
         return dto
 
@@ -28,9 +32,13 @@ class StudentService:
         model.name = dto.name
         model.phone = dto.phone
         model.belt = dto.belt
+        if dto.plan:
+            model.plan = PlanService.get_model(dto.plan)
+        if dto.lesson_class:
+            model.lesson_class = ClassService.get_model(dto.lesson_class)
         model.plan_id = dto.plan_id
-        model.plan = PlanService.get_model(dto.plan)
         model.class_id = dto.class_id
-        model.lesson_class = ClassService.get_model(dto.lesson_class)
         model.observation = dto.observation
+        model.date_of_birth = dto.date_of_birth
+        model.sex = dto.sex
         return model

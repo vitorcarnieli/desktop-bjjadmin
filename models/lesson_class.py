@@ -10,8 +10,4 @@ class LessonClass(BaseModel):
     name = Column(String)
     observation = Column(String)
 
-    students = relationship(
-        "Student",
-        back_populates="lesson_class",
-        cascade="all, delete-orphan"
-    )
+    students = relationship("Student")

@@ -61,7 +61,7 @@ class Ui_MainWindow(object):
 "    color: white;\n"
 "}")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(".\\../icons/lesson.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap(".\\../../icons/lesson.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btn_menu_lessons.setIcon(icon)
         self.btn_menu_lessons.setObjectName("btn_menu_lessons")
         self.verticalLayout_2.addWidget(self.btn_menu_lessons)
@@ -80,7 +80,7 @@ class Ui_MainWindow(object):
 "    color: white;\n"
 "}")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(".\\../icons/groups-white.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap(".\\../../icons/groups-white.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btn_menu_student.setIcon(icon1)
         self.btn_menu_student.setObjectName("btn_menu_student")
         self.verticalLayout_2.addWidget(self.btn_menu_student)
@@ -99,13 +99,13 @@ class Ui_MainWindow(object):
 "    color: white;\n"
 "}")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap(".\\../icons/administrative.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap(".\\../../icons/administrative.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btn_menu_message_forwarding.setIcon(icon2)
         self.btn_menu_message_forwarding.setObjectName("btn_menu_message_forwarding")
         self.verticalLayout_2.addWidget(self.btn_menu_message_forwarding)
-        self.btn_menu_configuration = QtWidgets.QPushButton(parent=self.layout_top_menu)
-        self.btn_menu_configuration.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_menu_configuration.setStyleSheet("QPushButton {\n"
+        self.btn_registers = QtWidgets.QPushButton(parent=self.layout_top_menu)
+        self.btn_registers.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_registers.setStyleSheet("QPushButton {\n"
 "    color: rgb(255, 255, 255);\n"
 "    border: 0px solid;\n"
 "    border-radius: 20px;\n"
@@ -118,10 +118,10 @@ class Ui_MainWindow(object):
 "    color: white;\n"
 "}")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap(".\\../icons/settings-white.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_menu_configuration.setIcon(icon3)
-        self.btn_menu_configuration.setObjectName("btn_menu_configuration")
-        self.verticalLayout_2.addWidget(self.btn_menu_configuration)
+        icon3.addPixmap(QtGui.QPixmap(".\\../../icons/record_fill.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_registers.setIcon(icon3)
+        self.btn_registers.setObjectName("btn_registers")
+        self.verticalLayout_2.addWidget(self.btn_registers)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_2.addItem(spacerItem)
         self.beta_label = QtWidgets.QLabel(parent=self.layout_top_menu)
@@ -151,34 +151,6 @@ class Ui_MainWindow(object):
         self.label_subscription.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_subscription.setObjectName("label_subscription")
         self.verticalLayout_14.addWidget(self.label_subscription)
-        self.btn_change_license = QtWidgets.QPushButton(parent=self.frame_license)
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        font.setBold(False)
-        font.setUnderline(True)
-        self.btn_change_license.setFont(font)
-        self.btn_change_license.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-        self.btn_change_license.setStyleSheet("QPushButton:enabled {\n"
-"                            background-color: rgba(255, 255, 255, 0);\n"
-"                            color: white;\n"
-"                            }\n"
-"\n"
-"                            QPushButton:disabled {\n"
-"                            background-color:rgba(255, 255, 255, 0);\n"
-"                            color: gray;\n"
-"                            }\n"
-"\n"
-"                            QPushButton {\n"
-"                            border-radius: 0px;\n"
-"                            color: white;\n"
-"                            }\n"
-"\n"
-"                            QPushButton:hover{\n"
-"                            color: ;\n"
-"                            color: rgb(234, 234, 234);\n"
-"                            }")
-        self.btn_change_license.setObjectName("btn_change_license")
-        self.verticalLayout_14.addWidget(self.btn_change_license)
         self.label_copywrite = QtWidgets.QLabel(parent=self.frame_license)
         self.label_copywrite.setStyleSheet("color: white;")
         self.label_copywrite.setText("")
@@ -373,12 +345,12 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(13)
         self.label_manage_students.setFont(font)
-        self.label_manage_students.setStyleSheet("color: #4F9AFE")
+        self.label_manage_students.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_manage_students.setObjectName("label_manage_students")
         self.verticalLayout_16.addWidget(self.label_manage_students)
         self.line_manage__students = QtWidgets.QFrame(parent=self.page_student)
         self.line_manage__students.setStyleSheet(" border: none;\n"
-"                        background: #4F9AFE;")
+"                        background: rgb(255, 255, 255);")
         self.line_manage__students.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_manage__students.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_manage__students.setObjectName("line_manage__students")
@@ -391,13 +363,13 @@ class Ui_MainWindow(object):
         self.btn_add_student.setMinimumSize(QtCore.QSize(130, 30))
         self.btn_add_student.setMaximumSize(QtCore.QSize(250, 30))
         self.btn_add_student.setStyleSheet("QPushButton {\n"
-"                            background: #4F9AFE;\n"
+"                            background: #383838;\n"
 "                            color: white;\n"
 "                            border-radius: 15px;\n"
 "                            }\n"
 "\n"
 "                            QPushButton:hover {\n"
-"                            background-color: rgb(59, 116, 190);\n"
+"                            background-color: #303030;\n"
 "                            color: white;\n"
 "                            }\n"
 "\n"
@@ -412,13 +384,13 @@ class Ui_MainWindow(object):
         self.btn_remove_student.setMinimumSize(QtCore.QSize(130, 30))
         self.btn_remove_student.setMaximumSize(QtCore.QSize(250, 30))
         self.btn_remove_student.setStyleSheet("QPushButton {\n"
-"                            background: #4F9AFE;\n"
+"                            background: #383838;\n"
 "                            color: white;\n"
 "                            border-radius: 15px;\n"
 "                            }\n"
 "\n"
 "                            QPushButton:hover {\n"
-"                            background-color: rgb(59, 116, 190);\n"
+"                            background-color: #303030;\n"
 "                            color: white;\n"
 "                            }\n"
 "\n"
@@ -431,35 +403,53 @@ class Ui_MainWindow(object):
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.layout_buttons_manage_students.addItem(spacerItem4)
         self.verticalLayout_16.addLayout(self.layout_buttons_manage_students)
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        self.label_total = QtWidgets.QLabel(parent=self.page_student)
+        self.label_total.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_total.setObjectName("label_total")
+        self.horizontalLayout_8.addWidget(self.label_total)
+        self.comboBox_filter_student = QtWidgets.QComboBox(parent=self.page_student)
+        self.comboBox_filter_student.setStyleSheet("QComboBox{\n"
+"    background:  #383838;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
+        self.comboBox_filter_student.setObjectName("comboBox_filter_student")
+        self.horizontalLayout_8.addWidget(self.comboBox_filter_student)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_8.addItem(spacerItem5)
+        self.verticalLayout_16.addLayout(self.horizontalLayout_8)
         self.table_students = QtWidgets.QTableWidget(parent=self.page_student)
         self.table_students.setStyleSheet("QTableWidget{\n"
-"                        background: #383838;\n"
-"                        border: none;\n"
-"                        border-radius: 20px;\n"
-"                        selection-background-color: #d5e3f2;\n"
-"                        selection-color: inherit;\n"
-"                        }\n"
+"                                background: #F0F3F6;\n"
+"                                border: none;\n"
+"                                border-radius: 20px;\n"
+"                                selection-background-color: #d5e3f2;\n"
+"                                selection-color: inherit;\n"
+"                                }\n"
 "\n"
-"                        QHeaderView::section {\n"
-"                        background-color: #303030;\n"
-"                        border: none;\n"
-"                        height: 32px;\n"
-"                        }\n"
+"                                QHeaderView::section {\n"
+"                                background-color: #E3E9EF;\n"
+"                                border: none;\n"
+"                                height: 32px;\n"
+"                                }\n"
 "\n"
-"                        QHeaderView::section:first {\n"
-"                        border-top-left-radius: 20px;\n"
-"                        }\n"
+"                                QHeaderView::section:first {\n"
+"                                border-top-left-radius: 20px;\n"
+"                                }\n"
 "\n"
 "\n"
-"                        QHeaderView::section:last {\n"
-"                        border-top-right-radius: 20px;\n"
-"                        }\n"
-"                      ")
+"                                QHeaderView::section:last {\n"
+"                                border-top-right-radius: 20px;\n"
+"                                }\n"
+"                              ")
         self.table_students.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
         self.table_students.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
         self.table_students.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
         self.table_students.setObjectName("table_students")
-        self.table_students.setColumnCount(4)
+        self.table_students.setColumnCount(5)
         self.table_students.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.table_students.setHorizontalHeaderItem(0, item)
@@ -469,6 +459,8 @@ class Ui_MainWindow(object):
         self.table_students.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
         self.table_students.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_students.setHorizontalHeaderItem(4, item)
         self.table_students.horizontalHeader().setStretchLastSection(True)
         self.table_students.verticalHeader().setVisible(False)
         self.table_students.verticalHeader().setDefaultSectionSize(45)
@@ -546,8 +538,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.setObjectName("verticalLayout_15")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem5)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem6)
         self.btn_add_plan = QtWidgets.QPushButton(parent=self.tab_plan)
         self.btn_add_plan.setMinimumSize(QtCore.QSize(110, 30))
         self.btn_add_plan.setMaximumSize(QtCore.QSize(250, 30))
@@ -586,8 +578,8 @@ class Ui_MainWindow(object):
 "                            }")
         self.btn_remove_plan.setObjectName("btn_remove_plan")
         self.horizontalLayout_3.addWidget(self.btn_remove_plan)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem6)
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem7)
         self.verticalLayout_15.addLayout(self.horizontalLayout_3)
         self.table_plan = QtWidgets.QTableWidget(parent=self.tab_plan)
         self.table_plan.setStyleSheet("QTableWidget{\n"
@@ -644,8 +636,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_17.setObjectName("verticalLayout_17")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem7)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem8)
         self.btn_add_class = QtWidgets.QPushButton(parent=self.tab_class)
         self.btn_add_class.setMinimumSize(QtCore.QSize(110, 30))
         self.btn_add_class.setMaximumSize(QtCore.QSize(250, 30))
@@ -684,8 +676,8 @@ class Ui_MainWindow(object):
 "                            }")
         self.btn_remove_class.setObjectName("btn_remove_class")
         self.horizontalLayout_5.addWidget(self.btn_remove_class)
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem8)
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem9)
         self.verticalLayout_17.addLayout(self.horizontalLayout_5)
         self.table_class = QtWidgets.QTableWidget(parent=self.tab_class)
         self.table_class.setStyleSheet("QTableWidget{\n"
@@ -735,312 +727,87 @@ class Ui_MainWindow(object):
         self.tabWidget_2.addTab(self.tab_class, "")
         self.verticalLayout_5.addWidget(self.tabWidget_2)
         self.stacked_pages.addWidget(self.page_administrative)
-        self.page_configuration = QtWidgets.QWidget()
-        self.page_configuration.setObjectName("page_configuration")
-        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.page_configuration)
-        self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_7.setSpacing(6)
-        self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.page_records = QtWidgets.QWidget()
+        self.page_records.setObjectName("page_records")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.page_records)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.label_page_configuration = QtWidgets.QLabel(parent=self.page_configuration)
+        self.label_manage_students_2 = QtWidgets.QLabel(parent=self.page_records)
         font = QtGui.QFont()
         font.setPointSize(13)
-        self.label_page_configuration.setFont(font)
-        self.label_page_configuration.setStyleSheet("color: #4F9AFE")
-        self.label_page_configuration.setObjectName("label_page_configuration")
-        self.verticalLayout_6.addWidget(self.label_page_configuration)
-        self.linel_page_configuration = QtWidgets.QFrame(parent=self.page_configuration)
-        self.linel_page_configuration.setStyleSheet(" border: none;\n"
-"                            background: #4F9AFE;")
-        self.linel_page_configuration.setFrameShape(QtWidgets.QFrame.Shape.HLine)
-        self.linel_page_configuration.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
-        self.linel_page_configuration.setObjectName("linel_page_configuration")
-        self.verticalLayout_6.addWidget(self.linel_page_configuration)
-        self.verticalLayout_7.addLayout(self.verticalLayout_6)
-        self.tabWidget = QtWidgets.QTabWidget(parent=self.page_configuration)
-        self.tabWidget.setObjectName("tabWidget")
-        self.tab_telegram_api = QtWidgets.QWidget()
-        self.tab_telegram_api.setObjectName("tab_telegram_api")
-        self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.tab_telegram_api)
-        self.verticalLayout_9.setObjectName("verticalLayout_9")
-        self.label_title_telegram_api_id = QtWidgets.QLabel(parent=self.tab_telegram_api)
-        self.label_title_telegram_api_id.setObjectName("label_title_telegram_api_id")
-        self.verticalLayout_9.addWidget(self.label_title_telegram_api_id)
-        self.line_telegram_api_id = QtWidgets.QLineEdit(parent=self.tab_telegram_api)
-        self.line_telegram_api_id.setStyleSheet("QLineEdit{\n"
-"                                background: #EBF4FF;\n"
-"                                border-radius: 10px;\n"
-"                                padding: 5px;\n"
-"                                }\n"
-"\n"
-"                                QLineEdit:disabled{\n"
-"                                background: #E3E9EF;\n"
-"                                border-radius: 10px;\n"
-"                                padding: 5px;\n"
-"                                }\n"
-"                              ")
-        self.line_telegram_api_id.setObjectName("line_telegram_api_id")
-        self.verticalLayout_9.addWidget(self.line_telegram_api_id)
-        self.label_title_telegram_api_hash = QtWidgets.QLabel(parent=self.tab_telegram_api)
-        self.label_title_telegram_api_hash.setObjectName("label_title_telegram_api_hash")
-        self.verticalLayout_9.addWidget(self.label_title_telegram_api_hash)
-        self.line_telegram_api_hash = QtWidgets.QLineEdit(parent=self.tab_telegram_api)
-        self.line_telegram_api_hash.setStyleSheet("QLineEdit{\n"
-"                                background: #EBF4FF;\n"
-"                                border-radius: 10px;\n"
-"                                padding: 5px;\n"
-"                                }\n"
-"\n"
-"                                QLineEdit:disabled{\n"
-"                                background: #E3E9EF;\n"
-"                                border-radius: 10px;\n"
-"                                padding: 5px;\n"
-"                                }")
-        self.line_telegram_api_hash.setObjectName("line_telegram_api_hash")
-        self.verticalLayout_9.addWidget(self.line_telegram_api_hash)
-        self.label_status_telegram_api = QtWidgets.QLabel(parent=self.tab_telegram_api)
-        self.label_status_telegram_api.setMinimumSize(QtCore.QSize(0, 30))
-        self.label_status_telegram_api.setText("")
-        self.label_status_telegram_api.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label_status_telegram_api.setObjectName("label_status_telegram_api")
-        self.verticalLayout_9.addWidget(self.label_status_telegram_api)
-        self.btn_save_telegram_api = QtWidgets.QPushButton(parent=self.tab_telegram_api)
-        self.btn_save_telegram_api.setEnabled(True)
-        self.btn_save_telegram_api.setMinimumSize(QtCore.QSize(150, 30))
-        self.btn_save_telegram_api.setMaximumSize(QtCore.QSize(250, 30))
-        self.btn_save_telegram_api.setStyleSheet("QPushButton {\n"
-"                                background: #39a5db;\n"
-"                                color: white;\n"
-"                                border-radius: 15px;\n"
-"                                }\n"
-"\n"
-"                                QPushButton:hover {\n"
-"                                background-color: rgb(59, 116, 190);\n"
-"                                color: white;\n"
-"                                }\n"
-"\n"
-"                                QPushButton:disabled{\n"
-"                                background-color: rgb(222, 222, 222);\n"
-"                                }")
-        icon = QtGui.QIcon.fromTheme("diskette.png")
-        self.btn_save_telegram_api.setIcon(icon)
-        self.btn_save_telegram_api.setObjectName("btn_save_telegram_api")
-        self.verticalLayout_9.addWidget(self.btn_save_telegram_api, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        spacerItem9 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_9.addItem(spacerItem9)
-        self.tabWidget.addTab(self.tab_telegram_api, "")
-        self.tab_general = QtWidgets.QWidget()
-        self.tab_general.setObjectName("tab_general")
-        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.tab_general)
-        self.verticalLayout_10.setObjectName("verticalLayout_10")
-        self.frame_2 = QtWidgets.QFrame(parent=self.tab_general)
-        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frame_2.setObjectName("frame_2")
-        self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.frame_2)
-        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_12.setObjectName("verticalLayout_12")
-        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        self.verticalLayout_13 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_13.setObjectName("verticalLayout_13")
-        self.label_flood_limit_per_account = QtWidgets.QLabel(parent=self.frame_2)
-        font = QtGui.QFont()
-        font.setBold(True)
-        self.label_flood_limit_per_account.setFont(font)
-        self.label_flood_limit_per_account.setObjectName("label_flood_limit_per_account")
-        self.verticalLayout_13.addWidget(self.label_flood_limit_per_account)
-        self.spin_flood_limit_per_account = QtWidgets.QSpinBox(parent=self.frame_2)
-        self.spin_flood_limit_per_account.setStyleSheet("QSpinBox{\n"
-"                                              background: #EBF4FF;\n"
-"                                              border-radius: 10px;\n"
-"                                              padding: 5px;\n"
-"                                              }\n"
-"\n"
-"                                              QSpinBox:disabled{\n"
-"                                              background: #E3E9EF;\n"
-"                                              border-radius: 10px;\n"
-"                                              padding: 5px;\n"
-"                                              }")
-        self.spin_flood_limit_per_account.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.spin_flood_limit_per_account.setObjectName("spin_flood_limit_per_account")
-        self.verticalLayout_13.addWidget(self.spin_flood_limit_per_account)
-        self.horizontalLayout_6.addLayout(self.verticalLayout_13)
-        self.verticalLayout_11 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_11.setObjectName("verticalLayout_11")
-        self.label_account_lockout_period = QtWidgets.QLabel(parent=self.frame_2)
-        font = QtGui.QFont()
-        font.setBold(True)
-        self.label_account_lockout_period.setFont(font)
-        self.label_account_lockout_period.setObjectName("label_account_lockout_period")
-        self.verticalLayout_11.addWidget(self.label_account_lockout_period)
-        self.spin_account_lockout_period = QtWidgets.QSpinBox(parent=self.frame_2)
-        self.spin_account_lockout_period.setStyleSheet("QSpinBox{\n"
-"                                              background: #EBF4FF;\n"
-"                                              border-radius: 10px;\n"
-"                                              padding: 5px;\n"
-"                                              }\n"
-"\n"
-"                                              QSpinBox:disabled{\n"
-"                                              background: #E3E9EF;\n"
-"                                              border-radius: 10px;\n"
-"                                              padding: 5px;\n"
-"                                              }")
-        self.spin_account_lockout_period.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.spin_account_lockout_period.setMaximum(999)
-        self.spin_account_lockout_period.setObjectName("spin_account_lockout_period")
-        self.verticalLayout_11.addWidget(self.spin_account_lockout_period)
-        self.horizontalLayout_6.addLayout(self.verticalLayout_11)
-        self.verticalLayout_12.addLayout(self.horizontalLayout_6)
-        self.label_status_configuration = QtWidgets.QLabel(parent=self.frame_2)
-        self.label_status_configuration.setMinimumSize(QtCore.QSize(0, 30))
-        self.label_status_configuration.setText("")
-        self.label_status_configuration.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.label_status_configuration.setObjectName("label_status_configuration")
-        self.verticalLayout_12.addWidget(self.label_status_configuration)
-        self.btn_save_general_configs = QtWidgets.QPushButton(parent=self.frame_2)
-        self.btn_save_general_configs.setMinimumSize(QtCore.QSize(150, 30))
-        self.btn_save_general_configs.setMaximumSize(QtCore.QSize(250, 30))
-        self.btn_save_general_configs.setStyleSheet("QPushButton {\n"
-"                                      background: #39a5db;\n"
-"                                      color: white;\n"
-"                                      border-radius: 15px;\n"
-"                                      }\n"
-"\n"
-"                                      QPushButton:hover {\n"
-"                                      background-color: rgb(59, 116, 190);\n"
-"                                      color: white;\n"
-"                                      }\n"
-"\n"
-"                                      QPushButton:disabled{\n"
-"                                      background-color: rgb(222, 222, 222);\n"
-"                                      }")
-        self.btn_save_general_configs.setObjectName("btn_save_general_configs")
-        self.verticalLayout_12.addWidget(self.btn_save_general_configs, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.verticalLayout_10.addWidget(self.frame_2)
-        spacerItem10 = QtWidgets.QSpacerItem(20, 678, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_10.addItem(spacerItem10)
-        self.tabWidget.addTab(self.tab_general, "")
-        self.tab_proxy = QtWidgets.QWidget()
-        self.tab_proxy.setObjectName("tab_proxy")
-        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.tab_proxy)
-        self.verticalLayout_8.setObjectName("verticalLayout_8")
+        self.label_manage_students_2.setFont(font)
+        self.label_manage_students_2.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_manage_students_2.setObjectName("label_manage_students_2")
+        self.verticalLayout_6.addWidget(self.label_manage_students_2)
+        self.line_manage__students_2 = QtWidgets.QFrame(parent=self.page_records)
+        self.line_manage__students_2.setStyleSheet(" border: none;\n"
+"                        background: rgb(255, 255, 255);")
+        self.line_manage__students_2.setFrameShape(QtWidgets.QFrame.Shape.HLine)
+        self.line_manage__students_2.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
+        self.line_manage__students_2.setObjectName("line_manage__students_2")
+        self.verticalLayout_6.addWidget(self.line_manage__students_2)
+        self.label_records_total = QtWidgets.QLabel(parent=self.page_records)
+        self.label_records_total.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_records_total.setObjectName("label_records_total")
+        self.verticalLayout_6.addWidget(self.label_records_total)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.comboBox_records_filters = QtWidgets.QComboBox(parent=self.page_records)
+        self.comboBox_records_filters.setStyleSheet("QComboBox{\n"
+"    background:  #383838;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
+        self.comboBox_records_filters.setObjectName("comboBox_records_filters")
+        self.horizontalLayout_4.addWidget(self.comboBox_records_filters)
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem10)
+        self.comboBox_month = QtWidgets.QComboBox(parent=self.page_records)
+        self.comboBox_month.setStyleSheet("QComboBox{\n"
+"    background:  #383838;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
+        self.comboBox_month.setObjectName("comboBox_month")
+        self.horizontalLayout_4.addWidget(self.comboBox_month)
+        self.comboBox_year = QtWidgets.QComboBox(parent=self.page_records)
+        self.comboBox_year.setStyleSheet("QComboBox{\n"
+"    background:  #383838;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
+        self.comboBox_year.setObjectName("comboBox_year")
+        self.horizontalLayout_4.addWidget(self.comboBox_year)
         spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem11)
-        self.btn_add_proxy = QtWidgets.QPushButton(parent=self.tab_proxy)
-        self.btn_add_proxy.setMinimumSize(QtCore.QSize(130, 30))
-        self.btn_add_proxy.setMaximumSize(QtCore.QSize(250, 16777215))
-        self.btn_add_proxy.setStyleSheet("QPushButton {\n"
-"                                    background: #39a5db;\n"
-"                                    color: white;\n"
-"                                    border-radius: 15px;\n"
-"                                    }\n"
+        self.pushButton_records_reload = QtWidgets.QPushButton(parent=self.page_records)
+        self.pushButton_records_reload.setMinimumSize(QtCore.QSize(30, 30))
+        self.pushButton_records_reload.setStyleSheet("QPushButton {\n"
 "\n"
-"                                    QPushButton:hover {\n"
-"                                    background-color: rgb(59, 116, 190);\n"
-"                                    color: white;\n"
-"                                    }\n"
+"                            background: #383838;\n"
+"                            color: white;\n"
+"                            border-radius: 100px;\n"
+"                            }\n"
 "\n"
-"                                    QPushButton:disabled{\n"
-"                                    background-color: rgb(222, 222, 222);\n"
-"                                    }")
-        self.btn_add_proxy.setIcon(icon4)
-        self.btn_add_proxy.setObjectName("btn_add_proxy")
-        self.horizontalLayout_4.addWidget(self.btn_add_proxy, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.btn_remove_proxy = QtWidgets.QPushButton(parent=self.tab_proxy)
-        self.btn_remove_proxy.setMinimumSize(QtCore.QSize(130, 30))
-        self.btn_remove_proxy.setMaximumSize(QtCore.QSize(250, 16777215))
-        self.btn_remove_proxy.setStyleSheet("QPushButton {\n"
-"                                    background: #39a5db;\n"
-"                                    color: white;\n"
-"                                    border-radius: 15px;\n"
-"                                    }\n"
+"                            QPushButton:hover {\n"
+"                            background-color: #303030;\n"
+"                            color: white;\n"
+"                            }\n"
 "\n"
-"                                    QPushButton:hover {\n"
-"                                    background-color: rgb(59, 116, 190);\n"
-"                                    color: white;\n"
-"                                    }\n"
-"\n"
-"                                    QPushButton:disabled{\n"
-"                                    background-color: rgb(222, 222, 222);\n"
-"                                    }")
-        self.btn_remove_proxy.setIcon(icon5)
-        self.btn_remove_proxy.setObjectName("btn_remove_proxy")
-        self.horizontalLayout_4.addWidget(self.btn_remove_proxy, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.btn_link_proxy_account = QtWidgets.QPushButton(parent=self.tab_proxy)
-        self.btn_link_proxy_account.setMinimumSize(QtCore.QSize(130, 30))
-        self.btn_link_proxy_account.setMaximumSize(QtCore.QSize(250, 16777215))
-        self.btn_link_proxy_account.setStyleSheet("QPushButton {\n"
-"                                    background: #39a5db;\n"
-"                                    color: white;\n"
-"                                    border-radius: 15px;\n"
-"                                    }\n"
-"\n"
-"                                    QPushButton:hover {\n"
-"                                    background-color: rgb(59, 116, 190);\n"
-"                                    color: white;\n"
-"                                    }\n"
-"\n"
-"                                    QPushButton:disabled{\n"
-"                                    background-color: rgb(222, 222, 222);\n"
-"                                    }")
+"                            QPushButton:disabled{\n"
+"                            background-color: rgb(222, 222, 222);\n"
+"                            }")
+        self.pushButton_records_reload.setText("")
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap(".\\../../../../../2tec/engagement-telegram/views/icons/groups-white.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_link_proxy_account.setIcon(icon6)
-        self.btn_link_proxy_account.setObjectName("btn_link_proxy_account")
-        self.horizontalLayout_4.addWidget(self.btn_link_proxy_account, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.btn_test_proxy = QtWidgets.QPushButton(parent=self.tab_proxy)
-        self.btn_test_proxy.setMinimumSize(QtCore.QSize(130, 30))
-        self.btn_test_proxy.setMaximumSize(QtCore.QSize(250, 16777215))
-        self.btn_test_proxy.setStyleSheet("QPushButton {\n"
-"                                    background: #39a5db;\n"
-"                                    color: white;\n"
-"                                    border-radius: 15px;\n"
-"                                    }\n"
-"\n"
-"                                    QPushButton:hover {\n"
-"                                    background-color: rgb(59, 116, 190);\n"
-"                                    color: white;\n"
-"                                    }\n"
-"\n"
-"                                    QPushButton:disabled{\n"
-"                                    background-color: rgb(222, 222, 222);\n"
-"                                    }")
-        icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap(".\\../../../../../2tec/engagement-telegram/views/icons/play-white.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_test_proxy.setIcon(icon7)
-        self.btn_test_proxy.setObjectName("btn_test_proxy")
-        self.horizontalLayout_4.addWidget(self.btn_test_proxy, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.btn_import_proxy = QtWidgets.QPushButton(parent=self.tab_proxy)
-        self.btn_import_proxy.setMinimumSize(QtCore.QSize(130, 30))
-        self.btn_import_proxy.setMaximumSize(QtCore.QSize(250, 16777215))
-        self.btn_import_proxy.setStyleSheet("QPushButton {\n"
-"                                    background: #39a5db;\n"
-"                                    color: white;\n"
-"                                    border-radius: 15px;\n"
-"                                    }\n"
-"\n"
-"                                    QPushButton:hover {\n"
-"                                    background-color: rgb(59, 116, 190);\n"
-"                                    color: white;\n"
-"                                    }\n"
-"\n"
-"                                    QPushButton:disabled{\n"
-"                                    background-color: rgb(222, 222, 222);\n"
-"                                    }")
-        icon8 = QtGui.QIcon()
-        icon8.addPixmap(QtGui.QPixmap(".\\../../../../../2tec/engagement-telegram/views/icons/import.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_import_proxy.setIcon(icon8)
-        self.btn_import_proxy.setObjectName("btn_import_proxy")
-        self.horizontalLayout_4.addWidget(self.btn_import_proxy, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem12)
-        self.verticalLayout_8.addLayout(self.horizontalLayout_4)
-        self.table_proxy = QtWidgets.QTableWidget(parent=self.tab_proxy)
-        self.table_proxy.setStyleSheet("QTableWidget{\n"
+        icon6.addPixmap(QtGui.QPixmap(".\\../../icons/refresh_white.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_records_reload.setIcon(icon6)
+        self.pushButton_records_reload.setObjectName("pushButton_records_reload")
+        self.horizontalLayout_4.addWidget(self.pushButton_records_reload)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_4)
+        self.table_students_2 = QtWidgets.QTableWidget(parent=self.page_records)
+        self.table_students_2.setStyleSheet("QTableWidget{\n"
 "                                background: #F0F3F6;\n"
 "                                border: none;\n"
 "                                border-radius: 20px;\n"
@@ -1063,78 +830,41 @@ class Ui_MainWindow(object):
 "                                border-top-right-radius: 20px;\n"
 "                                }\n"
 "                              ")
-        self.table_proxy.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
-        self.table_proxy.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection)
-        self.table_proxy.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
-        self.table_proxy.setColumnCount(7)
-        self.table_proxy.setObjectName("table_proxy")
-        self.table_proxy.setRowCount(0)
+        self.table_students_2.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.table_students_2.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
+        self.table_students_2.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
+        self.table_students_2.setObjectName("table_students_2")
+        self.table_students_2.setColumnCount(4)
+        self.table_students_2.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
-        self.table_proxy.setHorizontalHeaderItem(0, item)
+        self.table_students_2.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.table_proxy.setHorizontalHeaderItem(1, item)
+        self.table_students_2.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        self.table_proxy.setHorizontalHeaderItem(2, item)
+        self.table_students_2.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        self.table_proxy.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_proxy.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_proxy.setHorizontalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.table_proxy.setHorizontalHeaderItem(6, item)
-        self.table_proxy.horizontalHeader().setStretchLastSection(True)
-        self.table_proxy.verticalHeader().setVisible(False)
-        self.verticalLayout_8.addWidget(self.table_proxy)
-        self.tabWidget.addTab(self.tab_proxy, "")
-        self.tab_backup_and_restore = QtWidgets.QWidget()
-        self.tab_backup_and_restore.setObjectName("tab_backup_and_restore")
-        self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.tab_backup_and_restore)
-        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        self.btn_backup_and_restore = QtWidgets.QPushButton(parent=self.tab_backup_and_restore)
-        self.btn_backup_and_restore.setMinimumSize(QtCore.QSize(350, 45))
-        self.btn_backup_and_restore.setMaximumSize(QtCore.QSize(350, 45))
-        self.btn_backup_and_restore.setStyleSheet("QPushButton {\n"
-"    background: #39a5db;\n"
-"    color: white;\n"
-"    border-radius: 15px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color:   rgb(59, 116, 190);\n"
-"    color: white;\n"
-"}\n"
-"\n"
-"QPushButton:disabled{\n"
-"background-color:  rgb(222, 222, 222);\n"
-"}")
-        icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap(".\\../../../../../2tec/engagement-telegram/views/icons/backup.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_backup_and_restore.setIcon(icon9)
-        self.btn_backup_and_restore.setIconSize(QtCore.QSize(25, 25))
-        self.btn_backup_and_restore.setObjectName("btn_backup_and_restore")
-        self.horizontalLayout_7.addWidget(self.btn_backup_and_restore)
-        self.tabWidget.addTab(self.tab_backup_and_restore, "")
-        self.verticalLayout_7.addWidget(self.tabWidget)
-        self.stacked_pages.addWidget(self.page_configuration)
+        self.table_students_2.setHorizontalHeaderItem(3, item)
+        self.table_students_2.horizontalHeader().setStretchLastSection(True)
+        self.table_students_2.verticalHeader().setVisible(False)
+        self.table_students_2.verticalHeader().setDefaultSectionSize(45)
+        self.verticalLayout_6.addWidget(self.table_students_2)
+        self.stacked_pages.addWidget(self.page_records)
         self.horizontalLayout_2.addWidget(self.stacked_pages)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         self.stacked_pages.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget_2.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "LOGO"))
+        self.label.setText(_translate("MainWindow", "BJJ ADMIN"))
         self.btn_menu_lessons.setText(_translate("MainWindow", "Aulas"))
         self.btn_menu_student.setText(_translate("MainWindow", "Alunos"))
         self.btn_menu_message_forwarding.setText(_translate("MainWindow", "Administrativo"))
-        self.btn_menu_configuration.setText(_translate("MainWindow", "Configurações"))
-        self.btn_change_license.setText(_translate("MainWindow", "Alterar Licença"))
+        self.btn_registers.setText(_translate("MainWindow", "Registros"))
         self.label_page_account.setText(_translate("MainWindow", "Gerenciar Aulas"))
         self.btn_add_account.setText(_translate("MainWindow", "Adicionar"))
         self.btn_remove_account.setText(_translate("MainWindow", "Remover"))
@@ -1142,6 +872,7 @@ class Ui_MainWindow(object):
         self.label_manage_students.setText(_translate("MainWindow", "Gerenciar Alunos"))
         self.btn_add_student.setText(_translate("MainWindow", "Adicionar"))
         self.btn_remove_student.setText(_translate("MainWindow", "Remover"))
+        self.label_total.setText(_translate("MainWindow", "Total:"))
         item = self.table_students.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "id"))
         item = self.table_students.horizontalHeaderItem(1)
@@ -1150,6 +881,8 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Turma"))
         item = self.table_students.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Contato"))
+        item = self.table_students.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Status"))
         self.label_page_administrative.setText(_translate("MainWindow", "Administrativo"))
         self.btn_add_plan.setText(_translate("MainWindow", "Adicionar"))
         self.btn_remove_plan.setText(_translate("MainWindow", "Remover"))
@@ -1175,34 +908,13 @@ class Ui_MainWindow(object):
         item = self.table_class.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Detalhes"))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_class), _translate("MainWindow", "Turmas"))
-        self.label_page_configuration.setText(_translate("MainWindow", "Configurações"))
-        self.label_title_telegram_api_id.setText(_translate("MainWindow", "API ID:"))
-        self.label_title_telegram_api_hash.setText(_translate("MainWindow", "API HASH:"))
-        self.btn_save_telegram_api.setText(_translate("MainWindow", "Salvar"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_telegram_api), _translate("MainWindow", "API Padrão Telegram"))
-        self.label_flood_limit_per_account.setText(_translate("MainWindow", "Limite de flood por conta:"))
-        self.label_account_lockout_period.setText(_translate("MainWindow", "Prazo bloq. conta flood (dias):"))
-        self.btn_save_general_configs.setText(_translate("MainWindow", "Salvar"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_general), _translate("MainWindow", "Geral"))
-        self.btn_add_proxy.setText(_translate("MainWindow", "Adicionar"))
-        self.btn_remove_proxy.setText(_translate("MainWindow", "Remover"))
-        self.btn_link_proxy_account.setText(_translate("MainWindow", "Vincular Contas"))
-        self.btn_test_proxy.setText(_translate("MainWindow", "Testar"))
-        self.btn_import_proxy.setText(_translate("MainWindow", "Importar"))
-        item = self.table_proxy.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "Cód"))
-        item = self.table_proxy.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "Tipo"))
-        item = self.table_proxy.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Servidor"))
-        item = self.table_proxy.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "Porta"))
-        item = self.table_proxy.horizontalHeaderItem(4)
-        item.setText(_translate("MainWindow", "Total Contas"))
-        item = self.table_proxy.horizontalHeaderItem(5)
+        self.label_manage_students_2.setText(_translate("MainWindow", "Registros"))
+        self.label_records_total.setText(_translate("MainWindow", "Total: ."))
+        item = self.table_students_2.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "id"))
+        item = self.table_students_2.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "Aluno"))
+        item = self.table_students_2.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "Status"))
-        item = self.table_proxy.horizontalHeaderItem(6)
-        item.setText(_translate("MainWindow", "Última verificação"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_proxy), _translate("MainWindow", "Proxy"))
-        self.btn_backup_and_restore.setText(_translate("MainWindow", "  Assistente de Backup e Restauração"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_backup_and_restore), _translate("MainWindow", "Backup e Restauração"))
+        item = self.table_students_2.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "Última Atualização"))

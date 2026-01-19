@@ -27,9 +27,12 @@ class ThreadEditStudent(QThread):
         student.name = self.updatable_student_dto.name
         student.phone = self.updatable_student_dto.phone
         student.belt = self.updatable_student_dto.belt
+        student.observation = self.updatable_student_dto.observation
+        student.date_of_birth = self.updatable_student_dto.date_of_birth
+        student.sex = self.updatable_student_dto.sex
         student.plan_id = self.updatable_student_dto.plan_id
         student.class_id = self.updatable_student_dto.class_id
-        student.observation = self.updatable_student_dto.observation
+
 
         self.student_repository.update(student)
 

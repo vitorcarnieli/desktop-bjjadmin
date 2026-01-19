@@ -37,7 +37,7 @@ class Ui_AddStudentView(object):
         self.horizontalLayout_4.addItem(spacerItem)
         self.label_user_photo = QtWidgets.QLabel(parent=self.frame_user_photo_2)
         self.label_user_photo.setMinimumSize(QtCore.QSize(200, 200))
-        self.label_user_photo.setMaximumSize(QtCore.QSize(200, 200))
+        self.label_user_photo.setMaximumSize(QtCore.QSize(200, 300))
         self.label_user_photo.setText("")
         self.label_user_photo.setObjectName("label_user_photo")
         self.horizontalLayout_4.addWidget(self.label_user_photo)
@@ -45,9 +45,33 @@ class Ui_AddStudentView(object):
         self.horizontalLayout_4.addItem(spacerItem1)
         self.verticalLayout_8.addWidget(self.frame_user_photo_2)
         self.label_7 = QtWidgets.QLabel(parent=self.left)
+        self.label_7.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_7.setObjectName("label_7")
         self.verticalLayout_8.addWidget(self.label_7)
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.radio_adult = QtWidgets.QRadioButton(parent=self.left)
+        self.radio_adult.setStyleSheet("color: rgb(255, 255, 255);")
+        self.radio_adult.setChecked(True)
+        self.radio_adult.setObjectName("radio_adult")
+        self.horizontalLayout_5.addWidget(self.radio_adult)
+        self.radio_child = QtWidgets.QRadioButton(parent=self.left)
+        self.radio_child.setStyleSheet("color: rgb(255, 255, 255);\n"
+"")
+        self.radio_child.setObjectName("radio_child")
+        self.horizontalLayout_5.addWidget(self.radio_child)
+        self.radio_child_simple = QtWidgets.QRadioButton(parent=self.left)
+        self.radio_child_simple.setStyleSheet("color: rgb(255, 255, 255);")
+        self.radio_child_simple.setObjectName("radio_child_simple")
+        self.horizontalLayout_5.addWidget(self.radio_child_simple)
+        self.verticalLayout_8.addLayout(self.horizontalLayout_5)
         self.combo_belts = QtWidgets.QComboBox(parent=self.left)
+        self.combo_belts.setStyleSheet("QComboBox{\n"
+"    background:  #383838;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
         self.combo_belts.setObjectName("combo_belts")
         self.verticalLayout_8.addWidget(self.combo_belts)
         spacerItem2 = QtWidgets.QSpacerItem(20, 291, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
@@ -66,12 +90,66 @@ class Ui_AddStudentView(object):
         self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.frame_7)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
         self.label_8 = QtWidgets.QLabel(parent=self.frame_7)
+        self.label_8.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_8.setObjectName("label_8")
         self.verticalLayout_11.addWidget(self.label_8)
         self.line_name = QtWidgets.QLineEdit(parent=self.frame_7)
+        self.line_name.setMinimumSize(QtCore.QSize(0, 30))
+        self.line_name.setStyleSheet("QLineEdit{\n"
+"    background:  rgb(255, 255, 255);\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
         self.line_name.setObjectName("line_name")
         self.verticalLayout_11.addWidget(self.line_name)
         self.verticalLayout_10.addWidget(self.frame_7)
+        self.frame = QtWidgets.QFrame(parent=self.right)
+        self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame.setObjectName("frame")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.frame)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.label_2 = QtWidgets.QLabel(parent=self.frame)
+        self.label_2.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout.addWidget(self.label_2)
+        self.dateEdit = QtWidgets.QDateEdit(parent=self.frame)
+        self.dateEdit.setMinimumSize(QtCore.QSize(0, 30))
+        self.dateEdit.setStyleSheet("QDateEdit{\n"
+"    background:  rgb(255, 255, 255);\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
+        self.dateEdit.setMaximumDateTime(QtCore.QDateTime(QtCore.QDate(2100, 12, 31), QtCore.QTime(23, 59, 59)))
+        self.dateEdit.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1900, 9, 14), QtCore.QTime(3, 0, 0)))
+        self.dateEdit.setObjectName("dateEdit")
+        self.verticalLayout.addWidget(self.dateEdit)
+        self.verticalLayout_10.addWidget(self.frame)
+        self.frame_2 = QtWidgets.QFrame(parent=self.right)
+        self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame_2.setObjectName("frame_2")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame_2)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.label_3 = QtWidgets.QLabel(parent=self.frame_2)
+        self.label_3.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_3.setObjectName("label_3")
+        self.verticalLayout_2.addWidget(self.label_3)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.radio_male = QtWidgets.QRadioButton(parent=self.frame_2)
+        self.radio_male.setStyleSheet("color: rgb(255, 255, 255);")
+        self.radio_male.setChecked(True)
+        self.radio_male.setObjectName("radio_male")
+        self.horizontalLayout_2.addWidget(self.radio_male)
+        self.radio_female = QtWidgets.QRadioButton(parent=self.frame_2)
+        self.radio_female.setStyleSheet("color: rgb(255, 255, 255);")
+        self.radio_female.setObjectName("radio_female")
+        self.horizontalLayout_2.addWidget(self.radio_female)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+        self.verticalLayout_10.addWidget(self.frame_2)
         self.frame_8 = QtWidgets.QFrame(parent=self.right)
         self.frame_8.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_8.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
@@ -79,9 +157,17 @@ class Ui_AddStudentView(object):
         self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.frame_8)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
         self.label_9 = QtWidgets.QLabel(parent=self.frame_8)
+        self.label_9.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_9.setObjectName("label_9")
         self.verticalLayout_12.addWidget(self.label_9)
         self.line_phone = QtWidgets.QLineEdit(parent=self.frame_8)
+        self.line_phone.setMinimumSize(QtCore.QSize(0, 30))
+        self.line_phone.setStyleSheet("QLineEdit{\n"
+"    background:  rgb(255, 255, 255);\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
         self.line_phone.setObjectName("line_phone")
         self.verticalLayout_12.addWidget(self.line_phone)
         self.verticalLayout_10.addWidget(self.frame_8)
@@ -92,9 +178,17 @@ class Ui_AddStudentView(object):
         self.verticalLayout_13 = QtWidgets.QVBoxLayout(self.frame_9)
         self.verticalLayout_13.setObjectName("verticalLayout_13")
         self.label_10 = QtWidgets.QLabel(parent=self.frame_9)
+        self.label_10.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_10.setObjectName("label_10")
         self.verticalLayout_13.addWidget(self.label_10)
         self.combo_plan = QtWidgets.QComboBox(parent=self.frame_9)
+        self.combo_plan.setMinimumSize(QtCore.QSize(0, 30))
+        self.combo_plan.setStyleSheet("QComboBox{\n"
+"    background:  rgb(255, 255, 255);\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
         self.combo_plan.setObjectName("combo_plan")
         self.verticalLayout_13.addWidget(self.combo_plan)
         self.verticalLayout_10.addWidget(self.frame_9)
@@ -105,9 +199,17 @@ class Ui_AddStudentView(object):
         self.verticalLayout_14 = QtWidgets.QVBoxLayout(self.frame_10)
         self.verticalLayout_14.setObjectName("verticalLayout_14")
         self.label_11 = QtWidgets.QLabel(parent=self.frame_10)
+        self.label_11.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_11.setObjectName("label_11")
         self.verticalLayout_14.addWidget(self.label_11)
         self.combo_class = QtWidgets.QComboBox(parent=self.frame_10)
+        self.combo_class.setMinimumSize(QtCore.QSize(0, 30))
+        self.combo_class.setStyleSheet("QComboBox{\n"
+"    background:  rgb(255, 255, 255);\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
         self.combo_class.setObjectName("combo_class")
         self.verticalLayout_14.addWidget(self.combo_class)
         self.verticalLayout_10.addWidget(self.frame_10)
@@ -118,9 +220,16 @@ class Ui_AddStudentView(object):
         self.verticalLayout_15 = QtWidgets.QVBoxLayout(self.frame_11)
         self.verticalLayout_15.setObjectName("verticalLayout_15")
         self.label_12 = QtWidgets.QLabel(parent=self.frame_11)
+        self.label_12.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_12.setObjectName("label_12")
         self.verticalLayout_15.addWidget(self.label_12)
         self.textEdit_observation = QtWidgets.QTextEdit(parent=self.frame_11)
+        self.textEdit_observation.setStyleSheet("QTextEdit{\n"
+"    background:  rgb(255, 255, 255);\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}\n"
+"")
         self.textEdit_observation.setObjectName("textEdit_observation")
         self.verticalLayout_15.addWidget(self.textEdit_observation)
         self.verticalLayout_10.addWidget(self.frame_11)
@@ -130,11 +239,32 @@ class Ui_AddStudentView(object):
         self.verticalLayout_10.addItem(spacerItem4)
         self.horizontalLayout.addWidget(self.right)
         self.verticalLayout_9.addWidget(self.frame_6)
+        self.label = QtWidgets.QLabel(parent=AddStudentView)
+        self.label.setMinimumSize(QtCore.QSize(0, 30))
+        self.label.setText("")
+        self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label.setObjectName("label")
+        self.verticalLayout_9.addWidget(self.label)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem5)
         self.save_btn = QtWidgets.QPushButton(parent=AddStudentView)
+        self.save_btn.setMinimumSize(QtCore.QSize(150, 30))
+        self.save_btn.setStyleSheet("QPushButton {\n"
+"                            background: #383838;\n"
+"                            color: white;\n"
+"                            border-radius: 15px;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:hover {\n"
+"                            background-color: #303030;\n"
+"                            color: white;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:disabled{\n"
+"                            background-color: rgb(222, 222, 222);\n"
+"                            }")
         self.save_btn.setObjectName("save_btn")
         self.horizontalLayout_3.addWidget(self.save_btn)
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -148,7 +278,14 @@ class Ui_AddStudentView(object):
         _translate = QtCore.QCoreApplication.translate
         AddStudentView.setWindowTitle(_translate("AddStudentView", "Aluno"))
         self.label_7.setText(_translate("AddStudentView", "Faixa"))
+        self.radio_adult.setText(_translate("AddStudentView", "Adulto"))
+        self.radio_child.setText(_translate("AddStudentView", "Infantil"))
+        self.radio_child_simple.setText(_translate("AddStudentView", "Infantil Simplificado"))
         self.label_8.setText(_translate("AddStudentView", "Nome Completo"))
+        self.label_2.setText(_translate("AddStudentView", "Data de Nascimento"))
+        self.label_3.setText(_translate("AddStudentView", "Sexo"))
+        self.radio_male.setText(_translate("AddStudentView", "Masculino"))
+        self.radio_female.setText(_translate("AddStudentView", "Feminino"))
         self.label_9.setText(_translate("AddStudentView", "Telefone de Contato"))
         self.label_10.setText(_translate("AddStudentView", "Plano"))
         self.label_11.setText(_translate("AddStudentView", "Turma"))

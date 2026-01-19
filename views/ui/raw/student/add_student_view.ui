@@ -91,13 +91,63 @@
          </item>
          <item>
           <widget class="QLabel" name="label_7">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);</string>
+           </property>
            <property name="text">
             <string>Faixa</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="combo_belts"/>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QRadioButton" name="radio_adult">
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="text">
+              <string>Adulto</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radio_child">
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);
+</string>
+             </property>
+             <property name="text">
+              <string>Infantil</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radio_child_simple">
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="text">
+              <string>Infantil Simplificado</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QComboBox" name="combo_belts">
+           <property name="styleSheet">
+            <string notr="true">QComboBox{
+	background:  #383838;
+	border-radius: 10px;
+	padding: 5px;
+}
+</string>
+           </property>
+          </widget>
          </item>
          <item>
           <spacer name="v1_2">
@@ -135,13 +185,140 @@
            <layout class="QVBoxLayout" name="verticalLayout_11">
             <item>
              <widget class="QLabel" name="label_8">
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>Nome Completo</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="line_name"/>
+             <widget class="QLineEdit" name="line_name">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit{
+	background:  rgb(255, 255, 255);
+	border-radius: 10px;
+	padding: 5px;
+}
+</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame">
+           <property name="frameShape">
+            <enum>QFrame::Shape::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);</string>
+              </property>
+              <property name="text">
+               <string>Data de Nascimento</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateEdit" name="dateEdit">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QDateEdit{
+	background:  rgb(255, 255, 255);
+	border-radius: 10px;
+	padding: 5px;
+}
+</string>
+              </property>
+              <property name="maximumDateTime">
+               <datetime>
+                <hour>23</hour>
+                <minute>59</minute>
+                <second>59</second>
+                <year>2100</year>
+                <month>12</month>
+                <day>31</day>
+               </datetime>
+              </property>
+              <property name="minimumDateTime">
+               <datetime>
+                <hour>3</hour>
+                <minute>0</minute>
+                <second>0</second>
+                <year>1900</year>
+                <month>9</month>
+                <day>14</day>
+               </datetime>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_2">
+           <property name="frameShape">
+            <enum>QFrame::Shape::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);</string>
+              </property>
+              <property name="text">
+               <string>Sexo</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QRadioButton" name="radio_male">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string>Masculino</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="radio_female">
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);</string>
+                </property>
+                <property name="text">
+                 <string>Feminino</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -157,13 +334,31 @@
            <layout class="QVBoxLayout" name="verticalLayout_12">
             <item>
              <widget class="QLabel" name="label_9">
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>Telefone de Contato</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="line_phone"/>
+             <widget class="QLineEdit" name="line_phone">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit{
+	background:  rgb(255, 255, 255);
+	border-radius: 10px;
+	padding: 5px;
+}
+</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -179,13 +374,31 @@
            <layout class="QVBoxLayout" name="verticalLayout_13">
             <item>
              <widget class="QLabel" name="label_10">
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>Plano</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="combo_plan"/>
+             <widget class="QComboBox" name="combo_plan">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QComboBox{
+	background:  rgb(255, 255, 255);
+	border-radius: 10px;
+	padding: 5px;
+}
+</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -201,13 +414,31 @@
            <layout class="QVBoxLayout" name="verticalLayout_14">
             <item>
              <widget class="QLabel" name="label_11">
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>Turma</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="combo_class"/>
+             <widget class="QComboBox" name="combo_class">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QComboBox{
+	background:  rgb(255, 255, 255);
+	border-radius: 10px;
+	padding: 5px;
+}
+</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -223,13 +454,25 @@
            <layout class="QVBoxLayout" name="verticalLayout_15">
             <item>
              <widget class="QLabel" name="label_12">
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>Observações</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QTextEdit" name="textEdit_observation"/>
+             <widget class="QTextEdit" name="textEdit_observation">
+              <property name="styleSheet">
+               <string notr="true">QTextEdit{
+	background:  rgb(255, 255, 255);
+	border-radius: 10px;
+	padding: 5px;
+}
+</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -267,6 +510,22 @@
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="label">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <spacer name="horizontalSpacer">
@@ -283,6 +542,28 @@
      </item>
      <item>
       <widget class="QPushButton" name="save_btn">
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+                            background: #383838;
+                            color: white;
+                            border-radius: 15px;
+                            }
+
+                            QPushButton:hover {
+                            background-color: #303030;
+                            color: white;
+                            }
+
+                            QPushButton:disabled{
+                            background-color: rgb(222, 222, 222);
+                            }</string>
+       </property>
        <property name="text">
         <string>Salvar</string>
        </property>
