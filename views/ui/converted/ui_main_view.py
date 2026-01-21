@@ -487,19 +487,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_16.addLayout(self.layout_buttons_manage_students)
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
-        self.label_total = QtWidgets.QLabel(parent=self.page_student)
-        self.label_total.setStyleSheet("color: rgb(255, 255, 255);")
-        self.label_total.setObjectName("label_total")
-        self.horizontalLayout_8.addWidget(self.label_total)
-        self.comboBox_filter_student = QtWidgets.QComboBox(parent=self.page_student)
-        self.comboBox_filter_student.setStyleSheet("QComboBox{\n"
-"    background:  #383838;\n"
-"    border-radius: 10px;\n"
-"    padding: 5px;\n"
-"}\n"
-"")
-        self.comboBox_filter_student.setObjectName("comboBox_filter_student")
-        self.horizontalLayout_8.addWidget(self.comboBox_filter_student)
+        self.student_filter_layout = QtWidgets.QVBoxLayout()
+        self.student_filter_layout.setObjectName("student_filter_layout")
+        self.label_student_filter = QtWidgets.QLabel(parent=self.page_student)
+        self.label_student_filter.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_student_filter.setObjectName("label_student_filter")
+        self.student_filter_layout.addWidget(self.label_student_filter)
+        self.horizontalLayout_8.addLayout(self.student_filter_layout)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_8.addItem(spacerItem3)
         self.verticalLayout_16.addLayout(self.horizontalLayout_8)
@@ -951,7 +945,7 @@ class Ui_MainWindow(object):
         self.label_manage_students.setText(_translate("MainWindow", "Gerenciar Alunos"))
         self.btn_add_student.setText(_translate("MainWindow", "Adicionar"))
         self.btn_remove_student.setText(_translate("MainWindow", "Remover"))
-        self.label_total.setText(_translate("MainWindow", "Total:"))
+        self.label_student_filter.setText(_translate("MainWindow", "Total:."))
         item = self.table_students.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "id"))
         item = self.table_students.horizontalHeaderItem(1)
