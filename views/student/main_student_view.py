@@ -1,14 +1,22 @@
+import copy
+from datetime import date
+
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QTableWidgetItem
 
 from dtos.student_dto import StudentDto
+from enums.sex import Sex
 from threads.student.thread_get_students import ThreadGetStudents
+from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
+from views.checkable_combo_box import CheckableComboBox
 from views.student.add_student_view import StudentView
 from views.ui.converted.ui_main_view import Ui_MainWindow
 
 
 class MainStudentView:
     def __init__(self, main_view: Ui_MainWindow):
+        self.combo_student_filters:CheckableComboBox = None
+        self.thread_load_student_filters = None
         self.thread_get_students = None
         self.main_view = main_view
 
@@ -20,7 +28,8 @@ class MainStudentView:
         self.main_view.table_students.setColumnHidden(0, True)
 
         self.student_dtos = []
-
+        self.to_display_student_dtos = []
+        
         self.start_thread_get_students()
 
     # view handlers
@@ -58,7 +67,6 @@ class MainStudentView:
         return
 
     def insert_table_students(self, student_dto: StudentDto):
-        self.main_view.label_total.setText(f"Total: {len(self.student_dtos)}")
         try:
             row_position = None
             already_exists_on_table = False
@@ -113,7 +121,178 @@ class MainStudentView:
 
     def on_signal_student_dtos(self, student_dtos):
         self.student_dtos = student_dtos
+        self.to_display_student_dtos = student_dtos
         for student in student_dtos:
             self.insert_table_students(student)
+        self.start_thread_load_student_filters()
 
     # thread events
+    def start_thread_load_student_filters(self):
+        self.thread_load_student_filters = ThreadLoadStudentFilters()
+        self.thread_load_student_filters.signals.signal_filters.connect(self.on_signal_filters)
+        self.thread_load_student_filters.start()
+
+    def on_student_filter_change(self):
+        combo = self.combo_student_filters
+        combo.blockSignals(True)
+        for row in range(combo.model().rowCount()):
+            item = combo.model().item(row)
+            data = item.data(Qt.UserRole)
+            if not data:
+                continue
+            combo.enable_by_index(row)
+
+        indexes = combo.get_selected_indexes()
+
+        filled_fields = [
+            combo.model().item(row).data(Qt.UserRole)
+            for row in indexes
+            if combo.model().item(row).data(Qt.UserRole)
+        ]
+
+        for field in filled_fields:
+            for row in range(combo.model().rowCount()):
+                item = combo.model().item(row)
+
+                if not (item.flags() & Qt.ItemIsUserCheckable):
+                    continue
+
+                data = item.data(Qt.UserRole)
+                if not data:
+                    continue
+
+                if data.split("_")[0] == field.split("_")[0] and item.checkState() != Qt.Checked:
+                    combo.disable_by_index(row)
+
+        filters: dict[str, bool | int | None] = {
+            "payment": None,
+            "age": None,
+            "class": None,
+            "plan": None,
+            "sex": None
+        }
+
+        def get_true_if_greater_zero(num: str) -> bool:
+            return True if int(num.split("_")[-1]) > 0 else False
+
+        filled_fields = [str(f) for f in filled_fields]
+
+        for field in filled_fields:
+            if "payment" in field:
+                filters["payment"] = get_true_if_greater_zero(field)
+
+            if "age" in field:
+                filters["age"] = get_true_if_greater_zero(field)
+
+            if "class" in field:
+                filters["class"] = int(field.split("_")[-1])
+
+            if "plan" in field:
+                filters["plan"] = int(field.split("_")[-1])
+
+            if "sex" in field:
+                filters["sex"] = field.split("_")[-1]
+
+        combo.blockSignals(False)
+        self.apply_student_filters(filters)
+
+    def on_signal_filters(self, filters):
+        self.combo_student_filters = CheckableComboBox()
+        self.combo_student_filters.currentTextChanged.connect(self.on_student_filter_change)
+        self.combo_student_filters.setMinimumWidth(150)
+
+        self.combo_student_filters.addTitle("Filtros")
+
+
+        payment_id = "payment_"
+        self.combo_student_filters.addTitle("Pagamento")
+        self.combo_student_filters.addItem("Pagos", f"{payment_id}1")
+        self.combo_student_filters.addItem("Pendentes", f"{payment_id}0")
+
+        age_id = "age_"
+        self.combo_student_filters.addTitle("Idade")
+        self.combo_student_filters.addItem("+18", f"{age_id}1")
+        self.combo_student_filters.addItem("-18", f"{age_id}0")
+
+        sex_id = "sex_"
+        self.combo_student_filters.addTitle("Sexo")
+        self.combo_student_filters.addItem("Masculino", f"{sex_id}Male")
+        self.combo_student_filters.addItem("Feminino", f"{sex_id}Female")
+
+        class_id = "class_"
+        self.combo_student_filters.addTitle("Turmas")
+        for i,c in enumerate(filters["class"]):
+            if i < 1:
+                continue
+            self.combo_student_filters.addItem(c.name, f"{class_id}{c.id}")
+
+        plan_id = "plan_"
+        self.combo_student_filters.addTitle("Planos")
+        for i, p in enumerate(filters["plan"]):
+            if i < 1:
+                continue
+            self.combo_student_filters.addItem(p.name, f"{plan_id}{p.id}")
+
+
+        self.main_view.student_filter_layout.addWidget(self.combo_student_filters)
+
+    def apply_student_filters(self, filters: dict[str, bool | int | None]):
+        result = copy.deepcopy(self.student_dtos)
+
+        # payment
+        """
+        # TODO
+        payment_filter = filters.get("payment")
+        if payment_filter is not None:
+            result = [
+                s for s in result
+                if s.is_paid == payment_filter
+            ]
+        """
+
+
+        # age
+        age_filter = filters.get("age")
+        if age_filter is not None:
+            def is_18_years_old(birth_date) -> bool:
+                today = date.today()
+                return (
+                        today.year - birth_date.year
+                        - ((today.month, today.day) < (birth_date.month, birth_date.day))
+                ) >= 18
+
+            result = [
+                s for s in result
+                if is_18_years_old(s.date_of_birth) == age_filter
+            ]
+
+        #sex
+        sex_filter = filters.get("sex")
+        if sex_filter is not None:
+            result = [
+                s for s in result
+                if s.sex.value == sex_filter
+            ]
+
+        # class
+        class_filter = filters.get("class")
+        if class_filter is not None:
+            result = [
+                s for s in result
+                if s.class_id == int(class_filter)
+            ]
+
+        # plan
+        plan_filter = filters.get("plan")
+        if plan_filter is not None:
+            result = [
+                s for s in result
+                if s.plan_id == int(plan_filter)
+            ]
+
+        self.to_display_student_dtos = result
+        self.main_view.label_student_filter.setText(f"Total: {len(result)}")
+        self.main_view.table_students.setRowCount(0)
+        for s in self.to_display_student_dtos:
+            self.insert_table_students(s)
+
