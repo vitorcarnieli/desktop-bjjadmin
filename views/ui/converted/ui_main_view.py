@@ -168,173 +168,251 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setSpacing(6)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.frame = QtWidgets.QFrame(parent=self.page_lesson)
+        self.frame.setStyleSheet("QFrame {\n"
+"margin-left: 0px;}")
+        self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frame.setObjectName("frame")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.frame)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setContentsMargins(-1, -1, -1, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.label_page_account = QtWidgets.QLabel(parent=self.page_lesson)
+        self.label_page_account = QtWidgets.QLabel(parent=self.frame)
         font = QtGui.QFont()
         font.setPointSize(13)
         self.label_page_account.setFont(font)
-        self.label_page_account.setStyleSheet("color: #4F9AFE")
+        self.label_page_account.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_page_account.setObjectName("label_page_account")
         self.verticalLayout.addWidget(self.label_page_account)
-        self.line_page_account = QtWidgets.QFrame(parent=self.page_lesson)
+        self.line_page_account = QtWidgets.QFrame(parent=self.frame)
         self.line_page_account.setStyleSheet(" border: none;\n"
-"                            background: #4F9AFE;")
+"                        background: rgb(255, 255, 255);")
         self.line_page_account.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line_page_account.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_page_account.setObjectName("line_page_account")
         self.verticalLayout.addWidget(self.line_page_account)
-        self.verticalLayout_3.addLayout(self.verticalLayout)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setContentsMargins(-1, 0, -1, -1)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
-        self.btn_add_account = QtWidgets.QPushButton(parent=self.page_lesson)
-        self.btn_add_account.setEnabled(True)
-        self.btn_add_account.setMinimumSize(QtCore.QSize(110, 30))
-        self.btn_add_account.setMaximumSize(QtCore.QSize(250, 30))
-        self.btn_add_account.setStyleSheet("QPushButton {\n"
-"                            background: #4F9AFE;\n"
-"                            color: white;\n"
-"                            border-radius: 15px;\n"
-"                            }\n"
-"\n"
-"                            QPushButton:hover {\n"
-"                            background-color: rgb(59, 116, 190);\n"
-"                            color: white;\n"
-"                            }\n"
-"\n"
-"                            QPushButton:disabled{\n"
-"                            background-color: rgb(222, 222, 222);\n"
-"                            }")
-        icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap(".\\../../../../../2tec/engagement-telegram/views/icons/plus.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_add_account.setIcon(icon4)
-        self.btn_add_account.setObjectName("btn_add_account")
-        self.horizontalLayout.addWidget(self.btn_add_account)
-        self.btn_remove_account = QtWidgets.QPushButton(parent=self.page_lesson)
-        self.btn_remove_account.setEnabled(False)
-        self.btn_remove_account.setMinimumSize(QtCore.QSize(110, 30))
-        self.btn_remove_account.setMaximumSize(QtCore.QSize(250, 30))
-        self.btn_remove_account.setStyleSheet("QPushButton {\n"
-"                            background: #4F9AFE;\n"
-"                            color: white;\n"
-"                            border-radius: 15px;\n"
-"                            }\n"
-"\n"
-"                            QPushButton:hover {\n"
-"                            background-color: rgb(59, 116, 190);\n"
-"                            color: white;\n"
-"                            }\n"
-"\n"
-"                            QPushButton:disabled{\n"
-"                            background-color: rgb(222, 222, 222);\n"
-"                            }")
-        icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap(".\\../../../../../2tec/engagement-telegram/views/icons/delete.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btn_remove_account.setIcon(icon5)
-        self.btn_remove_account.setObjectName("btn_remove_account")
-        self.horizontalLayout.addWidget(self.btn_remove_account)
-        self.btn_lesson_configuration = QtWidgets.QPushButton(parent=self.page_lesson)
-        self.btn_lesson_configuration.setMinimumSize(QtCore.QSize(110, 30))
-        self.btn_lesson_configuration.setStyleSheet("QPushButton {\n"
-"                            background: #4F9AFE;\n"
-"                            color: white;\n"
-"                            border-radius: 15px;\n"
-"                            }\n"
-"\n"
-"                            QPushButton:hover {\n"
-"                            background-color: rgb(59, 116, 190);\n"
-"                            color: white;\n"
-"                            }\n"
-"\n"
-"                            QPushButton:disabled{\n"
-"                            background-color: rgb(222, 222, 222);\n"
-"                            }")
-        self.btn_lesson_configuration.setObjectName("btn_lesson_configuration")
-        self.horizontalLayout.addWidget(self.btn_lesson_configuration)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout.addItem(spacerItem2)
-        self.verticalLayout_3.addLayout(self.horizontalLayout)
-        self.calendarWidget = QtWidgets.QCalendarWidget(parent=self.page_lesson)
-        self.calendarWidget.setStyleSheet("QCalendarWidget {\n"
-"    background-color: #181818;\n"
-"    color: #e0e0e0;\n"
-"    border: 1px solid #2a2a2a;\n"
+        self.calendarWidget = QtWidgets.QCalendarWidget(parent=self.frame)
+        self.calendarWidget.setStyleSheet("/* QCalendarWidget - Estilo Moderno */\n"
+"QCalendarWidget {\n"
+"    background-color: rgb(32, 32, 32);\n"
+"    border: 1px solid rgb(60, 60, 60);\n"
+"    border-radius: 12px;\n"
+"    padding: 8px;\n"
 "}\n"
 "\n"
-"/* Barra de navegação (mês/ano) */\n"
+"/* Barra de navegação superior */\n"
 "QCalendarWidget QWidget#qt_calendar_navigationbar {\n"
-"    background-color: #202020;\n"
-"    border-bottom: 1px solid #2a2a2a;\n"
+"    background-color: rgb(40, 40, 40);\n"
+"    border-radius: 0px;\n"
+"    padding: 4px;\n"
+"    margin-bottom: 0px;\n"
 "}\n"
 "\n"
-"/* Botões de navegação */\n"
+"/* Botões de navegação (anterior/próximo) */\n"
 "QCalendarWidget QToolButton {\n"
-"    color: #e0e0e0;\n"
-"    background-color: #2a2a2a;\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 1px solid rgb(70, 70, 70);\n"
 "    border-radius: 6px;\n"
-"    padding: 5px;\n"
-"}\n"
-"\n"
-"QCalendarWidget QToolButton:hover {\n"
-"    background-color: #3a3a3a;\n"
-"}\n"
-"\n"
-"QCalendarWidget QToolButton:pressed {\n"
-"    background-color: #505050;\n"
-"}\n"
-"\n"
-"/* Label do mês/ano */\n"
-"QCalendarWidget QToolButton#qt_calendar_monthbutton,\n"
-"QCalendarWidget QToolButton#qt_calendar_yearbutton {\n"
-"    background-color: #212121 ;\n"
+"    color: rgb(220, 220, 220);\n"
+"    padding: 6px;\n"
+"    margin: 2px;\n"
 "    font-weight: bold;\n"
 "}\n"
 "\n"
-"/* Dias da semana */\n"
-"QCalendarWidget QHeaderView::section {\n"
-"    background-color: #212121 ;\n"
-"    color: #fff;\n"
-"    padding: 4px;\n"
+"QCalendarWidget QToolButton:hover {\n"
+"    background-color: rgb(70, 130, 255);\n"
+"    border-color: rgb(90, 150, 255);\n"
+"}\n"
+"\n"
+"QCalendarWidget QToolButton:pressed {\n"
+"    background-color: rgb(50, 110, 235);\n"
+"}\n"
+"\n"
+"/* Botão do menu (dropdown ano/mês) */\n"
+"QCalendarWidget QToolButton::menu-indicator {\n"
+"    image: none;\n"
+"    width: 0px;\n"
+"}\n"
+"\n"
+"/* Setas de navegação */\n"
+"QCalendarWidget QToolButton#qt_calendar_prevmonth {\n"
+"    qproperty-icon: url(none);\n"
+"    qproperty-text: \"<\";\n"
+"}\n"
+"\n"
+"QCalendarWidget QToolButton#qt_calendar_nextmonth {\n"
+"    qproperty-icon: url(none);\n"
+"    qproperty-text: \">\";\n"
+"}\n"
+"\n"
+"/* Botão de seleção de mês */\n"
+"QCalendarWidget QToolButton#qt_calendar_monthbutton {\n"
+"    background-color: transparent;\n"
 "    border: none;\n"
+"    color: rgb(70, 130, 255);\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    padding: 6px 12px;\n"
 "}\n"
 "\n"
-"/* Área dos dias */\n"
+"QCalendarWidget QToolButton#qt_calendar_monthbutton:hover {\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border-radius: 6px;\n"
+"}\n"
+"\n"
+"/* Botão de seleção de ano */\n"
+"QCalendarWidget QToolButton#qt_calendar_yearbutton {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"    color: rgb(70, 130, 255);\n"
+"    font-size: 14px;\n"
+"    font-weight: bold;\n"
+"    padding: 6px 12px;\n"
+"}\n"
+"\n"
+"QCalendarWidget QToolButton#qt_calendar_yearbutton:hover {\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border-radius: 6px;\n"
+"}\n"
+"\n"
+"/* Menu dropdown para mês/ano */\n"
+"QCalendarWidget QMenu {\n"
+"    background-color: rgb(40, 40, 40);\n"
+"    border: 1px solid rgb(70, 70, 70);\n"
+"    border-radius: 8px;\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QCalendarWidget QMenu::item {\n"
+"    padding: 6px 20px;\n"
+"    color: rgb(220, 220, 220);\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QCalendarWidget QMenu::item:selected {\n"
+"    background-color: rgb(70, 130, 255);\n"
+"}\n"
+"\n"
+"/* SpinBox para navegação de ano */\n"
+"QCalendarWidget QSpinBox {\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border: 1px solid rgb(70, 70, 70);\n"
+"    border-radius: 6px;\n"
+"    color: rgb(220, 220, 220);\n"
+"    padding: 4px 8px;\n"
+"    selection-background-color: rgb(70, 130, 255);\n"
+"}\n"
+"\n"
+"QCalendarWidget QSpinBox::up-button,\n"
+"QCalendarWidget QSpinBox::down-button {\n"
+"    background-color: rgb(60, 60, 60);\n"
+"    border: none;\n"
+"    border-radius: 3px;\n"
+"}\n"
+"\n"
+"QCalendarWidget QSpinBox::up-button:hover,\n"
+"QCalendarWidget QSpinBox::down-button:hover {\n"
+"    background-color: rgb(70, 130, 255);\n"
+"}\n"
+"\n"
+"/* Tabela do calendário */\n"
+"QCalendarWidget QTableView {\n"
+"    background-color: rgb(32, 32, 32);\n"
+"    border: none;\n"
+"    selection-background-color: rgb(70, 130, 255);\n"
+"    selection-color: white;\n"
+"    outline: none;\n"
+"    gridline-color: rgb(45, 45, 45);\n"
+"}\n"
+"\n"
+"/* Cabeçalho (dias da semana) */\n"
+"QCalendarWidget QTableView QHeaderView::section {\n"
+"    background-color: #323232;\n"
+"    color: rgb(150, 150, 150);\n"
+"    padding: 8px;\n"
+"    border: none;\n"
+"    font-weight: bold;\n"
+"    font-size: 11px;\n"
+"    text-transform: uppercase;\n"
+"}\n"
+"\n"
+"/* Células do calendário */\n"
 "QCalendarWidget QAbstractItemView {\n"
-"    background-color: #181818;\n"
-"    selection-background-color: #303030;\n"
-"    selection-color: #000000;\n"
-"    outline: 0;\n"
+"    color: rgb(220, 220, 220);\n"
+"    font-size: 13px;\n"
 "}\n"
 "\n"
-"/* Dia atual (hoje) */\n"
-"QCalendarWidget QAbstractItemView::item: !selected: !disabled:today {\n"
-"    background-color: #2f2f2f;\n"
-"    border: 1px solid #3daee9;\n"
-"    color: #ffffff;\n"
+"QCalendarWidget QAbstractItemView:enabled {\n"
+"    color: rgb(220, 220, 220);\n"
 "}\n"
 "\n"
-"/* Dias fora do mês */\n"
-"QCalendarWidget QAbstractItemView::item:disabled {\n"
-"    color: #555555;\n"
+"QCalendarWidget QAbstractItemView:disabled {\n"
+"    color: rgb(100, 100, 100);\n"
 "}\n"
 "\n"
-"/* Hover nos dias */\n"
-"QCalendarWidget QAbstractItemView::item:hover {\n"
-"    background-color: #2a2a2a;\n"
+"/* Dia atual */\n"
+"QCalendarWidget QAbstractItemView:enabled {\n"
+"    selection-background-color: rgb(70, 130, 255);\n"
+"    selection-color: white;\n"
+"}\n"
+"\n"
+"/* Células do calendário - sem efeito de fundo */\n"
+"QCalendarWidget QTableView::item {\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"QCalendarWidget QTableView::item:hover {\n"
+"    background-color: rgb(50, 50, 50);\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"/* Dia selecionado */\n"
+"QCalendarWidget QTableView::item:selected {\n"
+"    background-color: rgb(70, 130, 255);\n"
+"    color: white;\n"
+"    border-radius: 4px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Dias de outros meses (desabilitados) */\n"
+"QCalendarWidget QTableView::item:disabled {\n"
+"    color: rgb(80, 80, 80);\n"
+"}\n"
+"\n"
+"/* Scrollbars (caso apareçam) */\n"
+"QCalendarWidget QScrollBar:vertical {\n"
+"    background-color: rgb(32, 32, 32);\n"
+"    width: 12px;\n"
+"    border-radius: 6px;\n"
+"}\n"
+"\n"
+"QCalendarWidget QScrollBar::handle:vertical {\n"
+"    background-color: rgb(70, 70, 70);\n"
+"    border-radius: 6px;\n"
+"    min-height: 20px;\n"
+"}\n"
+"\n"
+"QCalendarWidget QScrollBar::handle:vertical:hover {\n"
+"    background-color: rgb(90, 90, 90);\n"
+"}\n"
+"\n"
+"QCalendarWidget QScrollBar::add-line:vertical,\n"
+"QCalendarWidget QScrollBar::sub-line:vertical {\n"
+"    height: 0px;\n"
 "}")
         self.calendarWidget.setMinimumDate(QtCore.QDate(2024, 3, 1))
         self.calendarWidget.setMaximumDate(QtCore.QDate(2100, 12, 31))
-        self.calendarWidget.setGridVisible(False)
+        self.calendarWidget.setGridVisible(True)
         self.calendarWidget.setHorizontalHeaderFormat(QtWidgets.QCalendarWidget.HorizontalHeaderFormat.ShortDayNames)
         self.calendarWidget.setVerticalHeaderFormat(QtWidgets.QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader)
         self.calendarWidget.setNavigationBarVisible(True)
         self.calendarWidget.setDateEditEnabled(True)
         self.calendarWidget.setObjectName("calendarWidget")
-        self.verticalLayout_3.addWidget(self.calendarWidget)
+        self.verticalLayout.addWidget(self.calendarWidget)
+        self.verticalLayout_7.addLayout(self.verticalLayout)
+        self.verticalLayout_3.addWidget(self.frame)
         self.stacked_pages.addWidget(self.page_lesson)
         self.page_student = QtWidgets.QWidget()
         self.page_student.setObjectName("page_student")
@@ -357,8 +435,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_16.addWidget(self.line_manage__students)
         self.layout_buttons_manage_students = QtWidgets.QHBoxLayout()
         self.layout_buttons_manage_students.setObjectName("layout_buttons_manage_students")
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.layout_buttons_manage_students.addItem(spacerItem3)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.layout_buttons_manage_students.addItem(spacerItem1)
         self.btn_add_student = QtWidgets.QPushButton(parent=self.page_student)
         self.btn_add_student.setMinimumSize(QtCore.QSize(130, 30))
         self.btn_add_student.setMaximumSize(QtCore.QSize(250, 30))
@@ -376,6 +454,8 @@ class Ui_MainWindow(object):
 "                            QPushButton:disabled{\n"
 "                            background-color: rgb(222, 222, 222);\n"
 "                            }")
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap(".\\../../../../../2tec/engagement-telegram/views/icons/plus.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btn_add_student.setIcon(icon4)
         self.btn_add_student.setObjectName("btn_add_student")
         self.layout_buttons_manage_students.addWidget(self.btn_add_student)
@@ -397,11 +477,13 @@ class Ui_MainWindow(object):
 "                            QPushButton:disabled{\n"
 "                            background-color: rgb(222, 222, 222);\n"
 "                            }")
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap(".\\../../../../../2tec/engagement-telegram/views/icons/delete.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btn_remove_student.setIcon(icon5)
         self.btn_remove_student.setObjectName("btn_remove_student")
         self.layout_buttons_manage_students.addWidget(self.btn_remove_student)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.layout_buttons_manage_students.addItem(spacerItem4)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.layout_buttons_manage_students.addItem(spacerItem2)
         self.verticalLayout_16.addLayout(self.layout_buttons_manage_students)
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
@@ -418,8 +500,8 @@ class Ui_MainWindow(object):
 "")
         self.comboBox_filter_student.setObjectName("comboBox_filter_student")
         self.horizontalLayout_8.addWidget(self.comboBox_filter_student)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_8.addItem(spacerItem5)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_8.addItem(spacerItem3)
         self.verticalLayout_16.addLayout(self.horizontalLayout_8)
         self.table_students = QtWidgets.QTableWidget(parent=self.page_student)
         self.table_students.setStyleSheet("QTableWidget{\n"
@@ -538,8 +620,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.setObjectName("verticalLayout_15")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem6)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem4)
         self.btn_add_plan = QtWidgets.QPushButton(parent=self.tab_plan)
         self.btn_add_plan.setMinimumSize(QtCore.QSize(110, 30))
         self.btn_add_plan.setMaximumSize(QtCore.QSize(250, 30))
@@ -578,8 +660,8 @@ class Ui_MainWindow(object):
 "                            }")
         self.btn_remove_plan.setObjectName("btn_remove_plan")
         self.horizontalLayout_3.addWidget(self.btn_remove_plan)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem7)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem5)
         self.verticalLayout_15.addLayout(self.horizontalLayout_3)
         self.table_plan = QtWidgets.QTableWidget(parent=self.tab_plan)
         self.table_plan.setStyleSheet("QTableWidget{\n"
@@ -636,8 +718,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_17.setObjectName("verticalLayout_17")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem8)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem6)
         self.btn_add_class = QtWidgets.QPushButton(parent=self.tab_class)
         self.btn_add_class.setMinimumSize(QtCore.QSize(110, 30))
         self.btn_add_class.setMaximumSize(QtCore.QSize(250, 30))
@@ -676,8 +758,8 @@ class Ui_MainWindow(object):
 "                            }")
         self.btn_remove_class.setObjectName("btn_remove_class")
         self.horizontalLayout_5.addWidget(self.btn_remove_class)
-        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem9)
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem7)
         self.verticalLayout_17.addLayout(self.horizontalLayout_5)
         self.table_class = QtWidgets.QTableWidget(parent=self.tab_class)
         self.table_class.setStyleSheet("QTableWidget{\n"
@@ -760,8 +842,8 @@ class Ui_MainWindow(object):
 "")
         self.comboBox_records_filters.setObjectName("comboBox_records_filters")
         self.horizontalLayout_4.addWidget(self.comboBox_records_filters)
-        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem10)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem8)
         self.comboBox_month = QtWidgets.QComboBox(parent=self.page_records)
         self.comboBox_month.setStyleSheet("QComboBox{\n"
 "    background:  #383838;\n"
@@ -780,8 +862,8 @@ class Ui_MainWindow(object):
 "")
         self.comboBox_year.setObjectName("comboBox_year")
         self.horizontalLayout_4.addWidget(self.comboBox_year)
-        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem11)
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem9)
         self.pushButton_records_reload = QtWidgets.QPushButton(parent=self.page_records)
         self.pushButton_records_reload.setMinimumSize(QtCore.QSize(30, 30))
         self.pushButton_records_reload.setStyleSheet("QPushButton {\n"
@@ -854,7 +936,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stacked_pages.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -866,9 +948,6 @@ class Ui_MainWindow(object):
         self.btn_menu_message_forwarding.setText(_translate("MainWindow", "Administrativo"))
         self.btn_registers.setText(_translate("MainWindow", "Registros"))
         self.label_page_account.setText(_translate("MainWindow", "Gerenciar Aulas"))
-        self.btn_add_account.setText(_translate("MainWindow", "Adicionar"))
-        self.btn_remove_account.setText(_translate("MainWindow", "Remover"))
-        self.btn_lesson_configuration.setText(_translate("MainWindow", "Configurar"))
         self.label_manage_students.setText(_translate("MainWindow", "Gerenciar Alunos"))
         self.btn_add_student.setText(_translate("MainWindow", "Adicionar"))
         self.btn_remove_student.setText(_translate("MainWindow", "Remover"))

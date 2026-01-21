@@ -5,6 +5,7 @@ from sqlalchemy import Enum as SAEnum
 from enums.belts import Belt
 from enums.sex import Sex
 from models.base_model import BaseModel
+from models.lesson_students import lesson_students
 
 
 class Student(BaseModel):
@@ -33,3 +34,8 @@ class Student(BaseModel):
         cascade="all, delete-orphan"
     )
 
+    lessons = relationship(
+        "Lesson",
+        secondary=lesson_students,
+        back_populates="students"
+    )
