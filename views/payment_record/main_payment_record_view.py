@@ -12,12 +12,14 @@ from threads.payment_records.thread_edit_payment_record import ThreadEditPayment
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
 from views.checkable_combo_box import CheckableComboBox
 from views.payment_record.edit_record_value import EditRecordValue
+from views.student.main_student_view import MainStudentView
 from views.ui.converted.ui_main_view import Ui_MainWindow
 
 
 class MainPaymentRecordView:
     def __init__(self, main_view: Ui_MainWindow):
         self.main_view = main_view
+        self.main_student_view: MainStudentView = None
 
 
         self.forgiven_value = None
@@ -192,6 +194,7 @@ class MainPaymentRecordView:
         self.clear_table_records_selection()
 
         self.set_label_values()
+        self.main_student_view.reset()
 
 
     def start_thread_load_student_filters(self):

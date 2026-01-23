@@ -361,3 +361,32 @@ class MainStudentView:
             self.main_view.label_student_filter.setText(f"Total: {len(self.to_display_student_dtos)}")
         else:
             self.main_view.label_student_filter.setText(f"Total: {len(self.student_dtos)}")
+
+    def reset(self):
+        # limpa tabela
+        self.main_view.table_students.setRowCount(0)
+        self.main_view.table_students.clearSelection()
+
+        # remove combo de filtros
+        if self.combo_student_filters:
+            self.combo_student_filters.setParent(None)
+            self.combo_student_filters.deleteLater()
+            self.combo_student_filters = None
+
+        # estado interno
+        self.selected_item = None
+        self.student_dtos = []
+        self.to_display_student_dtos = []
+
+        # threads
+        self.thread_load_student_filters = None
+        self.thread_delete_student = None
+        self.thread_get_students = None
+
+        # labels
+        self.main_view.label_student_filter.setText("Total: 0")
+        self.main_view.btn_remove_student.setEnabled(False)
+
+        # recarrega tudo
+        self.start_thread_get_students()
+
