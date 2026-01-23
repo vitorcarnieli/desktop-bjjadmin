@@ -144,6 +144,7 @@ class AdministrativeTabClassView:
             self.class_dtos.remove(c)
 
     def on_signal_class_dtos(self, class_dtos):
+        class_dtos.pop(0)
         self.class_dtos = class_dtos
         for dto in class_dtos:
             self.insert_table_classes(dto)
