@@ -19,12 +19,19 @@ class AdministrativeTabPlanView:
         self.main_view.btn_add_plan.clicked.connect(self.on_click_btn_add_plan)
         self.main_view.btn_remove_plan.clicked.connect(self.on_click_btn_remove_plan)
         self.main_view.table_plan.doubleClicked.connect(self.on_double_click_table_plan)
+        self.main_view.table_plan.itemSelectionChanged.connect(self.on_selection_change_table_plan)
         self.thread_get_plans = None
         self.thread_remove_plan = None
         self.plan_dtos = []
         self.start_thread_get_plans()
 
     # view handlers
+    def on_selection_change_table_plan(self):
+        if self.main_view.table_plan.selectedItems():
+            self.main_view.btn_remove_plan.setEnabled(True)
+        else:
+            self.main_view.btn_remove_plan.setEnabled(False)
+
     def on_click_btn_add_plan(self):
         add_plan = AddPlanView(self.main_view)
         add_plan.exec()

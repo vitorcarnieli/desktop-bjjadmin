@@ -18,12 +18,20 @@ class AdministrativeTabClassView:
         self.main_view.btn_add_class.clicked.connect(self.on_click_btn_add_class)
         self.main_view.btn_remove_class.clicked.connect(self.on_click_btn_remove_class)
         self.main_view.table_class.doubleClicked.connect(self.on_double_click_table_class)
+        self.main_view.table_class.itemSelectionChanged.connect(self.on_selection_change_table_class)
         self.thread_get_classes = None
         self.thread_remove_class = None
         self.class_dtos = []
         self.start_thread_get_classes()
 
     # view handlers
+    def on_selection_change_table_class(self):
+        if self.main_view.table_class.selectedItems():
+            self.main_view.btn_remove_class.setEnabled(True)
+        else:
+            self.main_view.btn_remove_class.setEnabled(False)
+
+
     def on_click_btn_add_class(self):
         add_class_view = ClassView(self.main_view)
         add_class_view.exec()
