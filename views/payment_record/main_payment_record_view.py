@@ -9,6 +9,7 @@ from PySide6.QtWidgets import QTableWidgetItem, QHeaderView
 from dtos.payment_record_dto import PaymentRecordDto
 from enums.payment_status import PaymentStatus
 from threads.payment_records.thread_create_payment_records import ThreadLoadPaymentRecords
+from threads.payment_records.thread_edit_payment_record_status import ThreadEditPaymentRecordStatus
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
 from views.checkable_combo_box import CheckableComboBox
 from views.student.add_student_view import StudentView
@@ -17,6 +18,10 @@ from views.ui.converted.ui_main_view import Ui_MainWindow
 
 class MainPaymentRecordView:
     def __init__(self, main_view: Ui_MainWindow):
+        self.forgiven_value = None
+        self.pending_value = None
+        self.payed_value = None
+        self.thread_edit_payment_record_status = None
         self.records = None
         self.selected_item: PaymentRecordDto = None
         self.thread_load_payment_records = None
@@ -70,11 +75,21 @@ class MainPaymentRecordView:
         self.start_thread_edit_payment_record_status()
 
     def start_thread_edit_payment_record_status(self):
-        # TODO
-        #self.thread_edit_payment_record_status = ThreadEditPaymentRecordStatus(self.selected_item)
-        #self.thread_edit_payment_record_status.signal.signal_record_dto.connect()
-        #self.thread_edit_payment_record_status.start()
-        pass
+        self.thread_edit_payment_record_status = ThreadEditPaymentRecordStatus(self.selected_item)
+        self.thread_edit_payment_record_status.signals.signal_updated_record_dto.connect(self.on_signal_updated_record_dto)
+        self.thread_edit_payment_record_status.start()
+
+    def on_signal_updated_record_dto(self, record):
+        self.set_records([record])
+        self.insert_table_records(record)
+
+        self.main_view.table_payment_records.clearSelection()
+        self.main_view.btn_money_on.setEnabled(False)
+        self.main_view.btn_money_off.setEnabled(False)
+        self.main_view.btn_money_forgiven.setEnabled(False)
+
+        self.set_label_values()
+
 
     def assemble_ui(self):
         # hidden id column
@@ -203,6 +218,8 @@ class MainPaymentRecordView:
             item_payment_status.setForeground(payment_status_style[record.payment_status.value])
             self.main_view.table_payment_records.setItem(row_position, 4, item_payment_status)
             set_qt_text_alignment_center(item_payment_status)
+            header = self.main_view.table_payment_records.horizontalHeader()
+            header.setSectionResizeMode(1, QHeaderView.Stretch)
         except Exception as e:
             print(e)
             return
@@ -374,21 +391,38 @@ class MainPaymentRecordView:
 
     def on_signal_records(self, records):
         self.main_view.table_payment_records.setRowCount(0)
-        payed = 0.00
-        pending = 0.00
-        forgiven = 0.00
-        self.records = records
-        for record in records:
-            self.insert_table_records(record)
-            header = self.main_view.table_payment_records.horizontalHeader()
-            header.setSectionResizeMode(1, QHeaderView.Stretch)
 
-            if record.payment_status is PaymentStatus.PAID:
-                payed += float(record.value)
-            elif record.payment_status is PaymentStatus.OPEN or record.payment_status is PaymentStatus.OVERDUE:
-                pending += float(record.value)
-            elif record.payment_status is PaymentStatus.FORGIVEN:
-                forgiven += float(record.value)
+        self.set_records(records)
+        for record in self.records:
+            self.insert_table_records(record)
+
+        self.set_label_values()
+
+        self.start_thread_load_student_filters()
+
+    def set_records(self, records):
+        if not self.records:
+            self.records = records
+            return
+
+        for record in records:
+            index_of_existing_record = next((i for i, r in enumerate(self.records) if r.id == record.id),None)
+            if index_of_existing_record is not None:
+                self.records[index_of_existing_record] = record
+
+
+
+    def set_label_values(self):
+        self.payed_value = 0.00
+        self.pending_value = 0.00
+        self.forgiven_value = 0.00
+        for record in self.records:
+            if record.payment_status == PaymentStatus.PAID:
+                self.payed_value += float(record.value)
+            elif record.payment_status == PaymentStatus.OPEN or record.payment_status == PaymentStatus.OVERDUE:
+                self.pending_value += float(record.value)
+            elif record.payment_status == PaymentStatus.FORGIVEN:
+                self.forgiven_value += float(record.value)
 
         def format_money(money: float):
             money_str_split = str(money).split(".")
@@ -397,9 +431,9 @@ class MainPaymentRecordView:
             if len(money_str_split[0]) < 2:
                 money_str_split[0] = f"0{money_str_split[0]}"
             return f"R$ {money_str_split[0]},{money_str_split[-1]}"
-
-        self.main_view.label_total_payment_done.setText(f"Total recebido: {format_money(payed)}")
-        self.main_view.label_total_payment_pedding.setText(f"Total pendente: {format_money(pending)}")
-        self.main_view.label_3.setText(f"Total perdoado: {format_money(forgiven)}")
-
-        self.start_thread_load_student_filters()
+        print(self.payed_value)
+        print(self.pending_value)
+        print(self.forgiven_value)
+        self.main_view.label_total_payment_done.setText(f"Total recebido: {format_money(self.payed_value)}")
+        self.main_view.label_total_payment_pedding.setText(f"Total pendente: {format_money(self.pending_value)}")
+        self.main_view.label_3.setText(f"Total perdoado: {format_money(self.forgiven_value)}")
