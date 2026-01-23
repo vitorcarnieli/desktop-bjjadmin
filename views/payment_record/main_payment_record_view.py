@@ -102,6 +102,8 @@ class MainPaymentRecordView:
             for i in combo_month_range:
                 toggle_enable_month(combo_model.item(i), True)
 
+        self.main_view.comboBox_month.setCurrentIndex(0)
+
     def on_student_filter_change(self):
         combo = self.combo_record_filters
         combo.blockSignals(True)
