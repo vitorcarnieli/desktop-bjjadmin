@@ -145,6 +145,7 @@ class AdministrativeTabPlanView:
             self.plan_dtos.remove(plan)
 
     def on_signal_plan_dtos(self, plan_dtos):
+        plan_dtos.pop(0)
         self.plan_dtos = plan_dtos
         for plan_dto in plan_dtos:
             self.insert_table_plan(plan_dto)
