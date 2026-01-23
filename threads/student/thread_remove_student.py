@@ -1,5 +1,4 @@
 from PySide6.QtCore import QObject, Signal, QThread
-from PySide6.scripts.metaobjectdump import Signal
 
 from engine import Session
 from repositories.student_repository import StudentRepository
