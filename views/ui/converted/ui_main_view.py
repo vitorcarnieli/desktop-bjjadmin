@@ -807,13 +807,26 @@ class Ui_MainWindow(object):
         self.page_records.setObjectName("page_records")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.page_records)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.label_manage_students_2 = QtWidgets.QLabel(parent=self.page_records)
         font = QtGui.QFont()
         font.setPointSize(13)
         self.label_manage_students_2.setFont(font)
         self.label_manage_students_2.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_manage_students_2.setObjectName("label_manage_students_2")
-        self.verticalLayout_6.addWidget(self.label_manage_students_2)
+        self.horizontalLayout_6.addWidget(self.label_manage_students_2)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem8)
+        self.btn_reload_records = QtWidgets.QPushButton(parent=self.page_records)
+        self.btn_reload_records.setStyleSheet("background-color: transparent;")
+        self.btn_reload_records.setText("")
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap(".\\../../icons/refresh_white.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_reload_records.setIcon(icon6)
+        self.btn_reload_records.setObjectName("btn_reload_records")
+        self.horizontalLayout_6.addWidget(self.btn_reload_records)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_6)
         self.line_manage__students_2 = QtWidgets.QFrame(parent=self.page_records)
         self.line_manage__students_2.setStyleSheet(" border: none;\n"
 "                        background: rgb(255, 255, 255);")
@@ -821,46 +834,123 @@ class Ui_MainWindow(object):
         self.line_manage__students_2.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line_manage__students_2.setObjectName("line_manage__students_2")
         self.verticalLayout_6.addWidget(self.line_manage__students_2)
-        self.label_records_total = QtWidgets.QLabel(parent=self.page_records)
-        self.label_records_total.setStyleSheet("color: rgb(255, 255, 255);")
-        self.label_records_total.setObjectName("label_records_total")
-        self.verticalLayout_6.addWidget(self.label_records_total)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label_record_total_records = QtWidgets.QLabel(parent=self.page_records)
+        self.label_record_total_records.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_record_total_records.setObjectName("label_record_total_records")
+        self.horizontalLayout.addWidget(self.label_record_total_records)
+        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout.addItem(spacerItem9)
+        self.label_total_payment_done = QtWidgets.QLabel(parent=self.page_records)
+        self.label_total_payment_done.setStyleSheet("color: green;")
+        self.label_total_payment_done.setObjectName("label_total_payment_done")
+        self.horizontalLayout.addWidget(self.label_total_payment_done)
+        self.label_4 = QtWidgets.QLabel(parent=self.page_records)
+        self.label_4.setMinimumSize(QtCore.QSize(30, 0))
+        self.label_4.setText("")
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout.addWidget(self.label_4)
+        self.label_3 = QtWidgets.QLabel(parent=self.page_records)
+        self.label_3.setStyleSheet("color: rgb(0, 255, 255);")
+        self.label_3.setObjectName("label_3")
+        self.horizontalLayout.addWidget(self.label_3)
+        self.label_5 = QtWidgets.QLabel(parent=self.page_records)
+        self.label_5.setMinimumSize(QtCore.QSize(30, 0))
+        self.label_5.setText("")
+        self.label_5.setObjectName("label_5")
+        self.horizontalLayout.addWidget(self.label_5)
+        self.label_total_payment_pedding = QtWidgets.QLabel(parent=self.page_records)
+        self.label_total_payment_pedding.setStyleSheet("color: red;")
+        self.label_total_payment_pedding.setObjectName("label_total_payment_pedding")
+        self.horizontalLayout.addWidget(self.label_total_payment_pedding)
+        self.verticalLayout_6.addLayout(self.horizontalLayout)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.comboBox_records_filters = QtWidgets.QComboBox(parent=self.page_records)
-        self.comboBox_records_filters.setStyleSheet("QComboBox{\n"
-"    background:  #383838;\n"
-"    border-radius: 10px;\n"
-"    padding: 5px;\n"
-"}\n"
-"")
-        self.comboBox_records_filters.setObjectName("comboBox_records_filters")
-        self.horizontalLayout_4.addWidget(self.comboBox_records_filters)
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem8)
+        self.layout_filter_records = QtWidgets.QVBoxLayout()
+        self.layout_filter_records.setObjectName("layout_filter_records")
+        self.horizontalLayout_4.addLayout(self.layout_filter_records)
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem10)
         self.comboBox_month = QtWidgets.QComboBox(parent=self.page_records)
-        self.comboBox_month.setStyleSheet("QComboBox{\n"
-"    background:  #383838;\n"
+        self.comboBox_month.setStyleSheet("            QComboBox {\n"
+"    background: #383838;\n"
+"    color: #ffffff;\n"
 "    border-radius: 10px;\n"
 "    padding: 5px;\n"
 "}\n"
-"")
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    color: #ffffff;\n"
+"    background: #383838;\n"
+"}\n"
+"\n"
+"/* ComboBox desabilitada */\n"
+"QComboBox:disabled {\n"
+"    background: #2b2b2b;\n"
+"    color: #777777;\n"
+"}\n"
+"\n"
+"/* Itens desabilitados */\n"
+"QComboBox QAbstractItemView::item:disabled {\n"
+"    background: #2b2b2b;\n"
+"    color: #777777;\n"
+"}\n"
+"\n"
+"/* Item selecionado mas desabilitado */\n"
+"QComboBox QAbstractItemView::item:selected:disabled {\n"
+"    background: #303030;\n"
+"}")
         self.comboBox_month.setObjectName("comboBox_month")
+        self.comboBox_month.addItem("")
+        self.comboBox_month.addItem("")
+        self.comboBox_month.addItem("")
+        self.comboBox_month.addItem("")
+        self.comboBox_month.addItem("")
+        self.comboBox_month.addItem("")
+        self.comboBox_month.addItem("")
+        self.comboBox_month.addItem("")
+        self.comboBox_month.addItem("")
+        self.comboBox_month.addItem("")
+        self.comboBox_month.addItem("")
+        self.comboBox_month.addItem("")
         self.horizontalLayout_4.addWidget(self.comboBox_month)
         self.comboBox_year = QtWidgets.QComboBox(parent=self.page_records)
-        self.comboBox_year.setStyleSheet("QComboBox{\n"
-"    background:  #383838;\n"
+        self.comboBox_year.setStyleSheet("            QComboBox {\n"
+"    background: #383838;\n"
+"    color: #ffffff;\n"
 "    border-radius: 10px;\n"
 "    padding: 5px;\n"
 "}\n"
-"")
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    color: #ffffff;\n"
+"    background: #383838;\n"
+"}\n"
+"\n"
+"/* ComboBox desabilitada */\n"
+"QComboBox:disabled {\n"
+"    background: #2b2b2b;\n"
+"    color: #777777;\n"
+"}\n"
+"\n"
+"/* Itens desabilitados */\n"
+"QComboBox QAbstractItemView::item:disabled {\n"
+"    background: #2b2b2b;\n"
+"    color: #777777;\n"
+"}\n"
+"\n"
+"/* Item selecionado mas desabilitado */\n"
+"QComboBox QAbstractItemView::item:selected:disabled {\n"
+"    background: #303030;\n"
+"}")
         self.comboBox_year.setObjectName("comboBox_year")
         self.horizontalLayout_4.addWidget(self.comboBox_year)
-        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem9)
-        self.pushButton_records_reload = QtWidgets.QPushButton(parent=self.page_records)
-        self.pushButton_records_reload.setMinimumSize(QtCore.QSize(30, 30))
-        self.pushButton_records_reload.setStyleSheet("QPushButton {\n"
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem11)
+        self.btn_money_on = QtWidgets.QPushButton(parent=self.page_records)
+        self.btn_money_on.setMinimumSize(QtCore.QSize(30, 30))
+        self.btn_money_on.setStyleSheet("QPushButton {\n"
 "\n"
 "                            background: #383838;\n"
 "                            color: white;\n"
@@ -875,15 +965,90 @@ class Ui_MainWindow(object):
 "                            QPushButton:disabled{\n"
 "                            background-color: rgb(222, 222, 222);\n"
 "                            }")
-        self.pushButton_records_reload.setText("")
-        icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap(".\\../../icons/refresh_white.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton_records_reload.setIcon(icon6)
-        self.pushButton_records_reload.setObjectName("pushButton_records_reload")
-        self.horizontalLayout_4.addWidget(self.pushButton_records_reload)
+        self.btn_money_on.setText("")
+        icon7 = QtGui.QIcon()
+        icon7.addPixmap(QtGui.QPixmap(".\\../../icons/money.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_money_on.setIcon(icon7)
+        self.btn_money_on.setObjectName("btn_money_on")
+        self.horizontalLayout_4.addWidget(self.btn_money_on)
+        self.btn_money_forgiven = QtWidgets.QPushButton(parent=self.page_records)
+        self.btn_money_forgiven.setMinimumSize(QtCore.QSize(30, 30))
+        self.btn_money_forgiven.setStyleSheet("QPushButton {\n"
+"\n"
+"                            background: #383838;\n"
+"                            color: white;\n"
+"                            border-radius: 100px;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:hover {\n"
+"                            background-color: #303030;\n"
+"                            color: white;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:disabled{\n"
+"                            background-color: rgb(222, 222, 222);\n"
+"                            }")
+        self.btn_money_forgiven.setText("")
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap(".\\../../icons/money_forgiven.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_money_forgiven.setIcon(icon8)
+        self.btn_money_forgiven.setObjectName("btn_money_forgiven")
+        self.horizontalLayout_4.addWidget(self.btn_money_forgiven)
+        self.btn_money_off = QtWidgets.QPushButton(parent=self.page_records)
+        self.btn_money_off.setMinimumSize(QtCore.QSize(30, 30))
+        self.btn_money_off.setStyleSheet("QPushButton {\n"
+"\n"
+"                            background: #383838;\n"
+"                            color: white;\n"
+"                            border-radius: 100px;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:hover {\n"
+"                            background-color: #303030;\n"
+"                            color: white;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:disabled{\n"
+"                            background-color: rgb(222, 222, 222);\n"
+"                            }")
+        self.btn_money_off.setText("")
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap(".\\../../icons/un_money_money.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_money_off.setIcon(icon9)
+        self.btn_money_off.setObjectName("btn_money_off")
+        self.horizontalLayout_4.addWidget(self.btn_money_off)
+        self.label_2 = QtWidgets.QLabel(parent=self.page_records)
+        self.label_2.setMinimumSize(QtCore.QSize(15, 0))
+        self.label_2.setText("")
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_4.addWidget(self.label_2)
+        self.btn_whatsapp = QtWidgets.QPushButton(parent=self.page_records)
+        self.btn_whatsapp.setMinimumSize(QtCore.QSize(30, 30))
+        self.btn_whatsapp.setStyleSheet("QPushButton {\n"
+"\n"
+"                            background: #383838;\n"
+"                            color: white;\n"
+"                            border-radius: 100px;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:hover {\n"
+"                            background-color: #303030;\n"
+"                            color: white;\n"
+"                            }\n"
+"\n"
+"                            QPushButton:disabled{\n"
+"                            background-color: rgb(222, 222, 222);\n"
+"                            }")
+        self.btn_whatsapp.setText("")
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap(".\\../../icons/whatsapp.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btn_whatsapp.setIcon(icon10)
+        self.btn_whatsapp.setObjectName("btn_whatsapp")
+        self.horizontalLayout_4.addWidget(self.btn_whatsapp)
         self.verticalLayout_6.addLayout(self.horizontalLayout_4)
-        self.table_students_2 = QtWidgets.QTableWidget(parent=self.page_records)
-        self.table_students_2.setStyleSheet("QTableWidget{\n"
+        self.table_payment_records = QtWidgets.QTableWidget(parent=self.page_records)
+        self.table_payment_records.setMinimumSize(QtCore.QSize(0, 0))
+        self.table_payment_records.setStyleSheet("QTableWidget{\n"
 "                                background: #F0F3F6;\n"
 "                                border: none;\n"
 "                                border-radius: 20px;\n"
@@ -906,24 +1071,28 @@ class Ui_MainWindow(object):
 "                                border-top-right-radius: 20px;\n"
 "                                }\n"
 "                              ")
-        self.table_students_2.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
-        self.table_students_2.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
-        self.table_students_2.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
-        self.table_students_2.setObjectName("table_students_2")
-        self.table_students_2.setColumnCount(4)
-        self.table_students_2.setRowCount(0)
+        self.table_payment_records.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.table_payment_records.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
+        self.table_payment_records.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
+        self.table_payment_records.setObjectName("table_payment_records")
+        self.table_payment_records.setColumnCount(6)
+        self.table_payment_records.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
-        self.table_students_2.setHorizontalHeaderItem(0, item)
+        self.table_payment_records.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.table_students_2.setHorizontalHeaderItem(1, item)
+        self.table_payment_records.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        self.table_students_2.setHorizontalHeaderItem(2, item)
+        self.table_payment_records.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        self.table_students_2.setHorizontalHeaderItem(3, item)
-        self.table_students_2.horizontalHeader().setStretchLastSection(True)
-        self.table_students_2.verticalHeader().setVisible(False)
-        self.table_students_2.verticalHeader().setDefaultSectionSize(45)
-        self.verticalLayout_6.addWidget(self.table_students_2)
+        self.table_payment_records.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_payment_records.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_payment_records.setHorizontalHeaderItem(5, item)
+        self.table_payment_records.horizontalHeader().setStretchLastSection(True)
+        self.table_payment_records.verticalHeader().setVisible(False)
+        self.table_payment_records.verticalHeader().setDefaultSectionSize(45)
+        self.verticalLayout_6.addWidget(self.table_payment_records)
         self.stacked_pages.addWidget(self.page_records)
         self.horizontalLayout_2.addWidget(self.stacked_pages)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -982,12 +1151,36 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Detalhes"))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_class), _translate("MainWindow", "Turmas"))
         self.label_manage_students_2.setText(_translate("MainWindow", "Registros"))
-        self.label_records_total.setText(_translate("MainWindow", "Total: ."))
-        item = self.table_students_2.horizontalHeaderItem(0)
+        self.btn_reload_records.setToolTip(_translate("MainWindow", "Recarregar página"))
+        self.label_record_total_records.setText(_translate("MainWindow", "Total de registros:"))
+        self.label_total_payment_done.setText(_translate("MainWindow", "Total pago:"))
+        self.label_3.setText(_translate("MainWindow", "Total perdoado:"))
+        self.label_total_payment_pedding.setText(_translate("MainWindow", "Total pendente:"))
+        self.comboBox_month.setItemText(0, _translate("MainWindow", "Janeiro"))
+        self.comboBox_month.setItemText(1, _translate("MainWindow", "Fevereiro"))
+        self.comboBox_month.setItemText(2, _translate("MainWindow", "Março"))
+        self.comboBox_month.setItemText(3, _translate("MainWindow", "Abril"))
+        self.comboBox_month.setItemText(4, _translate("MainWindow", "Maio"))
+        self.comboBox_month.setItemText(5, _translate("MainWindow", "Junho"))
+        self.comboBox_month.setItemText(6, _translate("MainWindow", "Julho"))
+        self.comboBox_month.setItemText(7, _translate("MainWindow", "Agosto"))
+        self.comboBox_month.setItemText(8, _translate("MainWindow", "Setembro"))
+        self.comboBox_month.setItemText(9, _translate("MainWindow", "Outubro"))
+        self.comboBox_month.setItemText(10, _translate("MainWindow", "Novembro"))
+        self.comboBox_month.setItemText(11, _translate("MainWindow", "Dezembro"))
+        self.btn_money_on.setToolTip(_translate("MainWindow", "Definir como \"Pago\""))
+        self.btn_money_forgiven.setToolTip(_translate("MainWindow", "Definir como \"Perdoado\""))
+        self.btn_money_off.setToolTip(_translate("MainWindow", "Definir como \"Pendente\""))
+        self.btn_whatsapp.setToolTip(_translate("MainWindow", "Enviar mensagem de cobrança"))
+        item = self.table_payment_records.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "id"))
-        item = self.table_students_2.horizontalHeaderItem(1)
+        item = self.table_payment_records.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Aluno"))
-        item = self.table_students_2.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Status"))
-        item = self.table_students_2.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "Última Atualização"))
+        item = self.table_payment_records.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Turma"))
+        item = self.table_payment_records.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "Plano"))
+        item = self.table_payment_records.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Valor Cobrado"))
+        item = self.table_payment_records.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "Status do Pagamento"))

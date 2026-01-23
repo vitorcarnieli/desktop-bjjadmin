@@ -5,6 +5,7 @@ from PySide6.QtWidgets import QMainWindow
 import constants
 from views.administrative.administrative_main_view import AdministrativeMainView
 from views.lesson.main_lesson_view import MainLessonView
+from views.payment_record.main_payment_record_view import MainPaymentRecordView
 from views.styles import menu_button_style
 from views.ui.converted.ui_main_view import Ui_MainWindow
 from views.student.main_student_view import MainStudentView
@@ -27,9 +28,10 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.btn_menu_lessons.setStyleSheet(menu_button_style.checked_menu)
         self.btn_menu_lessons.setIcon(QIcon("views/icons/phone-blue.png"))
 
-        self.main_student_view = MainStudentView(self)
         self.main_administrative_view = AdministrativeMainView(self)
         self.main_lesson_view = MainLessonView(self)
+        self.main_payment_record_view = MainPaymentRecordView(self)
+        self.main_student_view = MainStudentView(self, self.main_payment_record_view)
 
         self.btn_menu_lessons.setIcon(QIcon("views/icons/lesson.png"))
         self.btn_menu_student.setIcon(QIcon("views/icons/groups-white.png"))

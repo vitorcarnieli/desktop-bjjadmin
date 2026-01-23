@@ -1372,19 +1372,53 @@ QTabWidget::tab-bar {
       <widget class="QWidget" name="page_records">
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <widget class="QLabel" name="label_manage_students_2">
-          <property name="font">
-           <font>
-            <pointsize>13</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(255, 255, 255);</string>
-          </property>
-          <property name="text">
-           <string>Registros</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLabel" name="label_manage_students_2">
+            <property name="font">
+             <font>
+              <pointsize>13</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>Registros</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_reload_records">
+            <property name="toolTip">
+             <string>Recarregar página</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../../icons/refresh_white.png</normaloff>../../icons/refresh_white.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="Line" name="line_manage__students_2">
@@ -1398,28 +1432,92 @@ QTabWidget::tab-bar {
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_records_total">
-          <property name="styleSheet">
-           <string notr="true">color: rgb(255, 255, 255);</string>
-          </property>
-          <property name="text">
-           <string>Total: .</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label_record_total_records">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>Total de registros:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_total_payment_done">
+            <property name="styleSheet">
+             <string notr="true">color: green;</string>
+            </property>
+            <property name="text">
+             <string>Total pago:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>Total perdoado:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_5">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_total_payment_pedding">
+            <property name="styleSheet">
+             <string notr="true">color: red;</string>
+            </property>
+            <property name="text">
+             <string>Total pendente:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="QComboBox" name="comboBox_records_filters">
-            <property name="styleSheet">
-             <string notr="true">QComboBox{
-	background:  #383838;
-	border-radius: 10px;
-	padding: 5px;
-}
-</string>
-            </property>
-           </widget>
+           <layout class="QVBoxLayout" name="layout_filter_records"/>
           </item>
           <item>
            <spacer name="horizontalSpacer_14">
@@ -1437,24 +1535,128 @@ QTabWidget::tab-bar {
           <item>
            <widget class="QComboBox" name="comboBox_month">
             <property name="styleSheet">
-             <string notr="true">QComboBox{
-	background:  #383838;
-	border-radius: 10px;
-	padding: 5px;
+             <string notr="true">            QComboBox {
+    background: #383838;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 5px;
 }
-</string>
+
+QComboBox QAbstractItemView {
+    color: #ffffff;
+    background: #383838;
+}
+
+/* ComboBox desabilitada */
+QComboBox:disabled {
+    background: #2b2b2b;
+    color: #777777;
+}
+
+/* Itens desabilitados */
+QComboBox QAbstractItemView::item:disabled {
+    background: #2b2b2b;
+    color: #777777;
+}
+
+/* Item selecionado mas desabilitado */
+QComboBox QAbstractItemView::item:selected:disabled {
+    background: #303030;
+}</string>
             </property>
+            <item>
+             <property name="text">
+              <string>Janeiro</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Fevereiro</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Março</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Abril</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Maio</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Junho</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Julho</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Agosto</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Setembro</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Outubro</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Novembro</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Dezembro</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
            <widget class="QComboBox" name="comboBox_year">
             <property name="styleSheet">
-             <string notr="true">QComboBox{
-	background:  #383838;
-	border-radius: 10px;
-	padding: 5px;
+             <string notr="true">            QComboBox {
+    background: #383838;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 5px;
 }
-</string>
+
+QComboBox QAbstractItemView {
+    color: #ffffff;
+    background: #383838;
+}
+
+/* ComboBox desabilitada */
+QComboBox:disabled {
+    background: #2b2b2b;
+    color: #777777;
+}
+
+/* Itens desabilitados */
+QComboBox QAbstractItemView::item:disabled {
+    background: #2b2b2b;
+    color: #777777;
+}
+
+/* Item selecionado mas desabilitado */
+QComboBox QAbstractItemView::item:selected:disabled {
+    background: #303030;
+}</string>
             </property>
            </widget>
           </item>
@@ -1472,12 +1674,15 @@ QTabWidget::tab-bar {
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_records_reload">
+           <widget class="QPushButton" name="btn_money_on">
             <property name="minimumSize">
              <size>
               <width>30</width>
               <height>30</height>
              </size>
+            </property>
+            <property name="toolTip">
+             <string>Definir como &quot;Pago&quot;</string>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
@@ -1501,14 +1706,144 @@ QTabWidget::tab-bar {
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../../icons/refresh_white.png</normaloff>../../icons/refresh_white.png</iconset>
+              <normaloff>../../icons/money.png</normaloff>../../icons/money.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_money_forgiven">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Definir como &quot;Perdoado&quot;</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+
+                            background: #383838;
+                            color: white;
+                            border-radius: 100px;
+                            }
+
+                            QPushButton:hover {
+                            background-color: #303030;
+                            color: white;
+                            }
+
+                            QPushButton:disabled{
+                            background-color: rgb(222, 222, 222);
+                            }</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../../icons/money_forgiven.png</normaloff>../../icons/money_forgiven.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_money_off">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Definir como &quot;Pendente&quot;</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+
+                            background: #383838;
+                            color: white;
+                            border-radius: 100px;
+                            }
+
+                            QPushButton:hover {
+                            background-color: #303030;
+                            color: white;
+                            }
+
+                            QPushButton:disabled{
+                            background-color: rgb(222, 222, 222);
+                            }</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../../icons/un_money_money.png</normaloff>../../icons/un_money_money.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="minimumSize">
+             <size>
+              <width>15</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_whatsapp">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Enviar mensagem de cobrança</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+
+                            background: #383838;
+                            color: white;
+                            border-radius: 100px;
+                            }
+
+                            QPushButton:hover {
+                            background-color: #303030;
+                            color: white;
+                            }
+
+                            QPushButton:disabled{
+                            background-color: rgb(222, 222, 222);
+                            }</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../../icons/whatsapp.png</normaloff>../../icons/whatsapp.png</iconset>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QTableWidget" name="table_students_2">
+         <widget class="QTableWidget" name="table_payment_records">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="styleSheet">
            <string notr="true">QTableWidget{
                                 background: #F0F3F6;
@@ -1564,12 +1899,22 @@ QTabWidget::tab-bar {
           </column>
           <column>
            <property name="text">
-            <string>Status</string>
+            <string>Turma</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>Última Atualização</string>
+            <string>Plano</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Valor Cobrado</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status do Pagamento</string>
            </property>
           </column>
          </widget>

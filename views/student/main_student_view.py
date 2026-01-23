@@ -14,11 +14,12 @@ from views.ui.converted.ui_main_view import Ui_MainWindow
 
 
 class MainStudentView:
-    def __init__(self, main_view: Ui_MainWindow):
+    def __init__(self, main_view: Ui_MainWindow, main_payment_record_view):
         self.combo_student_filters:CheckableComboBox = None
         self.thread_load_student_filters = None
         self.thread_get_students = None
         self.main_view = main_view
+        self.main_payment_record_view = main_payment_record_view
 
         self.main_view.btn_add_student.clicked.connect(self.on_click_btn_add_student)
         self.main_view.btn_remove_student.clicked.connect(self.on_click_btn_remove_student)
@@ -29,7 +30,6 @@ class MainStudentView:
 
         self.student_dtos = []
         self.to_display_student_dtos = []
-        
         self.start_thread_get_students()
 
     # view handlers
@@ -41,6 +41,7 @@ class MainStudentView:
         if student_dto:
             self.student_dtos.append(student_dto)
             self.insert_table_students(student_dto)
+            self.main_payment_record_view.reset()
 
     def on_click_btn_remove_student(self):
         # TODO
@@ -237,7 +238,7 @@ class MainStudentView:
         self.main_view.student_filter_layout.addWidget(self.combo_student_filters)
 
     def apply_student_filters(self, filters: dict[str, bool | int | None]):
-        result = copy.deepcopy(self.student_dtos)
+        result = list(self.student_dtos)
 
         # payment
         """

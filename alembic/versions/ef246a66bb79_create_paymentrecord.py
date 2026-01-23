@@ -26,7 +26,7 @@ def upgrade() -> None:
     sa.Column('paid_at', sa.Date(), nullable=True),
     sa.Column('value', sa.String(), nullable=False),
     sa.Column('observation', sa.String(), nullable=True),
-    sa.Column('payment_status', sa.Enum('OPEN', 'PAID', 'OVERDUE', name='payment_status_enum'), nullable=False),
+    sa.Column('payment_status', sa.Enum('OPEN', 'PAID', 'OVERDUE', 'FORGIVEN', name='payment_status_enum'), nullable=False),
     sa.ForeignKeyConstraint(['student_id'], ['students.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
