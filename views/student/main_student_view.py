@@ -1,14 +1,14 @@
-import copy
 from datetime import date
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QTableWidgetItem
+from PySide6.QtWidgets import QTableWidgetItem, QMessageBox
 
 from dtos.student_dto import StudentDto
-from enums.sex import Sex
 from threads.student.thread_get_students import ThreadGetStudents
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
+from threads.student.thread_remove_student import ThreadRemoveStudent
 from views.checkable_combo_box import CheckableComboBox
+from views.confirm_view import ConfirmView
 from views.student.add_student_view import StudentView
 from views.ui.converted.ui_main_view import Ui_MainWindow
 
@@ -17,8 +17,10 @@ class MainStudentView:
     def __init__(self, main_view: Ui_MainWindow, main_payment_record_view):
         self.combo_student_filters:CheckableComboBox = None
         self.thread_load_student_filters = None
+        self.thread_delete_student = None
         self.thread_get_students = None
         self.main_view = main_view
+        self.selected_item = None
         self.main_payment_record_view = main_payment_record_view
 
         self.main_view.btn_add_student.clicked.connect(self.on_click_btn_add_student)
@@ -44,8 +46,11 @@ class MainStudentView:
             self.main_payment_record_view.reset()
 
     def on_click_btn_remove_student(self):
-        # TODO
-        return
+        confirm_view = ConfirmView(parent=self.main_view, title="Apagar",
+                                       text=f"Tem certeza que deseja apara o aluno '{self.selected_item.name}'?")
+        result = confirm_view.exec()
+        if result == QMessageBox.Yes:
+            self.start_thread_delete_student()
 
     def on_double_click_table_students(self):
         row = self.main_view.table_students.currentIndex().row()
@@ -64,8 +69,17 @@ class MainStudentView:
             self.insert_table_students(updated)
 
     def on_selection_change_table_students(self):
-        # TODO
-        return
+        selected_items = self.main_view.table_students.selectedItems()
+        if not selected_items:
+            self.selected_item = None
+            self.main_view.btn_remove_student.setEnabled(False)
+            return
+
+        row = selected_items[0].row()
+        selected_item_id = self.main_view.table_students.item(row, 0).text()
+        self.selected_item = next((r for r in self.student_dtos if r.id == int(selected_item_id)), None)
+        self.main_view.btn_remove_student.setEnabled(True)
+
 
     def insert_table_students(self, student_dto: StudentDto):
         try:
@@ -114,6 +128,26 @@ class MainStudentView:
             return
 
     # threads
+    def start_thread_delete_student(self):
+        self.thread_delete_student = ThreadRemoveStudent(self.selected_item.id)
+        self.thread_delete_student.signals.signal_finished.connect(self.on_signal_delete_student_finished)
+        self.thread_delete_student.start()
+
+    def on_signal_delete_student_finished(self, id):
+        row_position = None
+        cod = None
+        for i in range(self.main_view.table_students.rowCount()):
+            cod = int(self.main_view.table_students.item(i, 0).text())
+            if cod == id:
+                row_position = i
+                break
+        if row_position is not None:
+            self.main_view.table_students.removeRow(row_position)
+            c = next((c for c in self.student_dtos if c.id == cod), None)
+            self.student_dtos.remove(c)
+            if self.to_display_student_dtos:
+                self.to_display_student_dtos.remove(c)
+            self.set_total_student_label()
 
     def start_thread_get_students(self):
         self.thread_get_students = ThreadGetStudents()
@@ -292,8 +326,14 @@ class MainStudentView:
             ]
 
         self.to_display_student_dtos = result
-        self.main_view.label_student_filter.setText(f"Total: {len(result)}")
+        self.set_total_student_label()
         self.main_view.table_students.setRowCount(0)
         for s in self.to_display_student_dtos:
             self.insert_table_students(s)
 
+
+    def set_total_student_label(self):
+        if self.to_display_student_dtos:
+            self.main_view.label_student_filter.setText(f"Total: {len(self.to_display_student_dtos)}")
+        else:
+            self.main_view.label_student_filter.setText(f"Total: {len(self.student_dtos)}")
