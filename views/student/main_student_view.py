@@ -17,6 +17,7 @@ from views.ui.converted.ui_main_view import Ui_MainWindow
 
 class MainStudentView:
     def __init__(self, main_view: Ui_MainWindow, main_payment_record_view):
+        self.filters_on = None
         self.combo_student_filters:CheckableComboBox = None
         self.thread_load_student_filters = None
         self.thread_delete_student = None
@@ -348,7 +349,7 @@ class MainStudentView:
                 s for s in result
                 if s.plan_id == int(plan_filter)
             ]
-
+        self.filters_on = True
         self.to_display_student_dtos = result
         self.set_total_student_label()
         self.main_view.table_students.setRowCount(0)
@@ -357,7 +358,7 @@ class MainStudentView:
 
 
     def set_total_student_label(self):
-        if self.to_display_student_dtos:
+        if self.to_display_student_dtos or self.filters_on:
             self.main_view.label_student_filter.setText(f"Total: {len(self.to_display_student_dtos)}")
         else:
             self.main_view.label_student_filter.setText(f"Total: {len(self.student_dtos)}")
