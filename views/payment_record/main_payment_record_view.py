@@ -1,5 +1,4 @@
 import copy
-from calendar import month
 from datetime import date
 
 from PySide6.QtCore import Qt
@@ -12,23 +11,26 @@ from threads.payment_records.thread_create_payment_records import ThreadLoadPaym
 from threads.payment_records.thread_edit_payment_record_status import ThreadEditPaymentRecordStatus
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
 from views.checkable_combo_box import CheckableComboBox
-from views.student.add_student_view import StudentView
 from views.ui.converted.ui_main_view import Ui_MainWindow
 
 
 class MainPaymentRecordView:
     def __init__(self, main_view: Ui_MainWindow):
+        self.main_view = main_view
+
+
         self.forgiven_value = None
         self.pending_value = None
         self.payed_value = None
-        self.thread_edit_payment_record_status = None
-        self.records = None
-        self.selected_item: PaymentRecordDto = None
+
         self.thread_load_payment_records = None
         self.thread_load_student_filters = None
-        self.main_view = main_view
+        self.thread_edit_payment_record_status = None
+
+        self.records = None
+        self.selected_item: PaymentRecordDto = None
         self.to_day = date.today()
-        self.combo_record_filters: CheckableComboBox = None
+
 
         # TODO: self.main_view.btn_whatsapp.clicked.connect()
 
@@ -38,11 +40,14 @@ class MainPaymentRecordView:
 
         self.main_view.comboBox_year.currentIndexChanged.connect(self.on_index_change_comboBox_month)
         self.main_view.table_payment_records.itemSelectionChanged.connect(self.on_itemSelectionChanged_table_payment_records)
+        self.combo_record_filters: CheckableComboBox = None
 
 
         self.assemble_ui()
         self.start_thread_load_payment_records()
 
+
+    # views events
     def on_itemSelectionChanged_table_payment_records(self):
         selected_items = self.main_view.table_payment_records.selectedItems()
         if not selected_items:
@@ -69,60 +74,10 @@ class MainPaymentRecordView:
 
         return None
 
-
     def on_click_action_btns(self, status):
         self.selected_item.payment_status = status
         self.start_thread_edit_payment_record_status()
 
-    def start_thread_edit_payment_record_status(self):
-        self.thread_edit_payment_record_status = ThreadEditPaymentRecordStatus(self.selected_item)
-        self.thread_edit_payment_record_status.signals.signal_updated_record_dto.connect(self.on_signal_updated_record_dto)
-        self.thread_edit_payment_record_status.start()
-
-    def on_signal_updated_record_dto(self, record):
-        self.set_records([record])
-        self.insert_table_records(record)
-
-        self.main_view.table_payment_records.clearSelection()
-        self.main_view.btn_money_on.setEnabled(False)
-        self.main_view.btn_money_off.setEnabled(False)
-        self.main_view.btn_money_forgiven.setEnabled(False)
-
-        self.set_label_values()
-
-
-    def assemble_ui(self):
-        # hidden id column
-        self.main_view.table_payment_records.setColumnHidden(0, True)
-
-        # assemble action btns
-        self.main_view.btn_whatsapp.setIcon(QIcon("views/icons/whatsapp_unfill.png"))
-        self.main_view.btn_money_on.setIcon(QIcon("views/icons/money.png"))
-        self.main_view.btn_money_off.setIcon(QIcon("views/icons/un_money_money.png"))
-        self.main_view.btn_money_forgiven.setIcon(QIcon("views/icons/money_forgiven.png"))
-        self.main_view.btn_reload_records.setIcon(QIcon("views/icons/refresh_white.png"))
-        self.main_view.btn_whatsapp.setEnabled(False)
-        self.main_view.btn_money_on.setEnabled(False)
-        self.main_view.btn_money_off.setEnabled(False)
-        self.main_view.btn_reload_records.setEnabled(False)
-        self.main_view.btn_money_forgiven.setEnabled(False)
-
-
-        # assemble combo years
-        for y in range(2024, int(self.to_day.year)+1):
-            self.main_view.comboBox_year.addItem(str(y))
-        self.main_view.comboBox_month.setCurrentIndex(self.to_day.month - 1)
-        for i in range(self.main_view.comboBox_year.count()):
-            if self.main_view.comboBox_year.itemText(i) == str(self.to_day.year):
-                self.main_view.comboBox_year.setCurrentIndex(i)
-
-        #self.start_thread_load_student_filters()
-
-
-
-
-
-    # view handlers
     def on_index_change_comboBox_month(self, i):
 
         def toggle_enable_month(item, is_enabled):
@@ -142,94 +97,6 @@ class MainPaymentRecordView:
         else:
             for i in combo_month_range:
                 toggle_enable_month(combo_model.item(i), True)
-
-
-
-    def on_click_btn_add_student(self):
-        add_student_view = StudentView(parent=self.main_view)
-        add_student_view.exec()
-        student_dto = add_student_view.saved_student_dto
-        if student_dto:
-            self.student_dtos.append(student_dto)
-            self.insert_table_payment_records(student_dto)
-
-    def on_click_btn_remove_student(self):
-        pass
-
-    def on_double_click_table_payment_records(self):
-        pass
-
-    def on_selection_change_table_payment_records(self):
-        pass
-
-    def insert_table_records(self, record: PaymentRecordDto):
-        try:
-            row_position = None
-            already_exists_on_table = False
-
-            for r in range(self.main_view.table_payment_records.rowCount()):
-                cod = int(self.main_view.table_payment_records.item(r, 0).text())
-                if cod == record.id:
-                    row_position = r
-                    already_exists_on_table = True
-                    break
-            if row_position is None:
-                row_position = self.main_view.table_payment_records.rowCount()
-                self.main_view.table_payment_records.insertRow(row_position)
-
-            def set_qt_text_alignment_center(ui_element):
-                ui_element.setTextAlignment(Qt.AlignCenter)
-
-            if not already_exists_on_table:
-                item_id = QTableWidgetItem(str(record.id))
-                set_qt_text_alignment_center(item_id)
-                self.main_view.table_payment_records.setItem(row_position, 0, item_id)
-
-            # Name
-            item_student_name = QTableWidgetItem(record.student.name)
-            self.main_view.table_payment_records.setItem(row_position, 1, item_student_name)
-            set_qt_text_alignment_center(item_student_name)
-
-            # class
-            item_class = QTableWidgetItem(record.student.lesson_class.name)
-            self.main_view.table_payment_records.setItem(row_position, 2, item_class)
-            set_qt_text_alignment_center(item_class)
-
-            # phone contact
-            item_plan = QTableWidgetItem(record.student.plan.name)
-            self.main_view.table_payment_records.setItem(row_position, 3, item_plan)
-            set_qt_text_alignment_center(item_plan)
-
-            # status
-            payment_status_friendly = {
-                "Open": "Aguardando Pagamento",
-                "Paid": "Pagamento Confirmado",
-                "Overdue": "Pagamento Atrasado",
-                "Forgiven": "Pagamento Perdoado"
-            }
-            payment_status_style = {
-                "Open": QColor("#F9A825"),
-                "Paid": QColor("#2E7D32"),
-                "Overdue": QColor("#C62828"),
-                "Forgiven": QColor("#00838F")
-            }
-
-            item_payment_status = QTableWidgetItem(payment_status_friendly[record.payment_status.value])
-            item_payment_status.setForeground(payment_status_style[record.payment_status.value])
-            self.main_view.table_payment_records.setItem(row_position, 4, item_payment_status)
-            set_qt_text_alignment_center(item_payment_status)
-            header = self.main_view.table_payment_records.horizontalHeader()
-            header.setSectionResizeMode(1, QHeaderView.Stretch)
-        except Exception as e:
-            print(e)
-            return
-
-    # threads
-
-    def start_thread_load_student_filters(self):
-        self.thread_load_student_filters = ThreadLoadStudentFilters()
-        self.thread_load_student_filters.signals.signal_filters.connect(self.on_signal_filters)
-        self.thread_load_student_filters.start()
 
     def on_student_filter_change(self):
         combo = self.combo_record_filters
@@ -295,6 +162,30 @@ class MainPaymentRecordView:
         combo.blockSignals(False)
         self.apply_student_filters(filters)
 
+
+    # threads
+    def start_thread_edit_payment_record_status(self):
+        self.thread_edit_payment_record_status = ThreadEditPaymentRecordStatus(self.selected_item)
+        self.thread_edit_payment_record_status.signals.signal_updated_record_dto.connect(self.on_signal_updated_record_dto)
+        self.thread_edit_payment_record_status.start()
+
+    def on_signal_updated_record_dto(self, record):
+        self.set_records([record])
+        self.insert_table_records(record)
+
+        self.main_view.table_payment_records.clearSelection()
+        self.main_view.btn_money_on.setEnabled(False)
+        self.main_view.btn_money_off.setEnabled(False)
+        self.main_view.btn_money_forgiven.setEnabled(False)
+
+        self.set_label_values()
+
+
+    def start_thread_load_student_filters(self):
+        self.thread_load_student_filters = ThreadLoadStudentFilters()
+        self.thread_load_student_filters.signals.signal_filters.connect(self.on_signal_filters)
+        self.thread_load_student_filters.start()
+
     def on_signal_filters(self, filters):
         self.combo_record_filters = CheckableComboBox()
         self.main_view.layout_filter_records.addWidget(self.combo_record_filters)
@@ -323,6 +214,86 @@ class MainPaymentRecordView:
                 continue
             self.combo_record_filters.addItem(p.name, f"{plan_id}{p.id}")
 
+
+    def start_thread_load_payment_records(self):
+        self.thread_load_payment_records = ThreadLoadPaymentRecords(date.today())
+        self.thread_load_payment_records.signals.signal_payment_record_dtos.connect(self.on_signal_records)
+        self.thread_load_payment_records.start()
+
+    def on_signal_records(self, records):
+        self.main_view.table_payment_records.setRowCount(0)
+
+        self.set_records(records)
+        for record in self.records:
+            self.insert_table_records(record)
+
+        self.set_label_values()
+
+        self.start_thread_load_student_filters()
+
+
+    # helpers
+
+    def insert_table_records(self, record: PaymentRecordDto):
+        try:
+            row_position = None
+            already_exists_on_table = False
+
+            for r in range(self.main_view.table_payment_records.rowCount()):
+                cod = int(self.main_view.table_payment_records.item(r, 0).text())
+                if cod == record.id:
+                    row_position = r
+                    already_exists_on_table = True
+                    break
+            if row_position is None:
+                row_position = self.main_view.table_payment_records.rowCount()
+                self.main_view.table_payment_records.insertRow(row_position)
+
+            def set_qt_text_alignment_center(ui_element):
+                ui_element.setTextAlignment(Qt.AlignCenter)
+
+            if not already_exists_on_table:
+                item_id = QTableWidgetItem(str(record.id))
+                set_qt_text_alignment_center(item_id)
+                self.main_view.table_payment_records.setItem(row_position, 0, item_id)
+
+            # Name
+            item_student_name = QTableWidgetItem(record.student.name)
+            self.main_view.table_payment_records.setItem(row_position, 1, item_student_name)
+            set_qt_text_alignment_center(item_student_name)
+
+            # class
+            item_class = QTableWidgetItem(record.student.lesson_class.name)
+            self.main_view.table_payment_records.setItem(row_position, 2, item_class)
+            set_qt_text_alignment_center(item_class)
+
+            # phone contact
+            item_plan = QTableWidgetItem(record.student.plan.name)
+            self.main_view.table_payment_records.setItem(row_position, 3, item_plan)
+            set_qt_text_alignment_center(item_plan)
+
+            # status
+            payment_status_friendly = {
+                "Open": "Aguardando Pagamento",
+                "Paid": "Pagamento Confirmado",
+                "Overdue": "Pagamento Atrasado",
+                "Forgiven": "Pagamento Perdoado"
+            }
+            payment_status_style = {
+                "Open": QColor("#F9A825"),
+                "Paid": QColor("#2E7D32"),
+                "Overdue": QColor("#C62828"),
+                "Forgiven": QColor("#00838F")
+            }
+
+            item_payment_status = QTableWidgetItem(payment_status_friendly[record.payment_status.value])
+            item_payment_status.setForeground(payment_status_style[record.payment_status.value])
+            self.main_view.table_payment_records.setItem(row_position, 4, item_payment_status)
+            set_qt_text_alignment_center(item_payment_status)
+            header = self.main_view.table_payment_records.horizontalHeader()
+            header.setSectionResizeMode(1, QHeaderView.Stretch)
+        except Exception as e:
+            return
 
     def apply_student_filters(self, filters: dict[str, bool | int | None]):
         return
@@ -384,22 +355,6 @@ class MainPaymentRecordView:
         for s in self.to_display_student_dtos:
             self.insert_table_payment_records(s)
 
-    def start_thread_load_payment_records(self):
-        self.thread_load_payment_records = ThreadLoadPaymentRecords(date.today())
-        self.thread_load_payment_records.signals.signal_payment_record_dtos.connect(self.on_signal_records)
-        self.thread_load_payment_records.start()
-
-    def on_signal_records(self, records):
-        self.main_view.table_payment_records.setRowCount(0)
-
-        self.set_records(records)
-        for record in self.records:
-            self.insert_table_records(record)
-
-        self.set_label_values()
-
-        self.start_thread_load_student_filters()
-
     def set_records(self, records):
         if not self.records:
             self.records = records
@@ -409,8 +364,6 @@ class MainPaymentRecordView:
             index_of_existing_record = next((i for i, r in enumerate(self.records) if r.id == record.id),None)
             if index_of_existing_record is not None:
                 self.records[index_of_existing_record] = record
-
-
 
     def set_label_values(self):
         self.payed_value = 0.00
@@ -431,9 +384,33 @@ class MainPaymentRecordView:
             if len(money_str_split[0]) < 2:
                 money_str_split[0] = f"0{money_str_split[0]}"
             return f"R$ {money_str_split[0]},{money_str_split[-1]}"
-        print(self.payed_value)
-        print(self.pending_value)
-        print(self.forgiven_value)
         self.main_view.label_total_payment_done.setText(f"Total recebido: {format_money(self.payed_value)}")
         self.main_view.label_total_payment_pedding.setText(f"Total pendente: {format_money(self.pending_value)}")
         self.main_view.label_3.setText(f"Total perdoado: {format_money(self.forgiven_value)}")
+
+    def assemble_ui(self):
+        # hidden id column
+        self.main_view.table_payment_records.setColumnHidden(0, True)
+
+        # assemble action btns
+        self.main_view.btn_whatsapp.setIcon(QIcon("views/icons/whatsapp_unfill.png"))
+        self.main_view.btn_money_on.setIcon(QIcon("views/icons/money.png"))
+        self.main_view.btn_money_off.setIcon(QIcon("views/icons/un_money_money.png"))
+        self.main_view.btn_money_forgiven.setIcon(QIcon("views/icons/money_forgiven.png"))
+        self.main_view.btn_reload_records.setIcon(QIcon("views/icons/refresh_white.png"))
+        self.main_view.btn_whatsapp.setEnabled(False)
+        self.main_view.btn_money_on.setEnabled(False)
+        self.main_view.btn_money_off.setEnabled(False)
+        self.main_view.btn_reload_records.setEnabled(False)
+        self.main_view.btn_money_forgiven.setEnabled(False)
+
+
+        # assemble combo years
+        for y in range(2024, int(self.to_day.year)+1):
+            self.main_view.comboBox_year.addItem(str(y))
+        self.main_view.comboBox_month.setCurrentIndex(self.to_day.month - 1)
+        for i in range(self.main_view.comboBox_year.count()):
+            if self.main_view.comboBox_year.itemText(i) == str(self.to_day.year):
+                self.main_view.comboBox_year.setCurrentIndex(i)
+
+        #self.start_thread_load_student_filters()
