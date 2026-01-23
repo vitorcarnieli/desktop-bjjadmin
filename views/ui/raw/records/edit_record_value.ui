@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>EditRecordValue</class>
+ <widget class="QDialog" name="EditRecordValue">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Editar valor cobrado</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog {
@@ -39,6 +39,10 @@ background-color: rgb(24, 24, 24);
      </item>
      <item>
       <widget class="Line" name="line">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 255, 255);</string>
+       </property>
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
        </property>
@@ -86,6 +90,9 @@ background-color: rgb(24, 24, 24);
 	padding: 5px;
 }
 </string>
+       </property>
+       <property name="maximum">
+        <double>99999.990000000005239</double>
        </property>
       </widget>
      </item>
