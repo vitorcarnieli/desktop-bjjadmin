@@ -636,6 +636,7 @@ class Ui_MainWindow(object):
         self.btn_add_plan.setObjectName("btn_add_plan")
         self.horizontalLayout_3.addWidget(self.btn_add_plan)
         self.btn_remove_plan = QtWidgets.QPushButton(parent=self.tab_plan)
+        self.btn_remove_plan.setEnabled(False)
         self.btn_remove_plan.setMinimumSize(QtCore.QSize(110, 30))
         self.btn_remove_plan.setMaximumSize(QtCore.QSize(250, 30))
         self.btn_remove_plan.setStyleSheet("QPushButton {\n"
@@ -734,6 +735,7 @@ class Ui_MainWindow(object):
         self.btn_add_class.setObjectName("btn_add_class")
         self.horizontalLayout_5.addWidget(self.btn_add_class)
         self.btn_remove_class = QtWidgets.QPushButton(parent=self.tab_class)
+        self.btn_remove_class.setEnabled(False)
         self.btn_remove_class.setMinimumSize(QtCore.QSize(110, 30))
         self.btn_remove_class.setMaximumSize(QtCore.QSize(250, 30))
         self.btn_remove_class.setStyleSheet("QPushButton {\n"
