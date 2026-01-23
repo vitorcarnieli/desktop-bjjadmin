@@ -15,7 +15,7 @@ from services.payment_record_service import PaymentRecordService
 
 
 class ThreadEditPaymentRecordStatusSignals(QObject):
-    signal_record_dto = Signal(object)
+    signal_updated_record_dto = Signal(object)
     signal_message = Signal(Message)
 
 
@@ -39,7 +39,7 @@ class ThreadEditPaymentRecordStatus(QThread):
 
             record_dto = PaymentRecordService.get_dto(record_model)
 
-            self.signals.signal_record_dto.emit(record_dto)
+            self.signals.signal_updated_record_dto.emit(record_dto)
         except Exception as e:
             self.signals.signal_message.emit(Message(MessageType.ERROR, str(e)))
 
