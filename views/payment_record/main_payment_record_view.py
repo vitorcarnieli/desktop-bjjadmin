@@ -25,9 +25,12 @@ class MainPaymentRecordView:
         self.to_day = date.today()
         self.combo_record_filters: CheckableComboBox = None
 
-        self.main_view.btn_whatsapp.clicked.connect(self.on_click_btn_whatsapp)
-        self.main_view.btn_money_on.clicked.connect(self.on_click_btn_money_on)
-        self.main_view.btn_money_off.clicked.connect(self.on_click_btn_money_off)
+        # TODO: self.main_view.btn_whatsapp.clicked.connect()
+
+        self.main_view.btn_money_on.clicked.connect(lambda: self.on_click_action_btns(PaymentStatus.PAID))
+        self.main_view.btn_money_off.clicked.connect(lambda: self.on_click_action_btns(PaymentStatus.OPEN))
+        self.main_view.btn_money_forgiven.clicked.connect(lambda: self.on_click_action_btns(PaymentStatus.FORGIVEN))
+
         self.main_view.comboBox_year.currentIndexChanged.connect(self.on_index_change_comboBox_month)
         self.main_view.table_payment_records.itemSelectionChanged.connect(self.on_itemSelectionChanged_table_payment_records)
 
@@ -38,7 +41,7 @@ class MainPaymentRecordView:
     def on_itemSelectionChanged_table_payment_records(self):
         selected_items = self.main_view.table_payment_records.selectedItems()
         if not selected_items:
-            self.selected_item_id = None
+            self.selected_item = None
             self.main_view.btn_money_on.setEnabled(False)
             self.main_view.btn_money_off.setEnabled(False)
             self.main_view.btn_money_forgiven.setEnabled(False)
@@ -62,13 +65,15 @@ class MainPaymentRecordView:
         return None
 
 
-    def on_click_btn_whatsapp(self):
-        pass
+    def on_click_action_btns(self, status):
+        self.selected_item.payment_status = status
+        self.start_thread_edit_payment_record_status()
 
-    def on_click_btn_money_on(self):
-        pass
-
-    def on_click_btn_money_off(self):
+    def start_thread_edit_payment_record_status(self):
+        # TODO
+        #self.thread_edit_payment_record_status = ThreadEditPaymentRecordStatus(self.selected_item)
+        #self.thread_edit_payment_record_status.signal.signal_record_dto.connect()
+        #self.thread_edit_payment_record_status.start()
         pass
 
     def assemble_ui(self):
