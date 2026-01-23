@@ -1909,7 +1909,12 @@ QComboBox QAbstractItemView::item:selected:disabled {
           </column>
           <column>
            <property name="text">
-            <string>Status</string>
+            <string>Valor Cobrado</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Status do Pagamento</string>
            </property>
           </column>
          </widget>
