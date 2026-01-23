@@ -5,6 +5,7 @@ from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QTableWidgetItem, QMessageBox
 
 from dtos.student_dto import StudentDto
+from enums.payment_status import PaymentStatus
 from threads.student.thread_get_students import ThreadGetStudents
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
 from threads.student.thread_remove_student import ThreadRemoveStudent
@@ -290,15 +291,23 @@ class MainStudentView:
         result = list(self.student_dtos)
 
         # payment
-        """
-        # TODO
         payment_filter = filters.get("payment")
         if payment_filter is not None:
-            result = [
-                s for s in result
-                if s.is_paid == payment_filter
-            ]
-        """
+            payment_cause = {
+                "payed": [PaymentStatus.PAID, PaymentStatus.FORGIVEN],
+                "pending": [PaymentStatus.OPEN, PaymentStatus.OVERDUE]
+            }
+            # case paid
+            if payment_filter:
+                result = [
+                    s for s in result
+                    if s.latest_payment_status in payment_cause["payed"]
+                ]
+            else:
+                result = [
+                    s for s in result
+                    if s.latest_payment_status in payment_cause["pending"]
+                ]
 
 
         # age
