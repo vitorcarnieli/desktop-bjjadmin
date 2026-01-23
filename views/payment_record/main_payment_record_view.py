@@ -7,7 +7,7 @@ from PySide6.QtWidgets import QTableWidgetItem, QHeaderView
 
 from dtos.payment_record_dto import PaymentRecordDto
 from enums.payment_status import PaymentStatus
-from threads.payment_records.thread_create_payment_records import ThreadLoadPaymentRecords
+from threads.payment_records.thread_load_payment_records import ThreadLoadPaymentRecords
 from threads.payment_records.thread_edit_payment_record import ThreadEditPaymentRecord
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
 from views.checkable_combo_box import CheckableComboBox
@@ -330,7 +330,7 @@ class MainPaymentRecordView:
                 self.insert_table_records(s)
             return
 
-        result = copy.deepcopy(self.records)
+        result = list(self.records)
 
         # payment
         payment_filter = filters.get("payment")
@@ -426,3 +426,41 @@ class MainPaymentRecordView:
         self.main_view.btn_money_on.setEnabled(False)
         self.main_view.btn_money_off.setEnabled(False)
         self.main_view.btn_money_forgiven.setEnabled(False)
+
+    def reset(self):
+        self.main_view.table_payment_records.setRowCount(0)
+        self.main_view.table_payment_records.clearSelection()
+
+        if self.combo_record_filters:
+            self.combo_record_filters.setParent(None)
+            self.combo_record_filters.deleteLater()
+            self.combo_record_filters = None
+
+        self.forgiven_value = None
+        self.pending_value = None
+        self.payed_value = None
+
+        self.records = None
+        self.display_records = None
+        self.selected_item = None
+        self.to_day = date.today()
+
+        self.thread_load_payment_records = None
+        self.thread_load_student_filters = None
+        self.thread_edit_payment_record_status = None
+
+        self.main_view.label_total_payment_done.setText("Total recebido: R$ 0,00")
+        self.main_view.label_total_payment_pedding.setText("Total pendente: R$ 0,00")
+        self.main_view.label_3.setText("Total perdoado: R$ 0,00")
+        self.main_view.label_record_total_records.setText("Total: 0")
+
+        self.main_view.comboBox_year.blockSignals(True)
+        self.main_view.comboBox_month.blockSignals(True)
+        self.main_view.comboBox_year.clear()
+        self.main_view.comboBox_month.setCurrentIndex(0)
+        self.main_view.comboBox_year.blockSignals(False)
+        self.main_view.comboBox_month.blockSignals(False)
+
+        self.assemble_ui()
+
+        self.start_thread_load_payment_records()
