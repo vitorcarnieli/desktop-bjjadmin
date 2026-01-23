@@ -1054,6 +1054,9 @@ QTabWidget::tab-bar {
                 </item>
                 <item>
                  <widget class="QPushButton" name="btn_remove_plan">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="minimumSize">
                    <size>
                     <width>110</width>
@@ -1240,6 +1243,9 @@ QTabWidget::tab-bar {
                 </item>
                 <item>
                  <widget class="QPushButton" name="btn_remove_class">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="minimumSize">
                    <size>
                     <width>110</width>
