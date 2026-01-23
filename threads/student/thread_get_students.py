@@ -24,6 +24,14 @@ class ThreadGetStudents(QThread):
 
         students = self.student_repository.get_all()
         student_dtos = [StudentService.get_dto(student) for student in students]
+        for dto in student_dtos:
+            student = next((s for s in students if s.id == dto.id), None)
+            latest_record = self._most_recent_payment_record(student.payment_records)
+            dto.latest_payment_status = latest_record.payment_status
+
 
         self.signals.signal_student_dtos.emit(student_dtos)
         Session.remove()
+
+    def _most_recent_payment_record(self, records):
+        return max(records, key=lambda r: r.opened_at)
