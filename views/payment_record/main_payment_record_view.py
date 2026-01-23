@@ -28,6 +28,7 @@ class MainPaymentRecordView:
         self.thread_edit_payment_record_status = None
 
         self.records = None
+        self.display_records = None
         self.selected_item: PaymentRecordDto = None
         self.to_day = date.today()
 
@@ -62,6 +63,9 @@ class MainPaymentRecordView:
         self.selected_item = next((r for r in self.records if r.id == int(selected_item_id)), None)
         self.main_view.btn_money_forgiven.setEnabled(True)
 
+        self.main_view.btn_money_on.setEnabled(False)
+        self.main_view.btn_money_off.setEnabled(False)
+        self.main_view.btn_money_forgiven.setEnabled(False)
         if self.selected_item.payment_status is PaymentStatus.PAID:
             self.main_view.btn_money_off.setEnabled(True)
             self.main_view.btn_money_forgiven.setEnabled(True)
@@ -132,32 +136,21 @@ class MainPaymentRecordView:
 
         filters: dict[str, bool | int | None] = {
             "payment": None,
-            "age": None,
             "class": None,
-            "plan": None,
-            "sex": None
+            "plan": None
         }
-
-        def get_true_if_greater_zero(num: str) -> bool:
-            return True if int(num.split("_")[-1]) > 0 else False
 
         filled_fields = [str(f) for f in filled_fields]
 
         for field in filled_fields:
             if "payment" in field:
-                filters["payment"] = get_true_if_greater_zero(field)
-
-            if "age" in field:
-                filters["age"] = get_true_if_greater_zero(field)
+                filters["payment"] = field.split("_")[-1]
 
             if "class" in field:
                 filters["class"] = int(field.split("_")[-1])
 
             if "plan" in field:
                 filters["plan"] = int(field.split("_")[-1])
-
-            if "sex" in field:
-                filters["sex"] = field.split("_")[-1]
 
         combo.blockSignals(False)
         self.apply_student_filters(filters)
@@ -196,9 +189,9 @@ class MainPaymentRecordView:
 
         payment_id = "payment_"
         self.combo_record_filters.addTitle("Pagamento")
-        self.combo_record_filters.addItem("Pagos", f"{payment_id}1")
-        self.combo_record_filters.addItem("Pendentes", f"{payment_id}2")
-        self.combo_record_filters.addItem("Perdoados", f"{payment_id}3")
+        self.combo_record_filters.addItem("Pagos", f"{payment_id}Paid")
+        self.combo_record_filters.addItem("Pendentes", f"{payment_id}Open")
+        self.combo_record_filters.addItem("Perdoados", f"{payment_id}Forgiven")
 
         class_id = "class_"
         self.combo_record_filters.addTitle("Turmas")
@@ -296,41 +289,23 @@ class MainPaymentRecordView:
             return
 
     def apply_student_filters(self, filters: dict[str, bool | int | None]):
-        return
-        result = copy.deepcopy(self.student_dtos)
+        if not any(filters.values()):
+            self.display_records = None
+            self.main_view.label_record_total_records.setText(f"Total: {len(self.records)}")
+            self.set_label_values()
+            self.main_view.table_payment_records.setRowCount(0)
+            for s in self.records:
+                self.insert_table_records(s)
+            return
+
+        result = copy.deepcopy(self.records)
 
         # payment
-        """
-        # TODO
         payment_filter = filters.get("payment")
         if payment_filter is not None:
             result = [
                 s for s in result
-                if s.is_paid == payment_filter
-            ]
-        """
-
-        # age
-        age_filter = filters.get("age")
-        if age_filter is not None:
-            def is_18_years_old(birth_date) -> bool:
-                today = date.today()
-                return (
-                        today.year - birth_date.year
-                        - ((today.month, today.day) < (birth_date.month, birth_date.day))
-                ) >= 18
-
-            result = [
-                s for s in result
-                if is_18_years_old(s.date_of_birth) == age_filter
-            ]
-
-        # sex
-        sex_filter = filters.get("sex")
-        if sex_filter is not None:
-            result = [
-                s for s in result
-                if s.sex.value == sex_filter
+                if s.payment_status.value == payment_filter
             ]
 
         # class
@@ -338,7 +313,7 @@ class MainPaymentRecordView:
         if class_filter is not None:
             result = [
                 s for s in result
-                if s.class_id == int(class_filter)
+                if s.student.class_id == int(class_filter)
             ]
 
         # plan
@@ -346,30 +321,36 @@ class MainPaymentRecordView:
         if plan_filter is not None:
             result = [
                 s for s in result
-                if s.plan_id == int(plan_filter)
+                if s.student.plan_id == int(plan_filter)
             ]
-
-        self.to_display_student_dtos = result
-        self.main_view.label_student_filter.setText(f"Total: {len(result)}")
+        self.display_records = result
+        self.main_view.label_record_total_records.setText(f"Total: {len(result)}")
+        self.set_label_values()
         self.main_view.table_payment_records.setRowCount(0)
-        for s in self.to_display_student_dtos:
-            self.insert_table_payment_records(s)
+        for s in result:
+            self.insert_table_records(s)
 
     def set_records(self, records):
         if not self.records:
             self.records = records
             return
 
+        target = self.display_records if self.display_records else self.records
+
         for record in records:
-            index_of_existing_record = next((i for i, r in enumerate(self.records) if r.id == record.id),None)
+            index_of_existing_record = next((i for i, r in enumerate(target) if r.id == record.id),None)
             if index_of_existing_record is not None:
-                self.records[index_of_existing_record] = record
+                target[index_of_existing_record] = record
 
     def set_label_values(self):
         self.payed_value = 0.00
         self.pending_value = 0.00
         self.forgiven_value = 0.00
-        for record in self.records:
+        if self.display_records:
+            targets = self.display_records
+        else:
+            targets = self.records
+        for record in targets:
             if record.payment_status == PaymentStatus.PAID:
                 self.payed_value += float(record.value)
             elif record.payment_status == PaymentStatus.OPEN or record.payment_status == PaymentStatus.OVERDUE:
@@ -390,7 +371,7 @@ class MainPaymentRecordView:
 
     def assemble_ui(self):
         # hidden id column
-        self.main_view.table_payment_records.setColumnHidden(0, True)
+        #self.main_view.table_payment_records.setColumnHidden(0, True)
 
         # assemble action btns
         self.main_view.btn_whatsapp.setIcon(QIcon("views/icons/whatsapp_unfill.png"))
