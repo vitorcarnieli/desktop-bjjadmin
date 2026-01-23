@@ -8,9 +8,10 @@ from PySide6.QtWidgets import QTableWidgetItem, QHeaderView
 from dtos.payment_record_dto import PaymentRecordDto
 from enums.payment_status import PaymentStatus
 from threads.payment_records.thread_create_payment_records import ThreadLoadPaymentRecords
-from threads.payment_records.thread_edit_payment_record_status import ThreadEditPaymentRecordStatus
+from threads.payment_records.thread_edit_payment_record import ThreadEditPaymentRecord
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
 from views.checkable_combo_box import CheckableComboBox
+from views.payment_record.edit_record_value import EditRecordValue
 from views.ui.converted.ui_main_view import Ui_MainWindow
 
 
@@ -51,21 +52,23 @@ class MainPaymentRecordView:
 
     # views events
     def on_double_click_table_payment_records(self):
-        row = self.main_view.table_students.currentIndex().row()
-        cod = int(self.main_view.table_students.item(row, 0).text())
+        row = self.main_view.table_payment_records.currentIndex().row()
+        cod = int(self.main_view.table_payment_records.item(row, 0).text())
         target = self.display_records if self.display_records else self.records
         dto = next((dto for dto in target if dto.id == cod), None)
         if not dto:
             return
         edit_view = EditRecordValue(self.main_view, dto)
         edit_view.exec()
-        updated = edit_view.record_dto
+        updated = edit_view.updated_record_dto
         if updated:
             target = [
                 updated if dto.id == updated.id else dto
                 for dto in target
             ]
             self.insert_table_records(updated)
+            self.set_label_values()
+            self.clear_table_records_selection()
 
     def on_itemSelectionChanged_table_payment_records(self):
         selected_items = self.main_view.table_payment_records.selectedItems()
@@ -178,7 +181,7 @@ class MainPaymentRecordView:
 
     # threads
     def start_thread_edit_payment_record_status(self):
-        self.thread_edit_payment_record_status = ThreadEditPaymentRecordStatus(self.selected_item)
+        self.thread_edit_payment_record_status = ThreadEditPaymentRecord(self.selected_item)
         self.thread_edit_payment_record_status.signals.signal_updated_record_dto.connect(self.on_signal_updated_record_dto)
         self.thread_edit_payment_record_status.start()
 
@@ -186,10 +189,7 @@ class MainPaymentRecordView:
         self.set_records([record])
         self.insert_table_records(record)
 
-        self.main_view.table_payment_records.clearSelection()
-        self.main_view.btn_money_on.setEnabled(False)
-        self.main_view.btn_money_off.setEnabled(False)
-        self.main_view.btn_money_forgiven.setEnabled(False)
+        self.clear_table_records_selection()
 
         self.set_label_values()
 
@@ -420,3 +420,9 @@ class MainPaymentRecordView:
                 self.main_view.comboBox_year.setCurrentIndex(i)
 
         #self.start_thread_load_student_filters()
+
+    def clear_table_records_selection(self):
+        self.main_view.table_payment_records.clearSelection()
+        self.main_view.btn_money_on.setEnabled(False)
+        self.main_view.btn_money_off.setEnabled(False)
+        self.main_view.btn_money_forgiven.setEnabled(False)
