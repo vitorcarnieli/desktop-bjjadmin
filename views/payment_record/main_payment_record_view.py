@@ -4,7 +4,7 @@ from datetime import date
 
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QIcon, QColor
-from PySide6.QtWidgets import QTableWidgetItem
+from PySide6.QtWidgets import QTableWidgetItem, QHeaderView
 
 from dtos.payment_record_dto import PaymentRecordDto
 from enums.payment_status import PaymentStatus
@@ -375,6 +375,9 @@ class MainPaymentRecordView:
         self.records = records
         for record in records:
             self.insert_table_records(record)
+            header = self.main_view.table_payment_records.horizontalHeader()
+            header.setSectionResizeMode(1, QHeaderView.Stretch)
+
             if record.payment_status is PaymentStatus.PAID:
                 payed += float(record.value)
             elif record.payment_status is PaymentStatus.OPEN or record.payment_status is PaymentStatus.OVERDUE:
