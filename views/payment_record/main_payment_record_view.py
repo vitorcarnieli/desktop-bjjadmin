@@ -228,6 +228,13 @@ class MainPaymentRecordView:
 
 
     # helpers
+    def format_money(self, money: float):
+        money_str_split = str(money).split(".")
+        if len(money_str_split[-1]) < 2:
+            money_str_split[-1] = f"{money_str_split[-1]}0"
+        if len(money_str_split[0]) < 2:
+            money_str_split[0] = f"0{money_str_split[0]}"
+        return f"R$ {money_str_split[0]},{money_str_split[-1]}"
 
     def insert_table_records(self, record: PaymentRecordDto):
         try:
@@ -267,6 +274,11 @@ class MainPaymentRecordView:
             self.main_view.table_payment_records.setItem(row_position, 3, item_plan)
             set_qt_text_alignment_center(item_plan)
 
+            # money
+            item_money = QTableWidgetItem(f"{self.format_money(record.value)}")
+            self.main_view.table_payment_records.setItem(row_position, 4, item_money)
+            set_qt_text_alignment_center(item_money)
+
             # status
             payment_status_friendly = {
                 "Open": "Aguardando Pagamento",
@@ -283,7 +295,7 @@ class MainPaymentRecordView:
 
             item_payment_status = QTableWidgetItem(payment_status_friendly[record.payment_status.value])
             item_payment_status.setForeground(payment_status_style[record.payment_status.value])
-            self.main_view.table_payment_records.setItem(row_position, 4, item_payment_status)
+            self.main_view.table_payment_records.setItem(row_position, 5, item_payment_status)
             set_qt_text_alignment_center(item_payment_status)
             header = self.main_view.table_payment_records.horizontalHeader()
             header.setSectionResizeMode(1, QHeaderView.Stretch)
@@ -360,20 +372,13 @@ class MainPaymentRecordView:
             elif record.payment_status == PaymentStatus.FORGIVEN:
                 self.forgiven_value += float(record.value)
 
-        def format_money(money: float):
-            money_str_split = str(money).split(".")
-            if len(money_str_split[-1]) < 2:
-                money_str_split[-1] = f"{money_str_split[-1]}0"
-            if len(money_str_split[0]) < 2:
-                money_str_split[0] = f"0{money_str_split[0]}"
-            return f"R$ {money_str_split[0]},{money_str_split[-1]}"
-        self.main_view.label_total_payment_done.setText(f"Total recebido: {format_money(self.payed_value)}")
-        self.main_view.label_total_payment_pedding.setText(f"Total pendente: {format_money(self.pending_value)}")
-        self.main_view.label_3.setText(f"Total perdoado: {format_money(self.forgiven_value)}")
+        self.main_view.label_total_payment_done.setText(f"Total recebido: {self.format_money(self.payed_value)}")
+        self.main_view.label_total_payment_pedding.setText(f"Total pendente: {self.format_money(self.pending_value)}")
+        self.main_view.label_3.setText(f"Total perdoado: {self.format_money(self.forgiven_value)}")
 
     def assemble_ui(self):
         # hidden id column
-        #self.main_view.table_payment_records.setColumnHidden(0, True)
+        self.main_view.table_payment_records.setColumnHidden(0, True)
 
         # assemble action btns
         self.main_view.btn_whatsapp.setIcon(QIcon("views/icons/whatsapp_unfill.png"))
