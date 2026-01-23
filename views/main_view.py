@@ -32,6 +32,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.main_lesson_view = MainLessonView(self)
         self.main_payment_record_view = MainPaymentRecordView(self)
         self.main_student_view = MainStudentView(self, self.main_payment_record_view)
+        self.main_payment_record_view.main_student_view = self.main_student_view
 
         self.btn_menu_lessons.setIcon(QIcon("views/icons/lesson.png"))
         self.btn_menu_student.setIcon(QIcon("views/icons/groups-white.png"))

@@ -1,9 +1,11 @@
 from datetime import date
 
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QTableWidgetItem, QMessageBox
 
 from dtos.student_dto import StudentDto
+from enums.payment_status import PaymentStatus
 from threads.student.thread_get_students import ThreadGetStudents
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
 from threads.student.thread_remove_student import ThreadRemoveStudent
@@ -120,9 +122,23 @@ class MainStudentView:
             set_qt_text_alignment_center(item_phone)
 
             # status
-            item_observation = QTableWidgetItem(student_dto.observation)
-            self.main_view.table_students.setItem(row_position, 4, item_observation)
-            set_qt_text_alignment_center(item_observation)
+            payment_status_friendly = {
+                "Open": "Aguardando Pagamento",
+                "Paid": "Pagamento Confirmado",
+                "Overdue": "Pagamento Atrasado",
+                "Forgiven": "Pagamento Perdoado"
+            }
+            payment_status_style = {
+                "Open": QColor("#F9A825"),
+                "Paid": QColor("#2E7D32"),
+                "Overdue": QColor("#C62828"),
+                "Forgiven": QColor("#00838F")
+            }
+            status_value = student_dto.latest_payment_status.value
+            item_payment_status = QTableWidgetItem(payment_status_friendly.get(status_value))
+            item_payment_status.setForeground(payment_status_style.get(status_value))
+            self.main_view.table_students.setItem(row_position, 4, item_payment_status)
+            set_qt_text_alignment_center(item_payment_status)
         except Exception as e:
             print(e)
             return
@@ -275,15 +291,23 @@ class MainStudentView:
         result = list(self.student_dtos)
 
         # payment
-        """
-        # TODO
         payment_filter = filters.get("payment")
         if payment_filter is not None:
-            result = [
-                s for s in result
-                if s.is_paid == payment_filter
-            ]
-        """
+            payment_cause = {
+                "payed": [PaymentStatus.PAID, PaymentStatus.FORGIVEN],
+                "pending": [PaymentStatus.OPEN, PaymentStatus.OVERDUE]
+            }
+            # case paid
+            if payment_filter:
+                result = [
+                    s for s in result
+                    if s.latest_payment_status in payment_cause["payed"]
+                ]
+            else:
+                result = [
+                    s for s in result
+                    if s.latest_payment_status in payment_cause["pending"]
+                ]
 
 
         # age
@@ -337,3 +361,32 @@ class MainStudentView:
             self.main_view.label_student_filter.setText(f"Total: {len(self.to_display_student_dtos)}")
         else:
             self.main_view.label_student_filter.setText(f"Total: {len(self.student_dtos)}")
+
+    def reset(self):
+        # limpa tabela
+        self.main_view.table_students.setRowCount(0)
+        self.main_view.table_students.clearSelection()
+
+        # remove combo de filtros
+        if self.combo_student_filters:
+            self.combo_student_filters.setParent(None)
+            self.combo_student_filters.deleteLater()
+            self.combo_student_filters = None
+
+        # estado interno
+        self.selected_item = None
+        self.student_dtos = []
+        self.to_display_student_dtos = []
+
+        # threads
+        self.thread_load_student_filters = None
+        self.thread_delete_student = None
+        self.thread_get_students = None
+
+        # labels
+        self.main_view.label_student_filter.setText("Total: 0")
+        self.main_view.btn_remove_student.setEnabled(False)
+
+        # recarrega tudo
+        self.start_thread_get_students()
+
