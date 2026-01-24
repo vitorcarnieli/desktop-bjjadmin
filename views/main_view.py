@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QIcon, QTextCharFormat, QColor
+from PySide6.QtGui import QIcon, QTextCharFormat, QColor, QPixmap
 from PySide6.QtWidgets import QMainWindow
 
 import constants
@@ -16,6 +16,20 @@ class MainView(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(MainView, self).__init__()
         self.setupUi(self)
+        self.setWindowIcon(QIcon("C:\\Users\\vitor\\workspace\\jitjitsu-system\\views\\icons\\window_icon.ico"))
+
+        pixmap = QPixmap("C:\\Users\\vitor\\workspace\\jitjitsu-system\\views\\icons\\logo2.png").scaled(
+            200, 200,
+            Qt.AspectRatioMode.KeepAspectRatio,
+            Qt.TransformationMode.SmoothTransformation
+        )
+
+
+        label = self.label_logo
+        label.setPixmap(pixmap)
+        label.setMouseTracking(True)
+        label.setCursor(Qt.CursorShape.PointingHandCursor)
+
         # opening window in maximized size
         # self.showMaximized()
 
@@ -42,7 +56,7 @@ class MainView(QMainWindow, Ui_MainWindow):
 
 
         # Set Version
-        self.label_copywrite.setText(f"Versão: {constants.APP_VERSION}")
+        self.label_copywrite.setText(f"Versão: 1.0")
 
         self.calendarWidget.setStyleSheet("""
         /* QCalendarWidget - Estilo Moderno */

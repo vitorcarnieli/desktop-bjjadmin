@@ -2,7 +2,7 @@ from datetime import date
 
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QColor
-from PySide6.QtWidgets import QTableWidgetItem, QMessageBox
+from PySide6.QtWidgets import QTableWidgetItem, QMessageBox, QHeaderView
 
 from dtos.student_dto import StudentDto
 from enums.payment_status import PaymentStatus
@@ -140,6 +140,9 @@ class MainStudentView:
             item_payment_status.setForeground(payment_status_style.get(status_value))
             self.main_view.table_students.setItem(row_position, 4, item_payment_status)
             set_qt_text_alignment_center(item_payment_status)
+
+            header = self.main_view.table_students.horizontalHeader()
+            header.setSectionResizeMode(1, QHeaderView.Stretch)
         except Exception as e:
             print(e)
             return
