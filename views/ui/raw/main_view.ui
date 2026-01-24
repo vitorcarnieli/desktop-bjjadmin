@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>BJJ Admin — Gerencie seu CT com eficiência </string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../icons/window_icon.ico</normaloff>../../icons/window_icon.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(24, 24, 24);</string>
@@ -94,7 +98,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="label_logo">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -110,7 +114,7 @@
              <string notr="true">color: white;</string>
             </property>
             <property name="text">
-             <string>BJJ ADMIN</string>
+             <string/>
             </property>
             <property name="alignment">
              <set>Qt::AlignmentFlag::AlignCenter</set>
