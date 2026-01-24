@@ -42,7 +42,8 @@ class MainPaymentRecordView:
         self.main_view.btn_money_off.clicked.connect(lambda: self.on_click_action_btns(PaymentStatus.OPEN))
         self.main_view.btn_money_forgiven.clicked.connect(lambda: self.on_click_action_btns(PaymentStatus.FORGIVEN))
 
-        self.main_view.comboBox_year.currentIndexChanged.connect(self.on_index_change_comboBox_month)
+        self.main_view.comboBox_year.currentIndexChanged.connect(self.on_index_change_comboBox_year)
+        self.main_view.comboBox_month.currentIndexChanged.connect(self.on_index_change_comboBox_month)
         self.main_view.table_payment_records.itemSelectionChanged.connect(self.on_itemSelectionChanged_table_payment_records)
         self.main_view.table_payment_records.itemDoubleClicked.connect(self.on_double_click_table_payment_records)
         self.combo_record_filters: CheckableComboBox = None
@@ -105,7 +106,7 @@ class MainPaymentRecordView:
         self.selected_item.payment_status = status
         self.start_thread_edit_payment_record_status()
 
-    def on_index_change_comboBox_month(self, i):
+    def on_index_change_comboBox_year(self, i):
 
         def toggle_enable_month(item, is_enabled):
             if item:
@@ -126,6 +127,10 @@ class MainPaymentRecordView:
                 toggle_enable_month(combo_model.item(i), True)
 
         self.main_view.comboBox_month.setCurrentIndex(0)
+
+    def on_index_change_comboBox_month(self):
+        # TODO
+        pass
 
     def on_student_filter_change(self):
         combo = self.combo_record_filters
@@ -415,14 +420,15 @@ class MainPaymentRecordView:
 
 
         # assemble combo years
-        for y in range(2024, int(self.to_day.year)+1):
+        for y in range(2026, int(self.to_day.year)+1):
             self.main_view.comboBox_year.addItem(str(y))
         self.main_view.comboBox_month.setCurrentIndex(self.to_day.month - 1)
+
+        # select current year
         for i in range(self.main_view.comboBox_year.count()):
             if self.main_view.comboBox_year.itemText(i) == str(self.to_day.year):
                 self.main_view.comboBox_year.setCurrentIndex(i)
-
-        #self.start_thread_load_student_filters()
+                break
 
     def clear_table_records_selection(self):
         self.main_view.table_payment_records.clearSelection()
