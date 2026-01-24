@@ -1,5 +1,5 @@
 from PySide6.QtGui import Qt
-from PySide6.QtWidgets import QTableWidgetItem, QMessageBox
+from PySide6.QtWidgets import QTableWidgetItem, QMessageBox, QHeaderView
 
 from threads.lesson_class.thread_get_classes import ThreadGetClasses
 from threads.lesson_class.thread_remove_class import ThreadRemoveClass
@@ -99,10 +99,10 @@ class AdministrativeTabClassView:
 
             # students amount
             if not already_exists_on_table:
-                item_students_amount = QTableWidgetItem(len(class_dto.students))
+                item_students_amount = QTableWidgetItem(str(len(class_dto.students)))
                 self.main_view.table_class.setItem(row_position, 2, item_students_amount)
             else:
-                item_students_amount = QTableWidgetItem(len(class_dto.students))
+                item_students_amount = QTableWidgetItem(str(len(class_dto.students)))
                 self.main_view.table_class.setItem(row_position, 2, item_students_amount)
             item_students_amount.setTextAlignment(Qt.AlignCenter)
 
@@ -114,7 +114,8 @@ class AdministrativeTabClassView:
                 item_observation = QTableWidgetItem(class_dto.observation)
                 self.main_view.table_class.setItem(row_position, 3, item_observation)
             item_observation.setTextAlignment(Qt.AlignCenter)
-
+            header = self.main_view.table_class.horizontalHeader()
+            header.setSectionResizeMode(1, QHeaderView.Stretch)
 
         except Exception as e:
             return
