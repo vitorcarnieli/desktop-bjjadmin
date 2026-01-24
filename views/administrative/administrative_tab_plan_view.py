@@ -1,5 +1,5 @@
 from PySide6.QtGui import Qt
-from PySide6.QtWidgets import QTableWidgetItem, QMessageBox
+from PySide6.QtWidgets import QTableWidgetItem, QMessageBox, QHeaderView
 
 from dtos.plan_dto import PlanDto
 from threads.plan.thread_get_plans import ThreadGetPlans
@@ -118,12 +118,15 @@ class AdministrativeTabPlanView:
 
             # students amount
             if not already_exists_on_table:
-                item_students_amount = QTableWidgetItem(len(plan_dto.students))
+                item_students_amount = QTableWidgetItem(str(len(plan_dto.students)))
                 item_students_amount.setTextAlignment(Qt.AlignCenter)
                 self.main_view.table_plan.setItem(row_position, 3, item_students_amount)
             else:
-                item_students_amount = QTableWidgetItem(len(plan_dto.students))
+                item_students_amount = QTableWidgetItem(str(len(plan_dto.students)))
                 self.main_view.table_plan.setItem(row_position, 3, item_students_amount)
+
+            header = self.main_view.table_plan.horizontalHeader()
+            header.setSectionResizeMode(1, QHeaderView.Stretch)
         except Exception as e:
             return
 
