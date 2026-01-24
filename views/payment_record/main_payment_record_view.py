@@ -236,8 +236,8 @@ class MainPaymentRecordView:
             self.combo_record_filters.addItem(p.name, f"{plan_id}{p.id}")
 
 
-    def start_thread_load_payment_records(self):
-        self.thread_load_payment_records = ThreadLoadPaymentRecords(date.today())
+    def start_thread_load_payment_records(self, date):
+        self.thread_load_payment_records = ThreadLoadPaymentRecords(date)
         self.thread_load_payment_records.signals.signal_payment_record_dtos.connect(self.on_signal_records)
         self.thread_load_payment_records.start()
 
