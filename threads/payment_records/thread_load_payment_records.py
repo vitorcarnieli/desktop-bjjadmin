@@ -56,9 +56,8 @@ class ThreadLoadPaymentRecords(QThread):
         def create_record(student):
             record = PaymentRecord()
             record.student_id = student.id
-            to_day = date.today()
-            record.opened_at = date(to_day.year, to_day.month, 1)
-            record.due_date = date(to_day.year, to_day.month, 10)
+            record.opened_at = date(self.date.year, self.date.month, 1)
+            record.due_date = date(self.date.year, self.date.month, 10)
             record.value = student.plan.value
             record.payment_status = PaymentStatus.OPEN
             self.payment_record_repository.add(record)
@@ -76,13 +75,12 @@ class ThreadLoadPaymentRecords(QThread):
         return self.session.execute(stmt).first()
 
     def _students_without_record_this_month(self) -> list[Student]:
-        today = date.today()
 
         subquery = (
             select(PaymentRecord.student_id)
             .where(
-                extract("month", PaymentRecord.opened_at) == today.month,
-                extract("year", PaymentRecord.opened_at) == today.year
+                extract("month", PaymentRecord.opened_at) == self.date.month,
+                extract("year", PaymentRecord.opened_at) == self.date.year
             )
             .distinct()
             .subquery()
