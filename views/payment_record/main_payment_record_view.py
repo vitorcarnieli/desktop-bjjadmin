@@ -36,7 +36,7 @@ class MainPaymentRecordView:
         self.records = None
         self.display_records = None
         self.selected_item: PaymentRecordDto = None
-        self.to_day = date(2027, 1, 25)
+        self.to_day = date.today()
 
 
         # TODO: self.main_view.btn_whatsapp.clicked.connect()
@@ -269,6 +269,7 @@ class MainPaymentRecordView:
 
 
             if not self.assembly_completed:
+                self.main_view.comboBox_month.setCurrentIndex(self.to_day.month-1)
                 self.start_thread_load_student_filters()
             else:
                 self.on_student_filter_change()
@@ -465,7 +466,7 @@ class MainPaymentRecordView:
 
     def assemble_ui(self):
         # hidden id column
-        self.main_view.table_payment_records.setColumnHidden(0, True)
+        #self.main_view.table_payment_records.setColumnHidden(0, True)
 
         # assemble action btns
         self.main_view.btn_whatsapp.setIcon(QIcon("views/icons/whatsapp_unfill.png"))

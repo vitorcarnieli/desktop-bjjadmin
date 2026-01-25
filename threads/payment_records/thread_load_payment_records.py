@@ -52,7 +52,13 @@ class ThreadLoadPaymentRecords(QThread):
             Session.remove()
 
     def _get_already_record_for_this_month(self):
-        return [PaymentRecordService.get_dto(record) for record in self.payment_record_repository.get_payments_by_month(self.date)]
+        records = self.payment_record_repository.get_payments_by_month(self.date)
+        for record in records:
+            if date.today() >= record.due_date:
+                record.payment_status = PaymentStatus.OVERDUE
+                self.payment_record_repository.update(record)
+
+        return [PaymentRecordService.get_dto(record) for record in records]
 
     def _create_records_for_this_month(self, students):
         def create_record(student):
