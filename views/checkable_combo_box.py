@@ -225,4 +225,11 @@ class CheckableComboBox(QComboBox):
 
         item.setBackground(Qt.white)
 
+    def uncheck_all(self):
+        for row in range(self.model().rowCount()):
+            item = self.model().item(row)
+            if item and (item.flags() & Qt.ItemIsUserCheckable):
+                item.setCheckState(Qt.Unchecked)
+        self.update_text()
+
 
