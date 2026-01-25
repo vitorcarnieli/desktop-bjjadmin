@@ -30,6 +30,7 @@ class ThreadLoadPaymentRecords(QThread):
 
     def run(self):
         try:
+            print('foi')
             self.session = Session()
 
             self.student_repository = StudentRepository(self.session)
@@ -43,7 +44,9 @@ class ThreadLoadPaymentRecords(QThread):
                 records = self._get_already_record_for_this_month()
 
             self.signals.signal_payment_record_dtos.emit(records)
+
         except Exception as e:
+            print(e)
             self.signals.signal_message.emit(Message(MessageType.ERROR, str(e)))
 
         finally:

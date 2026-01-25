@@ -1,4 +1,5 @@
 import copy
+from calendar import month
 from datetime import date
 
 from PySide6.QtCore import Qt
@@ -18,6 +19,7 @@ from views.ui.converted.ui_main_view import Ui_MainWindow
 
 class MainPaymentRecordView:
     def __init__(self, main_view: Ui_MainWindow):
+        self.start_thread_load_payment_records_is_running = None
         self.main_view = main_view
         self.main_student_view: MainStudentView = None
 
@@ -30,10 +32,11 @@ class MainPaymentRecordView:
         self.thread_load_student_filters = None
         self.thread_edit_payment_record_status = None
 
+        self.assembly_completed = False
         self.records = None
         self.display_records = None
         self.selected_item: PaymentRecordDto = None
-        self.to_day = date.today()
+        self.to_day = date(2027, 1, 25)
 
 
         # TODO: self.main_view.btn_whatsapp.clicked.connect()
@@ -50,7 +53,7 @@ class MainPaymentRecordView:
 
 
         self.assemble_ui()
-        self.start_thread_load_payment_records()
+        self.start_thread_load_payment_records(self.to_day)
 
 
     # views events
@@ -107,83 +110,93 @@ class MainPaymentRecordView:
         self.start_thread_edit_payment_record_status()
 
     def on_index_change_comboBox_year(self, i):
+        try:
+            def toggle_enable_month(item, is_enabled):
+                if item:
+                    item.setEnabled(is_enabled)
 
-        def toggle_enable_month(item, is_enabled):
-            if item:
-                item.setEnabled(is_enabled)
+            combo_model = self.main_view.comboBox_month.model()
 
-        combo_model = self.main_view.comboBox_month.model()
+            year_selected_is_current_year = str(self.to_day.year) == self.main_view.comboBox_year.currentText()
+            combo_month_range = range(self.main_view.comboBox_month.count())
 
-        year_selected_is_current_year = str(self.to_day.year) == self.main_view.comboBox_year.currentText()
-        combo_month_range = range(self.main_view.comboBox_month.count())
+            if year_selected_is_current_year:
+                # disable months that haven't passed yet
+                for i in combo_month_range:
+                    if not i in range(self.to_day.month):
+                        toggle_enable_month(combo_model.item(i), False)
+            else:
+                for i in combo_month_range:
+                    toggle_enable_month(combo_model.item(i), True)
 
-        if year_selected_is_current_year:
-            # disable months that haven't passed yet
-            for i in combo_month_range:
-                if not i in range(self.to_day.month):
-                    toggle_enable_month(combo_model.item(i), False)
-        else:
-            for i in combo_month_range:
-                toggle_enable_month(combo_model.item(i), True)
-
-        self.main_view.comboBox_month.setCurrentIndex(0)
+            if self.assembly_completed:
+                self.start_thread_load_payment_records_is_running = True
+                self.main_view.comboBox_month.setCurrentIndex(0)
+                self.start_thread_load_payment_records(self.get_selected_date())
+            else:
+                self.main_view.comboBox_month.setCurrentIndex(0)
+        except Exception as e:
+            print(e)
 
     def on_index_change_comboBox_month(self):
-        # TODO
-        pass
+        if self.assembly_completed and not self.start_thread_load_payment_records_is_running:
+            self.start_thread_load_payment_records(self.get_selected_date())
 
     def on_student_filter_change(self):
-        combo = self.combo_record_filters
-        combo.blockSignals(True)
-        for row in range(combo.model().rowCount()):
-            item = combo.model().item(row)
-            data = item.data(Qt.UserRole)
-            if not data:
-                continue
-            combo.enable_by_index(row)
-
-        indexes = combo.get_selected_indexes()
-
-        filled_fields = [
-            combo.model().item(row).data(Qt.UserRole)
-            for row in indexes
-            if combo.model().item(row).data(Qt.UserRole)
-        ]
-
-        for field in filled_fields:
+        try:
+            combo = self.combo_record_filters
+            combo.blockSignals(True)
             for row in range(combo.model().rowCount()):
                 item = combo.model().item(row)
-
-                if not (item.flags() & Qt.ItemIsUserCheckable):
-                    continue
-
                 data = item.data(Qt.UserRole)
                 if not data:
                     continue
+                combo.enable_by_index(row)
 
-                if data.split("_")[0] == field.split("_")[0] and item.checkState() != Qt.Checked:
-                    combo.disable_by_index(row)
+            indexes = combo.get_selected_indexes()
 
-        filters: dict[str, bool | int | None] = {
-            "payment": None,
-            "class": None,
-            "plan": None
-        }
+            filled_fields = [
+                combo.model().item(row).data(Qt.UserRole)
+                for row in indexes
+                if combo.model().item(row).data(Qt.UserRole)
+            ]
 
-        filled_fields = [str(f) for f in filled_fields]
+            for field in filled_fields:
+                for row in range(combo.model().rowCount()):
+                    item = combo.model().item(row)
 
-        for field in filled_fields:
-            if "payment" in field:
-                filters["payment"] = field.split("_")[-1]
+                    if not (item.flags() & Qt.ItemIsUserCheckable):
+                        continue
 
-            if "class" in field:
-                filters["class"] = int(field.split("_")[-1])
+                    data = item.data(Qt.UserRole)
+                    if not data:
+                        continue
 
-            if "plan" in field:
-                filters["plan"] = int(field.split("_")[-1])
+                    if data.split("_")[0] == field.split("_")[0] and item.checkState() != Qt.Checked:
+                        combo.disable_by_index(row)
 
-        combo.blockSignals(False)
-        self.apply_student_filters(filters)
+            filters: dict[str, bool | int | None] = {
+                "payment": None,
+                "class": None,
+                "plan": None
+            }
+
+            filled_fields = [str(f) for f in filled_fields]
+
+            for field in filled_fields:
+                if "payment" in field:
+                    filters["payment"] = field.split("_")[-1]
+
+                if "class" in field:
+                    filters["class"] = int(field.split("_")[-1])
+
+                if "plan" in field:
+                    filters["plan"] = int(field.split("_")[-1])
+
+            combo.blockSignals(False)
+            self.apply_student_filters(filters)
+        except Exception as e:
+            print(e)
 
 
     # threads
@@ -193,7 +206,7 @@ class MainPaymentRecordView:
         self.thread_edit_payment_record_status.start()
 
     def on_signal_updated_record_dto(self, record):
-        self.set_records([record])
+        self.add_record(record)
         self.insert_table_records(record)
 
         self.clear_table_records_selection()
@@ -235,6 +248,8 @@ class MainPaymentRecordView:
                 continue
             self.combo_record_filters.addItem(p.name, f"{plan_id}{p.id}")
 
+        self.assembly_completed = True
+
 
     def start_thread_load_payment_records(self, date):
         self.thread_load_payment_records = ThreadLoadPaymentRecords(date)
@@ -242,18 +257,30 @@ class MainPaymentRecordView:
         self.thread_load_payment_records.start()
 
     def on_signal_records(self, records):
-        self.main_view.table_payment_records.setRowCount(0)
+        try:
+            self.main_view.table_payment_records.setRowCount(0)
 
-        self.set_records(records)
-        for record in self.records:
-            self.insert_table_records(record)
+            self.set_records(records)
+            self.clear_table_records_selection()
+            for record in self.records:
+                self.insert_table_records(record)
 
-        self.set_label_values()
-
-        self.start_thread_load_student_filters()
+            self.set_label_values()
+            if not self.assembly_completed:
+                self.start_thread_load_student_filters()
+            else:
+                self.on_student_filter_change()
+            self.start_thread_load_payment_records_is_running = False
+        except Exception as e:
+            print(e)
 
 
     # helpers
+    def get_selected_date(self):
+        y = int(self.main_view.comboBox_year.currentText())
+        m = self.main_view.comboBox_month.currentIndex() + 1
+        return date(y, m, 1)
+
     def format_money(self, money: float):
         money_str_split = str(money).split(".")
         if len(money_str_split[-1]) < 2:
@@ -329,78 +356,109 @@ class MainPaymentRecordView:
             return
 
     def apply_student_filters(self, filters: dict[str, bool | int | None]):
-        if not any(filters.values()):
-            self.display_records = None
-            self.main_view.label_record_total_records.setText(f"Total: {len(self.records)}")
+        try:
+            if not any(filters.values()):
+                self.display_records = None
+                self.main_view.label_record_total_records.setText(f"Total: {len(self.records)}")
+                self.set_label_values()
+                self.main_view.table_payment_records.setRowCount(0)
+                for s in self.records:
+                    self.insert_table_records(s)
+                return
+
+            result = list(self.records)
+
+            # payment
+            payment_filter = filters.get("payment")
+            if payment_filter is not None:
+                result = [
+                    s for s in result
+                    if s.payment_status.value == payment_filter
+                ]
+
+            # class
+            class_filter = filters.get("class")
+            if class_filter is not None:
+                result = [
+                    s for s in result
+                    if s.student.class_id == int(class_filter)
+                ]
+
+            # plan
+            plan_filter = filters.get("plan")
+            if plan_filter is not None:
+                result = [
+                    s for s in result
+                    if s.student.plan_id == int(plan_filter)
+                ]
+            self.display_records = result
+            self.main_view.label_record_total_records.setText(f"Total: {len(result)}")
             self.set_label_values()
             self.main_view.table_payment_records.setRowCount(0)
-            for s in self.records:
+            for s in result:
                 self.insert_table_records(s)
-            return
+        except Exception as e:
+            print(e)
 
-        result = list(self.records)
+    def add_record(self, record):
+        target = self.display_records if self.display_records else self.records
 
-        # payment
-        payment_filter = filters.get("payment")
-        if payment_filter is not None:
-            result = [
-                s for s in result
-                if s.payment_status.value == payment_filter
-            ]
+        index_of_existing_record = next((i for i, r in enumerate(target) if r.id == record.id), None)
+        if index_of_existing_record is not None:
+            target[index_of_existing_record] = record
+        else:
+            target.append(record)
 
-        # class
-        class_filter = filters.get("class")
-        if class_filter is not None:
-            result = [
-                s for s in result
-                if s.student.class_id == int(class_filter)
-            ]
-
-        # plan
-        plan_filter = filters.get("plan")
-        if plan_filter is not None:
-            result = [
-                s for s in result
-                if s.student.plan_id == int(plan_filter)
-            ]
-        self.display_records = result
-        self.main_view.label_record_total_records.setText(f"Total: {len(result)}")
-        self.set_label_values()
-        self.main_view.table_payment_records.setRowCount(0)
-        for s in result:
-            self.insert_table_records(s)
 
     def set_records(self, records):
         if not self.records:
             self.records = records
             return
 
+        if self.display_records:
+            self.display_records.clear()
+            self.display_records = records
+        else:
+            self.records.clear()
+            self.records = records
+        """
         target = self.display_records if self.display_records else self.records
+        target.clear()
+        target = records
 
-        for record in records:
+        
+                for record in records:
             index_of_existing_record = next((i for i, r in enumerate(target) if r.id == record.id),None)
             if index_of_existing_record is not None:
                 target[index_of_existing_record] = record
+            else:
+                target.append(record)
+        """
+
 
     def set_label_values(self):
-        self.payed_value = 0.00
-        self.pending_value = 0.00
-        self.forgiven_value = 0.00
-        if self.display_records:
-            targets = self.display_records
-        else:
-            targets = self.records
-        for record in targets:
-            if record.payment_status == PaymentStatus.PAID:
-                self.payed_value += float(record.value)
-            elif record.payment_status == PaymentStatus.OPEN or record.payment_status == PaymentStatus.OVERDUE:
-                self.pending_value += float(record.value)
-            elif record.payment_status == PaymentStatus.FORGIVEN:
-                self.forgiven_value += float(record.value)
+        try:
+            self.payed_value = 0.00
+            self.pending_value = 0.00
+            self.forgiven_value = 0.00
+            if self.display_records:
+                targets = self.display_records
+            else:
+                targets = self.records
+            for record in targets:
+                if record.payment_status == PaymentStatus.PAID:
+                    self.payed_value += float(record.value)
+                elif record.payment_status == PaymentStatus.OPEN or record.payment_status == PaymentStatus.OVERDUE:
+                    self.pending_value += float(record.value)
+                elif record.payment_status == PaymentStatus.FORGIVEN:
+                    self.forgiven_value += float(record.value)
 
-        self.main_view.label_total_payment_done.setText(f"Total recebido: {self.format_money(self.payed_value)}")
-        self.main_view.label_total_payment_pedding.setText(f"Total pendente: {self.format_money(self.pending_value)}")
-        self.main_view.label_3.setText(f"Total perdoado: {self.format_money(self.forgiven_value)}")
+            self.main_view.label_total_payment_done.setText(f"Total recebido: {self.format_money(self.payed_value)}")
+            self.main_view.label_total_payment_pedding.setText(
+                f"Total pendente: {self.format_money(self.pending_value)}")
+            self.main_view.label_3.setText(f"Total perdoado: {self.format_money(self.forgiven_value)}")
+        except Exception as e:
+            print(e)
 
     def assemble_ui(self):
         # hidden id column
