@@ -35,8 +35,14 @@ class ThreadEditStudent(QThread):
 
 
         self.student_repository.update(student)
+        dto = StudentService.get_dto(student)
+        latest_record = self._most_recent_payment_record(student.payment_records)
+        dto.latest_payment_status = latest_record.payment_status
 
         self.signals.signal_student_dto.emit(
-            StudentService.get_dto(student)
+            dto
         )
         Session.remove()
+
+    def _most_recent_payment_record(self, records):
+        return max(records, key=lambda r: r.opened_at)

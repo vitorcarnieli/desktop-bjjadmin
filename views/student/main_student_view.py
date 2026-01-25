@@ -1,4 +1,5 @@
 from datetime import date
+from pathlib import Path
 
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QColor
@@ -6,6 +7,7 @@ from PySide6.QtWidgets import QTableWidgetItem, QMessageBox, QHeaderView
 
 from dtos.student_dto import StudentDto
 from enums.payment_status import PaymentStatus
+from services.file_service import FileService
 from threads.student.thread_get_students import ThreadGetStudents
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
 from threads.student.thread_remove_student import ThreadRemoveStudent
@@ -44,6 +46,13 @@ class MainStudentView:
         add_student_view.exec()
         student_dto = add_student_view.saved_student_dto
         if student_dto:
+            if add_student_view.profile_photo_changed:
+                photo_path = Path(add_student_view.profile_photo_changed)
+                new_name = f"{student_dto.id}{photo_path.suffix}"
+                rename = str(photo_path.parent / new_name)
+                FileService.remove_file(rename)
+                FileService.rename_file(add_student_view.profile_photo_changed, rename)
+
             self.student_dtos.append(student_dto)
             self.insert_table_students(student_dto)
             self.main_payment_record_view.reset()
@@ -64,6 +73,13 @@ class MainStudentView:
         edit_view = StudentView(self.main_view, student_dto)
         edit_view.exec()
         if edit_view.saved_student_dto:
+            if edit_view.profile_photo_changed:
+                photo_path = Path(edit_view.profile_photo_changed)
+                new_name = f"{student_dto.id}{photo_path.suffix}"
+                rename = str(photo_path.parent / new_name)
+                FileService.remove_file(rename)
+                FileService.rename_file(edit_view.profile_photo_changed, rename)
+
             updated = edit_view.saved_student_dto
             self.student_dtos = [
                 updated if dto.id == updated.id else dto

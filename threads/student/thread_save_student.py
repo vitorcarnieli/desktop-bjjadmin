@@ -4,6 +4,7 @@ from dtos.message import Message
 from dtos.student_dto import StudentDto
 from engine import Session
 from enums.message_type import MessageType
+from enums.payment_status import PaymentStatus
 from repositories.class_repository import ClassRepository
 from repositories.plan_repository import PlanRepository
 from repositories.student_repository import StudentRepository
@@ -46,6 +47,7 @@ class ThreadAddStudent(QThread):
 
             self.student_dto.plan = plan
             self.student_dto.lesson_class = lesson_class
+            self.student_dto.latest_payment_status = PaymentStatus.OPEN
 
 
 

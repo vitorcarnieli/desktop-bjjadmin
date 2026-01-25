@@ -25,6 +25,7 @@ class StudentView(QDialog, Ui_AddStudentView):
 
     def __init__(self, parent, to_edit_student: StudentDto = None):
         super(StudentView, self).__init__(parent)
+        self.profile_photo_path = "views/icons/user_without_photo.png"
         self.thread_edit_student = None
         self.setupUi(self)
         self.setEnabled(False)
@@ -80,7 +81,10 @@ class StudentView(QDialog, Ui_AddStudentView):
 
         if file:
             self.set_profile_photo(file)
-            self.profile_photo_changed = file
+            path = "profile_photos/student"
+            FileService.create_folder(path)
+            FileService.copy_file(file, path)
+            self.profile_photo_changed = f"{path}/{file.split("/")[-1]}"
 
 
     # ThreadGetClasses
@@ -332,8 +336,12 @@ background:  rgb(255, 255, 255);
         """)
 
     def assemble_user_photo(self):
-
-        self.set_profile_photo("views/icons/user_without_photo.png")
+        if self.to_edit_student:
+            for file in FileService.list_file_names("profile_photos/student"):
+                if file.split(".")[0] == str(self.to_edit_student.id):
+                    self.profile_photo_path = f"profile_photos/student/{self.to_edit_student.id}.{file.split(".")[-1]}"
+                    break
+        self.set_profile_photo(self.profile_photo_path)
 
         class HoverFilter(QObject):
             def eventFilter(_, obj, event):
