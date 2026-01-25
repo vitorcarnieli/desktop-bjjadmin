@@ -111,6 +111,7 @@ class MainPaymentRecordView:
 
     def on_index_change_comboBox_year(self, i):
         try:
+            self.clear_filters()
             def toggle_enable_month(item, is_enabled):
                 if item:
                     item.setEnabled(is_enabled)
@@ -140,6 +141,7 @@ class MainPaymentRecordView:
 
     def on_index_change_comboBox_month(self):
         if self.assembly_completed and not self.start_thread_load_payment_records_is_running:
+            self.clear_filters()
             self.start_thread_load_payment_records(self.get_selected_date())
 
     def on_student_filter_change(self):
@@ -265,11 +267,12 @@ class MainPaymentRecordView:
             for record in self.records:
                 self.insert_table_records(record)
 
-            self.set_label_values()
+
             if not self.assembly_completed:
                 self.start_thread_load_student_filters()
             else:
                 self.on_student_filter_change()
+            self.set_label_values()
             self.start_thread_load_payment_records_is_running = False
         except Exception as e:
             print(e)
@@ -487,6 +490,10 @@ class MainPaymentRecordView:
             if self.main_view.comboBox_year.itemText(i) == str(self.to_day.year):
                 self.main_view.comboBox_year.setCurrentIndex(i)
                 break
+
+    def clear_filters(self):
+        if self.combo_record_filters:
+            self.combo_record_filters.uncheck_all()
 
     def clear_table_records_selection(self):
         self.main_view.table_payment_records.clearSelection()

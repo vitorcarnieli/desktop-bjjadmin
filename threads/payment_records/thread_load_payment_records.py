@@ -30,7 +30,6 @@ class ThreadLoadPaymentRecords(QThread):
 
     def run(self):
         try:
-            print('foi')
             self.session = Session()
 
             self.student_repository = StudentRepository(self.session)
