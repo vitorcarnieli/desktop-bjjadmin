@@ -1,7 +1,10 @@
+from pathlib import Path
+
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QDialog, QTableWidgetItem
 
 from dtos.lesson_dto import LessonDto
+from services.file_service import FileService
 from threads.lesson.thread_get_lessons_by_date import ThreadGetLessonsByDate
 from threads.lesson.thread_remove_lesson import ThreadRemoveLesson
 from views.lesson.add_lesson_view import AddLessonView
@@ -74,6 +77,12 @@ class LessonView(QDialog, Ui_lesson):
         add_lesson_view.exec()
         lesson_added = add_lesson_view.saved_lesson_dto
         if lesson_added:
+            photo_path = Path(add_lesson_view.profile_photo_changed)
+            new_name = f"{lesson_added.id}{photo_path.suffix}"
+            rename = str(photo_path.parent / new_name)
+            FileService.remove_file(rename)
+            FileService.rename_file(add_lesson_view.profile_photo_changed, rename)
+
             self.lesson_dtos.append(lesson_added)
             self.insert_table_lessons(lesson_added)
 
@@ -89,6 +98,12 @@ class LessonView(QDialog, Ui_lesson):
         edit_view = AddLessonView(self, self.date, student_dto)
         edit_view.exec()
         if edit_view.saved_lesson_dto:
+            if edit_view.profile_photo_changed:
+                photo_path = Path(edit_view.profile_photo_changed)
+                new_name = f"{student_dto.id}{photo_path.suffix}"
+                rename = str(photo_path.parent / new_name)
+                FileService.remove_file(rename)
+                FileService.rename_file(edit_view.profile_photo_changed, rename)
             updated = edit_view.saved_lesson_dto
             self.lesson_dtos = [
                 updated if dto.id == updated.id else dto

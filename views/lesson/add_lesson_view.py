@@ -212,8 +212,13 @@ class AddLessonView(QDialog, Ui_add_lesson):
         self.assemble_class_photo()
 
     def assemble_class_photo(self):
-
-        self.set_class_photo("views/icons/class.png")
+        file_path = "views/icons/class.png"
+        if self.to_edit_lesson_dto:
+            for file in FileService.list_file_names("profile_photos/lesson"):
+                if file.split(".")[0] == str(self.to_edit_lesson_dto.id):
+                    file_path = f"profile_photos/lesson/{self.to_edit_lesson_dto.id}.{file.split(".")[-1]}"
+                    break
+        self.set_class_photo(file_path)
 
         class HoverFilter(QObject):
             def eventFilter(_, obj, event):
@@ -305,7 +310,10 @@ class AddLessonView(QDialog, Ui_add_lesson):
 
         if file:
             self.set_profile_photo(file)
-            self.profile_photo_changed = file
+            path = "profile_photos/lesson"
+            FileService.create_folder(path)
+            FileService.copy_file(file, path)
+            self.profile_photo_changed = f"{path}/{file.split("/")[-1]}"
 
     def update_status(self, message: Message):
         if message.type == MessageType.ERROR:
