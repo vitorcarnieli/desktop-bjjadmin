@@ -18,7 +18,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowIcon(QIcon("C:\\Users\\vitor\\workspace\\jitjitsu-system\\views\\icons\\window_icon.ico"))
 
-        pixmap = QPixmap("C:\\Users\\vitor\\workspace\\jitjitsu-system\\views\\icons\\logo2.png").scaled(
+        pixmap = QPixmap("C:\\Users\\vitor\\workspace\\jitjitsu-system\\views\\icons\\logo3.png").scaled(
             200, 200,
             Qt.AspectRatioMode.KeepAspectRatio,
             Qt.TransformationMode.SmoothTransformation
