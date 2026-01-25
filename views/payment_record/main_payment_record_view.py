@@ -537,5 +537,6 @@ class MainPaymentRecordView:
         self.main_view.comboBox_month.blockSignals(False)
 
         self.assemble_ui()
-
-        self.start_thread_load_payment_records()
+        self.clear_filters()
+        if not self.start_thread_load_payment_records_is_running:
+            self.start_thread_load_payment_records(self.to_day)
