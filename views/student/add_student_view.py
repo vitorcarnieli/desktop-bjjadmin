@@ -4,7 +4,7 @@ from PySide6.QtCore import QDate
 from PySide6.QtGui import QPixmap, QIcon, QPainter, QColor
 from PySide6.QtCore import Qt, QSize, QObject, QEvent
 from PySide6.QtSvg import QSvgRenderer
-from PySide6.QtWidgets import QDialog, QFileDialog
+from PySide6.QtWidgets import QDialog, QFileDialog, QHeaderView
 
 from dtos.class_dto import ClassDto
 from dtos.message import Message
@@ -51,7 +51,7 @@ class StudentView(QDialog, Ui_AddStudentView):
         self.assemble_user_photo()
         self.populate_combo_belts(True)
         self.start_thread_get_plans()
-
+        self.table_frequency.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
 
     # views events
     def on_click_save_btn(self):
