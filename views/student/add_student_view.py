@@ -52,18 +52,18 @@ class StudentView(QDialog, Ui_AddStudentView):
         self.populate_combo_belts(True)
         self.start_thread_get_plans()
         self.table_frequency.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
-        self.assemble_table_frequency(self.to_edit_student.frequency)
+        self.assemble_table_frequency(self.to_edit_student)
 
-    def assemble_table_frequency(self,frequency):
+    def assemble_table_frequency(self,dto):
         try:
-            if not frequency:
+            if not dto:
+                self.table_frequency.hide()
                 return
-            print(frequency)
+            frequency = dto.frequency
             def set_qt_text_alignment_center(ui_element):
                 ui_element.setTextAlignment(Qt.AlignCenter)
 
             for row, (key, value) in enumerate(frequency.items()):
-                print(row)
                 self.table_frequency.setItem(row, 0, QTableWidgetItem(str(key)))
                 item = QTableWidgetItem(str(value))
                 self.table_frequency.setItem(row, 1, item)
