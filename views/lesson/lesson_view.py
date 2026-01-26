@@ -77,11 +77,12 @@ class LessonView(QDialog, Ui_lesson):
         add_lesson_view.exec()
         lesson_added = add_lesson_view.saved_lesson_dto
         if lesson_added:
-            photo_path = Path(add_lesson_view.profile_photo_changed)
-            new_name = f"{lesson_added.id}{photo_path.suffix}"
-            rename = str(photo_path.parent / new_name)
-            FileService.remove_file(rename)
-            FileService.rename_file(add_lesson_view.profile_photo_changed, rename)
+            if add_lesson_view.profile_photo_changed:
+                photo_path = Path(add_lesson_view.profile_photo_changed)
+                new_name = f"{lesson_added.id}{photo_path.suffix}"
+                rename = str(photo_path.parent / new_name)
+                FileService.remove_file(rename)
+                FileService.rename_file(add_lesson_view.profile_photo_changed, rename)
 
             self.lesson_dtos.append(lesson_added)
             self.insert_table_lessons(lesson_added)

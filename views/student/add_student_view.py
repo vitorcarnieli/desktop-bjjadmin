@@ -4,7 +4,7 @@ from PySide6.QtCore import QDate
 from PySide6.QtGui import QPixmap, QIcon, QPainter, QColor
 from PySide6.QtCore import Qt, QSize, QObject, QEvent
 from PySide6.QtSvg import QSvgRenderer
-from PySide6.QtWidgets import QDialog, QFileDialog, QHeaderView
+from PySide6.QtWidgets import QDialog, QFileDialog, QHeaderView, QTableWidgetItem
 
 from dtos.class_dto import ClassDto
 from dtos.message import Message
@@ -52,6 +52,30 @@ class StudentView(QDialog, Ui_AddStudentView):
         self.populate_combo_belts(True)
         self.start_thread_get_plans()
         self.table_frequency.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
+        self.assemble_table_frequency(self.to_edit_student.frequency)
+
+    def assemble_table_frequency(self,frequency):
+        try:
+            if not frequency:
+                return
+            print(frequency)
+            def set_qt_text_alignment_center(ui_element):
+                ui_element.setTextAlignment(Qt.AlignCenter)
+
+            for row, (key, value) in enumerate(frequency.items()):
+                print(row)
+                self.table_frequency.setItem(row, 0, QTableWidgetItem(str(key)))
+                item = QTableWidgetItem(str(value))
+                self.table_frequency.setItem(row, 1, item)
+                set_qt_text_alignment_center(item)
+
+            header = self.table_frequency.horizontalHeader()
+            header.setSectionResizeMode(0, QHeaderView.Stretch)
+        except Exception as e:
+            print(e)
+            return
+
+
 
     # views events
     def on_click_save_btn(self):

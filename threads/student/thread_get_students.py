@@ -40,7 +40,6 @@ class ThreadGetStudents(QThread):
             latest_record = self._most_recent_payment_record(student.payment_records)
             dto.latest_payment_status = latest_record.payment_status
             dto.frequency = self.get_frequency(dto)
-            print(dto.frequency)
 
 
 
