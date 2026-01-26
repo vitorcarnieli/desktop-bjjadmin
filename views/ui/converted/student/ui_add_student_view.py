@@ -74,6 +74,117 @@ class Ui_AddStudentView(object):
 "")
         self.combo_belts.setObjectName("combo_belts")
         self.verticalLayout_8.addWidget(self.combo_belts)
+        self.label_4 = QtWidgets.QLabel(parent=self.left)
+        self.label_4.setText("")
+        self.label_4.setObjectName("label_4")
+        self.verticalLayout_8.addWidget(self.label_4)
+        self.table_frequency = QtWidgets.QTableWidget(parent=self.left)
+        self.table_frequency.setEnabled(True)
+        self.table_frequency.setMinimumSize(QtCore.QSize(0, 160))
+        self.table_frequency.setStyleSheet("/* QTableWidget / QTableView - Dark Modern */\n"
+"\n"
+"QTableWidget {\n"
+"    background-color: rgb(24, 24, 24);\n"
+"    color: rgb(220, 220, 220);\n"
+"    gridline-color: rgb(45, 45, 45);\n"
+"    border: 1px solid rgb(40, 40, 40);\n"
+"    border-radius: 10px;\n"
+"    font-size: 13px;\n"
+"    selection-background-color: rgb(52, 120, 180);\n"
+"    selection-color: white;\n"
+"}\n"
+"\n"
+"/* Linhas alternadas */\n"
+"QTableWidget::item:alternate {\n"
+"    background-color: rgb(28, 28, 28);\n"
+"}\n"
+"\n"
+"/* Hover */\n"
+"QTableWidget::item:hover {\n"
+"    background-color: rgb(40, 40, 40);\n"
+"}\n"
+"\n"
+"/* Selecionado */\n"
+"QTableWidget::item:selected {\n"
+"    background-color: rgb(52, 120, 180);\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"/* Header horizontal */\n"
+"QHeaderView::section {\n"
+"    background-color: rgb(32, 32, 32);\n"
+"    color: rgb(200, 200, 200);\n"
+"    padding: 6px;\n"
+"    border: none;\n"
+"    border-bottom: 1px solid rgb(45, 45, 45);\n"
+"    border-right: 1px solid rgb(45, 45, 45);\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"/* Header hover */\n"
+"QHeaderView::section:hover {\n"
+"    background-color: rgb(38, 38, 38);\n"
+"}\n"
+"\n"
+"/* Scrollbars minimalistas */\n"
+"QScrollBar:vertical {\n"
+"    background: rgb(24, 24, 24);\n"
+"    width: 10px;\n"
+"    margin: 0;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical {\n"
+"    background: rgb(60, 60, 60);\n"
+"    border-radius: 5px;\n"
+"    min-height: 20px;\n"
+"}\n"
+"\n"
+"QScrollBar::handle:vertical:hover {\n"
+"    background: rgb(90, 90, 90);\n"
+"}\n"
+"\n"
+"QScrollBar::add-line,\n"
+"QScrollBar::sub-line {\n"
+"    height: 0;\n"
+"}\n"
+"\n"
+"/* Foco discreto */\n"
+"QTableWidget:focus {\n"
+"    outline: none;\n"
+"}\n"
+"")
+        self.table_frequency.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.table_frequency.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.NoSelection)
+        self.table_frequency.setObjectName("table_frequency")
+        self.table_frequency.setColumnCount(2)
+        self.table_frequency.setRowCount(4)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_frequency.setVerticalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_frequency.setVerticalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_frequency.setVerticalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_frequency.setVerticalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_frequency.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_frequency.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_frequency.setItem(0, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_frequency.setItem(1, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_frequency.setItem(2, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_frequency.setItem(3, 0, item)
+        self.table_frequency.horizontalHeader().setVisible(True)
+        self.table_frequency.horizontalHeader().setStretchLastSection(True)
+        self.table_frequency.verticalHeader().setVisible(False)
+        self.table_frequency.verticalHeader().setCascadingSectionResizes(False)
+        self.table_frequency.verticalHeader().setSortIndicatorShown(False)
+        self.table_frequency.verticalHeader().setStretchLastSection(True)
+        self.verticalLayout_8.addWidget(self.table_frequency)
         spacerItem2 = QtWidgets.QSpacerItem(20, 291, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_8.addItem(spacerItem2)
         self.horizontalLayout.addWidget(self.left)
@@ -122,8 +233,8 @@ class Ui_AddStudentView(object):
 "    padding: 5px;\n"
 "}\n"
 "")
-        self.dateEdit.setMaximumDateTime(QtCore.QDateTime(QtCore.QDate(2100, 12, 31), QtCore.QTime(23, 59, 59)))
-        self.dateEdit.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1900, 9, 14), QtCore.QTime(3, 0, 0)))
+        self.dateEdit.setMaximumDateTime(QtCore.QDateTime(QtCore.QDate(2101, 1, 1), QtCore.QTime(2, 59, 59)))
+        self.dateEdit.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1900, 9, 14), QtCore.QTime(6, 0, 0)))
         self.dateEdit.setObjectName("dateEdit")
         self.verticalLayout.addWidget(self.dateEdit)
         self.verticalLayout_10.addWidget(self.frame)
@@ -281,6 +392,29 @@ class Ui_AddStudentView(object):
         self.radio_adult.setText(_translate("AddStudentView", "Adulto"))
         self.radio_child.setText(_translate("AddStudentView", "Infantil"))
         self.radio_child_simple.setText(_translate("AddStudentView", "Infantil Simplificado"))
+        item = self.table_frequency.verticalHeaderItem(0)
+        item.setText(_translate("AddStudentView", "all_period"))
+        item = self.table_frequency.verticalHeaderItem(1)
+        item.setText(_translate("AddStudentView", "yearly"))
+        item = self.table_frequency.verticalHeaderItem(2)
+        item.setText(_translate("AddStudentView", "biannual"))
+        item = self.table_frequency.verticalHeaderItem(3)
+        item.setText(_translate("AddStudentView", "monthly"))
+        item = self.table_frequency.horizontalHeaderItem(0)
+        item.setText(_translate("AddStudentView", "Tipo de frequência"))
+        item = self.table_frequency.horizontalHeaderItem(1)
+        item.setText(_translate("AddStudentView", "Porcentagem"))
+        __sortingEnabled = self.table_frequency.isSortingEnabled()
+        self.table_frequency.setSortingEnabled(False)
+        item = self.table_frequency.item(0, 0)
+        item.setText(_translate("AddStudentView", "Todo período"))
+        item = self.table_frequency.item(1, 0)
+        item.setText(_translate("AddStudentView", "Anual"))
+        item = self.table_frequency.item(2, 0)
+        item.setText(_translate("AddStudentView", "Semestral"))
+        item = self.table_frequency.item(3, 0)
+        item.setText(_translate("AddStudentView", "Mensal"))
+        self.table_frequency.setSortingEnabled(__sortingEnabled)
         self.label_8.setText(_translate("AddStudentView", "Nome Completo"))
         self.label_2.setText(_translate("AddStudentView", "Data de Nascimento"))
         self.label_3.setText(_translate("AddStudentView", "Sexo"))

@@ -14,3 +14,6 @@ class StudentDto:
 
         # No model attr
         self.latest_payment_status = None
+
+        # No model attr
+        self.frequency = None

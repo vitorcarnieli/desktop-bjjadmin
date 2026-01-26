@@ -91,7 +91,6 @@ class AddLessonView(QDialog, Ui_add_lesson):
         self.thread_get_students.start()
 
     def on_signal_student_dtos(self, student_dtos):
-        student_dtos.pop(0)
         self.student_dtos = list(filter(lambda s: s.class_id == self.current_class_selected.id, student_dtos))
         self.combo_students.clear()
         for student in self.student_dtos:
