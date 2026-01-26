@@ -17,7 +17,8 @@ include_files = [
     ('views/ui', 'views/ui'),
     ('alembic', 'alembic'),
     ('alembic.ini', 'alembic.ini'),
-    ('utils', 'utils')
+    ('utils', 'utils'),
+    ('profile_photos', 'profile_photos')
 ]
 
 build_exe_options = {
