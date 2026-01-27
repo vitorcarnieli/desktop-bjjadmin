@@ -11,6 +11,7 @@ class StudentDto:
         self.observation = None
         self.plan = None
         self.lesson_class = None
+        self.is_inactive = None
 
         # No model attr
         self.latest_payment_status = None

@@ -22,6 +22,7 @@ class StudentService:
             dto.lesson_class = ClassService.get_dto(model.lesson_class)
         dto.sex = model.sex
         dto.date_of_birth = model.date_of_birth
+        dto.is_inactive = model.is_inactive
 
         return dto
 
@@ -41,4 +42,5 @@ class StudentService:
         model.observation = dto.observation
         model.date_of_birth = dto.date_of_birth
         model.sex = dto.sex
+        model.is_inactive = dto.is_inactive
         return model

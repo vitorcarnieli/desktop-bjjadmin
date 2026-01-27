@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Date
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy import Enum as SAEnum
 
@@ -14,6 +14,7 @@ class Student(BaseModel):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     phone = Column(String)
+    is_inactive = Column(Boolean, default=False)
 
     date_of_birth = Column(Date, nullable=False)
 
