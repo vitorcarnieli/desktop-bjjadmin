@@ -1,3 +1,4 @@
+from sqlalchemy import DateTime, func
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy import Enum as SAEnum
@@ -40,3 +41,5 @@ class Student(BaseModel):
         secondary=lesson_students,
         back_populates="students"
     )
+
+    created_at = Column(DateTime(timezone=True), server_default=func.now())

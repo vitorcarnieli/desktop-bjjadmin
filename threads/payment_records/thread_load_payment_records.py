@@ -8,6 +8,7 @@ from engine import Session
 from enums.message_type import MessageType
 from enums.payment_status import PaymentStatus
 from models import PaymentRecord, Student
+from repositories.lesson_repository import LessonRepository
 from repositories.payment_record_repository import PaymentRecordRepository
 from repositories.student_repository import StudentRepository
 from services.payment_record_service import PaymentRecordService
@@ -27,6 +28,7 @@ class ThreadLoadPaymentRecords(QThread):
         self.date = date
         self.payment_record_repository: PaymentRecordRepository = None
         self.student_repository: StudentRepository = None
+        self.lessons_repository: LessonRepository = None
 
     def run(self):
         try:
@@ -34,6 +36,7 @@ class ThreadLoadPaymentRecords(QThread):
 
             self.student_repository = StudentRepository(self.session)
             self.payment_record_repository = PaymentRecordRepository(self.session)
+            self.lessons_repository = LessonRepository(self.session)
 
             missing_records = self._students_without_record_this_month()
             if not missing_records:
@@ -45,7 +48,7 @@ class ThreadLoadPaymentRecords(QThread):
             self.signals.signal_payment_record_dtos.emit(records)
 
         except Exception as e:
-            print(e)
+            print(f"print aqui: {e}")
             self.signals.signal_message.emit(Message(MessageType.ERROR, str(e)))
 
         finally:
@@ -61,6 +64,20 @@ class ThreadLoadPaymentRecords(QThread):
         return [PaymentRecordService.get_dto(record) for record in records]
 
     def _create_records_for_this_month(self, students):
+        # filters students who were not present last month
+        month = self.date.month - 1 if self.date.month > 1 else 12
+        year = self.date.year if self.date.month > 1 else self.date.year -1
+        lessons = self.lessons_repository.get_by_month_and_year(year, month)
+        students_present_last_month = [s.id for l in lessons for s in l.students]
+        # save if student has created to day
+        students_away = list(filter(lambda s: s.id not in students_present_last_month and s.created_at.date() != date.today(), students))
+        for s in students_away:
+            s.is_inactive = True
+            self.student_repository.update(s)
+            if s in students:
+                students.remove(s)
+
+
         def create_record(student):
             record = PaymentRecord()
             record.student_id = student.id
@@ -71,7 +88,7 @@ class ThreadLoadPaymentRecords(QThread):
             self.payment_record_repository.add(record)
             return record
 
-        return [PaymentRecordService.get_dto(create_record(student)) for student in students]
+        return [PaymentRecordService.get_dto(create_record(student)) for student in students if not student.is_inactive]
 
     def _exist_records_for_this_month(self):
         today = date.today()

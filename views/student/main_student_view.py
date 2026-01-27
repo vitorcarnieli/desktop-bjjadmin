@@ -144,16 +144,18 @@ class MainStudentView:
                 "Paid": "Pagamento Confirmado",
                 "Overdue": "Pagamento Atrasado",
                 "Forgiven": "Pagamento Perdoado",
-                "Inactive": "Inativo"
+                "Inactive": "Inativo",
+                "":""
             }
             payment_status_style = {
                 "Open": QColor("#F9A825"),
                 "Paid": QColor("#2E7D32"),
                 "Overdue": QColor("#C62828"),
                 "Forgiven": QColor("#00838F"),
-                "Inactive": QColor("#000")
+                "Inactive": QColor("#000"),
+                "": QColor("#000")
             }
-            status_value = "Inactive" if student_dto.is_inactive else student_dto.latest_payment_status.value
+            status_value = "Inactive" if student_dto.is_inactive else "" if not student_dto.latest_payment_status else student_dto.latest_payment_status.value
             item_payment_status = QTableWidgetItem(payment_status_friendly.get(status_value))
             item_payment_status.setForeground(payment_status_style.get(status_value))
             self.main_view.table_students.setItem(row_position, 4, item_payment_status)
