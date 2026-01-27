@@ -53,6 +53,10 @@ class StudentView(QDialog, Ui_AddStudentView):
         self.start_thread_get_plans()
         self.table_frequency.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
         self.assemble_table_frequency(self.to_edit_student)
+        if not self.to_edit_student:
+            self.inactive_student_check.hide()
+        else:
+            self.inactive_student_check.show()
 
     def assemble_table_frequency(self,dto):
         try:
