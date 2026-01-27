@@ -249,6 +249,11 @@ background:  rgb(255, 255, 255);
         if index != -1:
             self.combo_belts.setCurrentIndex(index)
 
+        if self.to_edit_student.is_inactive:
+            self.inactive_student_check.setChecked(True)
+        else:
+            self.inactive_student_check.setChecked(False)
+
     def get_form_data(self):
         required_fields = {
             "Nome": self.line_name.text(),
@@ -271,6 +276,7 @@ background:  rgb(255, 255, 255);
         student_dto.phone = self.line_phone.text()
         student_dto.date_of_birth = self.dateEdit.date().toPython()
         student_dto.sex = Sex.MALE if self.radio_male.isChecked() else Sex.FEMALE
+        student_dto.is_inactive = self.inactive_student_check.isChecked()
         return student_dto
 
     def on_text_changed_line_phone(self, text):

@@ -32,7 +32,7 @@ class ThreadEditStudent(QThread):
         student.sex = self.updatable_student_dto.sex
         student.plan_id = self.updatable_student_dto.plan_id
         student.class_id = self.updatable_student_dto.class_id
-
+        student.is_inactive = self.updatable_student_dto.is_inactive
 
         self.student_repository.update(student)
         dto = StudentService.get_dto(student)
