@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Date
+from sqlalchemy import DateTime, func
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy import Enum as SAEnum
 
@@ -14,6 +15,7 @@ class Student(BaseModel):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     phone = Column(String)
+    is_inactive = Column(Boolean, default=False)
 
     date_of_birth = Column(Date, nullable=False)
 
@@ -39,3 +41,5 @@ class Student(BaseModel):
         secondary=lesson_students,
         back_populates="students"
     )
+
+    created_at = Column(DateTime(timezone=True), server_default=func.now())

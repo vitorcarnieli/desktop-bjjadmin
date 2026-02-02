@@ -1,3 +1,7 @@
+import shiboken6
+print(shiboken6.__file__)
+
+import os
 import sys
 
 from PySide6.QtWidgets import QApplication
@@ -12,11 +16,14 @@ from models import Plan, LessonClass
 from views.main_view import MainView
 
 
+def resource_path(relative):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative)
+    return os.path.join(os.path.abspath("."), relative)
+
 def run_migrations():
-    """Execute migrations."""
-    config = Config("alembic.ini")
-    upgrade_revision = "head"
-    command.upgrade(config, upgrade_revision)
+    config = Config(resource_path("alembic.ini"))
+    command.upgrade(config, "head")
 
 def ensure_defaults(session):
     if not session.get(Plan, 1):
@@ -54,6 +61,7 @@ if __name__ == "__main__":
         run_migrations()
 
         app = QApplication(sys.argv)
+        app.setStyle("windowsvista")
 
         ensure_defaults(Session())
 

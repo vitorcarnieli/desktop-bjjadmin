@@ -406,7 +406,7 @@ class Ui_MainWindow(object):
 "QCalendarWidget QScrollBar::sub-line:vertical {\n"
 "    height: 0px;\n"
 "}")
-        self.calendarWidget.setMinimumDate(QtCore.QDate(2024, 3, 1))
+        self.calendarWidget.setMinimumDate(QtCore.QDate(2026, 1, 1))
         self.calendarWidget.setMaximumDate(QtCore.QDate(2100, 12, 31))
         self.calendarWidget.setGridVisible(True)
         self.calendarWidget.setHorizontalHeaderFormat(QtWidgets.QCalendarWidget.HorizontalHeaderFormat.ShortDayNames)

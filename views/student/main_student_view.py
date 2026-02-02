@@ -143,15 +143,19 @@ class MainStudentView:
                 "Open": "Aguardando Pagamento",
                 "Paid": "Pagamento Confirmado",
                 "Overdue": "Pagamento Atrasado",
-                "Forgiven": "Pagamento Perdoado"
+                "Forgiven": "Pagamento Perdoado",
+                "Inactive": "Inativo",
+                "":""
             }
             payment_status_style = {
                 "Open": QColor("#F9A825"),
                 "Paid": QColor("#2E7D32"),
                 "Overdue": QColor("#C62828"),
-                "Forgiven": QColor("#00838F")
+                "Forgiven": QColor("#00838F"),
+                "Inactive": QColor("#000"),
+                "": QColor("#000")
             }
-            status_value = student_dto.latest_payment_status.value
+            status_value = "Inactive" if student_dto.is_inactive else "" if not student_dto.latest_payment_status else student_dto.latest_payment_status.value
             item_payment_status = QTableWidgetItem(payment_status_friendly.get(status_value))
             item_payment_status.setForeground(payment_status_style.get(status_value))
             self.main_view.table_students.setItem(row_position, 4, item_payment_status)
@@ -240,7 +244,8 @@ class MainStudentView:
             "age": None,
             "class": None,
             "plan": None,
-            "sex": None
+            "sex": None,
+            "inactive": None
         }
 
         def get_true_if_greater_zero(num: str) -> bool:
@@ -249,6 +254,9 @@ class MainStudentView:
         filled_fields = [str(f) for f in filled_fields]
 
         for field in filled_fields:
+            if "inactive" in field:
+                filters["inactive"] = get_true_if_greater_zero(field)
+
             if "payment" in field:
                 filters["payment"] = get_true_if_greater_zero(field)
 
@@ -274,6 +282,9 @@ class MainStudentView:
 
         self.combo_student_filters.addTitle("Filtros")
 
+        payment_id = "inactive_"
+        self.combo_student_filters.addTitle("Inativo")
+        self.combo_student_filters.addItem("Inativos", f"{payment_id}1")
 
         payment_id = "payment_"
         self.combo_student_filters.addTitle("Pagamento")
@@ -310,6 +321,13 @@ class MainStudentView:
     def apply_student_filters(self, filters: dict[str, bool | int | None]):
         result = list(self.student_dtos)
 
+        # inactive
+        inactive_filter = filters.get("inactive")
+        if inactive_filter is not None:
+            result = [
+                s for s in result
+                if s.is_inactive
+            ]
         # payment
         payment_filter = filters.get("payment")
         if payment_filter is not None:

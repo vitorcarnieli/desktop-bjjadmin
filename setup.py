@@ -4,12 +4,27 @@ from cx_Freeze import setup, Executable
 base = "Win32GUI" if sys.platform == "win32" else None
 
 executables = [
-    Executable("main.py", base=base, target_name="bjj-system.exe", icon="C:\\Users\\vitor\\workspace\\jitjitsu-system\\views\\icons\\window_icon.ico"),
+    Executable("main.py", base=base, target_name="bjj-system.exe", icon="./views/icons/window_icon.ico"),
 ]
 
 packages = [
-    "PySide6", "requests", "pkg_resources", "multiprocessing", "idna", "alembic",
-    "sqlalchemy", "logging", "asyncio", "random", "sys", "threading"
+    "PySide6.QtCore",
+    "PySide6.QtGui",
+    "PySide6.QtWidgets",
+    "PySide6.QtNetwork",
+    "shiboken6",
+    "requests",
+    "pkg_resources",
+    "multiprocessing",
+    "idna",
+    "alembic",
+    "sqlalchemy",
+    "sqlalchemy.dialects.sqlite",
+    "logging",
+    "asyncio",
+    "random",
+    "sys",
+    "threading"
 ]
 
 include_files = [
@@ -24,7 +39,16 @@ include_files = [
 build_exe_options = {
     "packages": packages,
     "include_files": include_files,
-    "excludes": [],
+    "includes": [
+        "PySide6.QtCore",
+        "PySide6.QtGui",
+        "PySide6.QtWidgets",
+    ],
+    "excludes": ["tkinter", "unittest", "email", "http", "xml", "pydoc"],
+    "zip_include_packages": ["*"],
+    "zip_exclude_packages": ["PySide6", "shiboken6"],
+    "optimize": 0,
+    "include_msvcr": True
 }
 
 setup(

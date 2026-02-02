@@ -318,6 +318,23 @@ QTableWidget:focus {
           </widget>
          </item>
          <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="inactive_student_check">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>Aluno inativo</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="v1_2">
            <property name="orientation">
             <enum>Qt::Orientation::Vertical</enum>
@@ -419,7 +436,7 @@ QTableWidget:focus {
               </property>
               <property name="maximumDateTime">
                <datetime>
-                <hour>2</hour>
+                <hour>5</hour>
                 <minute>59</minute>
                 <second>59</second>
                 <year>2101</year>
@@ -429,7 +446,7 @@ QTableWidget:focus {
               </property>
               <property name="minimumDateTime">
                <datetime>
-                <hour>6</hour>
+                <hour>9</hour>
                 <minute>0</minute>
                 <second>0</second>
                 <year>1900</year>
