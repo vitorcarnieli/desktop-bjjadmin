@@ -40,6 +40,7 @@ class ThreadEditPaymentRecord(QThread):
 
             self.signals.signal_updated_record_dto.emit(record_dto)
         except Exception as e:
+            print(e)
             self.signals.signal_message.emit(Message(MessageType.ERROR, str(e)))
 
         finally:

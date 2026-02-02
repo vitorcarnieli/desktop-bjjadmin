@@ -38,7 +38,6 @@ class MainPaymentRecordView:
         self.selected_item: PaymentRecordDto = None
         self.to_day = date.today()
 
-
         # TODO: self.main_view.btn_whatsapp.clicked.connect()
 
         self.main_view.btn_money_on.clicked.connect(lambda: self.on_click_action_btns(PaymentStatus.PAID))
@@ -46,7 +45,6 @@ class MainPaymentRecordView:
         self.main_view.btn_money_forgiven.clicked.connect(lambda: self.on_click_action_btns(PaymentStatus.FORGIVEN))
 
         self.main_view.comboBox_year.currentIndexChanged.connect(self.on_index_change_comboBox_year)
-        self.main_view.comboBox_month.currentIndexChanged.connect(self.on_index_change_comboBox_month)
         self.main_view.table_payment_records.itemSelectionChanged.connect(self.on_itemSelectionChanged_table_payment_records)
         self.main_view.table_payment_records.itemDoubleClicked.connect(self.on_double_click_table_payment_records)
         self.combo_record_filters: CheckableComboBox = None
@@ -54,7 +52,6 @@ class MainPaymentRecordView:
 
         self.assemble_ui()
         self.start_thread_load_payment_records(self.to_day)
-
 
     # views events
     def on_double_click_table_payment_records(self):
@@ -132,10 +129,7 @@ class MainPaymentRecordView:
 
             if self.assembly_completed:
                 self.start_thread_load_payment_records_is_running = True
-                self.main_view.comboBox_month.setCurrentIndex(0)
                 self.start_thread_load_payment_records(self.get_selected_date())
-            else:
-                self.main_view.comboBox_month.setCurrentIndex(0)
         except Exception as e:
             print(e)
 
@@ -143,8 +137,11 @@ class MainPaymentRecordView:
         if self.assembly_completed and not self.start_thread_load_payment_records_is_running:
             self.clear_filters()
             self.start_thread_load_payment_records(self.get_selected_date())
+        print(self.main_view.comboBox_month.currentText())
 
     def on_student_filter_change(self):
+        if not self.combo_record_filters:
+            return
         try:
             combo = self.combo_record_filters
             combo.blockSignals(True)
@@ -254,6 +251,7 @@ class MainPaymentRecordView:
 
 
     def start_thread_load_payment_records(self, date):
+        print(date)
         self.thread_load_payment_records = ThreadLoadPaymentRecords(date)
         self.thread_load_payment_records.signals.signal_payment_record_dtos.connect(self.on_signal_records)
         self.thread_load_payment_records.start()
@@ -492,6 +490,9 @@ class MainPaymentRecordView:
                 self.main_view.comboBox_year.setCurrentIndex(i)
                 break
 
+
+        self.main_view.comboBox_month.currentIndexChanged.connect(self.on_index_change_comboBox_month)
+
     def clear_filters(self):
         if self.combo_record_filters:
             self.combo_record_filters.uncheck_all()
@@ -503,40 +504,42 @@ class MainPaymentRecordView:
         self.main_view.btn_money_forgiven.setEnabled(False)
 
     def reset(self):
-        self.main_view.table_payment_records.setRowCount(0)
-        self.main_view.table_payment_records.clearSelection()
+        try:
+            self.main_view.table_payment_records.setRowCount(0)
+            self.main_view.table_payment_records.clearSelection()
 
-        if self.combo_record_filters:
-            self.combo_record_filters.setParent(None)
-            self.combo_record_filters.deleteLater()
-            self.combo_record_filters = None
+            if self.combo_record_filters:
+                self.combo_record_filters.setParent(None)
+                self.combo_record_filters.deleteLater()
+                self.combo_record_filters = None
 
-        self.forgiven_value = None
-        self.pending_value = None
-        self.payed_value = None
+            self.forgiven_value = None
+            self.pending_value = None
+            self.payed_value = None
 
-        self.records = None
-        self.display_records = None
-        self.selected_item = None
-        self.to_day = date.today()
+            self.records = None
+            self.display_records = None
+            self.selected_item = None
+            self.to_day = date.today()
 
-        self.thread_load_payment_records = None
-        self.thread_load_student_filters = None
-        self.thread_edit_payment_record_status = None
+            self.thread_load_payment_records = None
+            self.thread_load_student_filters = None
+            self.thread_edit_payment_record_status = None
 
-        self.main_view.label_total_payment_done.setText("Total recebido: R$ 0,00")
-        self.main_view.label_total_payment_pedding.setText("Total pendente: R$ 0,00")
-        self.main_view.label_3.setText("Total perdoado: R$ 0,00")
-        self.main_view.label_record_total_records.setText("Total: 0")
+            self.main_view.label_total_payment_done.setText("Total recebido: R$ 0,00")
+            self.main_view.label_total_payment_pedding.setText("Total pendente: R$ 0,00")
+            self.main_view.label_3.setText("Total perdoado: R$ 0,00")
+            self.main_view.label_record_total_records.setText("Total: 0")
 
-        self.main_view.comboBox_year.blockSignals(True)
-        self.main_view.comboBox_month.blockSignals(True)
-        self.main_view.comboBox_year.clear()
-        self.main_view.comboBox_month.setCurrentIndex(0)
-        self.main_view.comboBox_year.blockSignals(False)
-        self.main_view.comboBox_month.blockSignals(False)
+            self.main_view.comboBox_year.blockSignals(True)
+            self.main_view.comboBox_month.blockSignals(True)
+            self.main_view.comboBox_year.clear()
+            self.main_view.comboBox_year.blockSignals(False)
+            self.main_view.comboBox_month.blockSignals(False)
 
-        self.assemble_ui()
-        self.clear_filters()
-        if not self.start_thread_load_payment_records_is_running:
-            self.start_thread_load_payment_records(self.to_day)
+            self.assemble_ui()
+            self.clear_filters()
+            if not self.start_thread_load_payment_records_is_running:
+                self.start_thread_load_payment_records(self.to_day)
+        except Exception as e:
+            print(e)

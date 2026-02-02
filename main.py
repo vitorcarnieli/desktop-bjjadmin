@@ -61,6 +61,7 @@ if __name__ == "__main__":
         run_migrations()
 
         app = QApplication(sys.argv)
+        app.setStyle("windowsvista")
 
         ensure_defaults(Session())
 
