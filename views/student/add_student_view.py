@@ -63,18 +63,19 @@ class StudentView(QDialog, Ui_AddStudentView):
             if not dto:
                 self.table_frequency.hide()
                 return
-            frequency = dto.frequency
             def set_qt_text_alignment_center(ui_element):
                 ui_element.setTextAlignment(Qt.AlignCenter)
 
-            for row, (key, value) in enumerate(frequency.items()):
-                self.table_frequency.setItem(row, 0, QTableWidgetItem(str(key)))
-                item = QTableWidgetItem(str(value))
-                self.table_frequency.setItem(row, 1, item)
-                set_qt_text_alignment_center(item)
+            frequency = dto.frequency
+            if frequency:
+                for row, (key, value) in enumerate(frequency.items()):
+                    self.table_frequency.setItem(row, 0, QTableWidgetItem(str(key)))
+                    item = QTableWidgetItem(str(value))
+                    self.table_frequency.setItem(row, 1, item)
+                    set_qt_text_alignment_center(item)
 
-            header = self.table_frequency.horizontalHeader()
-            header.setSectionResizeMode(0, QHeaderView.Stretch)
+                header = self.table_frequency.horizontalHeader()
+                header.setSectionResizeMode(0, QHeaderView.Stretch)
         except Exception as e:
             print(e)
             return
