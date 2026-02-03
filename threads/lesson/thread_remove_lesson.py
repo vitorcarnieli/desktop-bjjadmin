@@ -4,6 +4,7 @@ from engine import Session
 from repositories.class_repository import ClassRepository
 from repositories.lesson_repository import LessonRepository
 from repositories.student_repository import StudentRepository
+from services.file_service import FileService
 
 
 class ThreadRemoveLessonSignals(QObject):
@@ -25,6 +26,11 @@ class ThreadRemoveLesson(QThread):
         lesson = self.lesson_repository.get_by_id(self.id)
 
         self.lesson_repository.delete(lesson)
-        print(self.id)
+        for file_name in FileService.list_file_names("./profile_photos/lesson"):
+            id_in_file_name = int(file_name.split(".")[0])
+            if id_in_file_name == self.id:
+                FileService.remove_file(f"./profile_photos/lesson/{file_name}")
+                break
+
         self.signals.signal_finished.emit(int(self.id))
         Session.remove()
