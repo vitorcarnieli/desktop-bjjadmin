@@ -52,6 +52,7 @@ class StudentView(QDialog, Ui_AddStudentView):
         self.populate_combo_belts(True)
         self.start_thread_get_plans()
         self.table_frequency.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
+        self.dateEdit.setDisplayFormat("dd/MM/yyyy")
         self.assemble_table_frequency(self.to_edit_student)
         if not self.to_edit_student:
             self.inactive_student_check.hide()
