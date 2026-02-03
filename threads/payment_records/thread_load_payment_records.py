@@ -32,7 +32,6 @@ class ThreadLoadPaymentRecords(QThread):
 
     def run(self):
         try:
-            print(self.date)
             self.session = Session()
 
             self.student_repository = StudentRepository(self.session)
@@ -134,12 +133,6 @@ class ThreadLoadPaymentRecords(QThread):
                 select(Student)
                 .where(~Student.id.in_(select(subquery.c.student_id)))
             )
-            for s in self.session.execute(stmt).scalars().all():
-                print((
-                    s.created_at.year,
-                    s.created_at.month, self.date.year,
-                    self.date.month
-                ))
             students = list(
                 filter(
                     lambda s: (
