@@ -29,11 +29,8 @@ packages = [
 
 include_files = [
     ('views/icons', 'views/icons'),
-    ('views/ui', 'views/ui'),
     ('alembic', 'alembic'),
-    ('alembic.ini', 'alembic.ini'),
-    ('utils', 'utils'),
-    ('profile_photos', 'profile_photos')
+    ('alembic.ini', 'alembic.ini')
 ]
 
 build_exe_options = {
