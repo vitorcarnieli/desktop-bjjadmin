@@ -340,6 +340,10 @@ background:  rgb(255, 255, 255);
 
         belts = [
             ("white", "Branca"),
+            ("gray", "Cinza"),
+            ("yellow", "Amarela"),
+            ("orange", "Laranja"),
+            ("green", "Verde"),
             ("blue", "Azul"),
             ("purple", "Roxa"),
             ("brown", "Marrom"),
