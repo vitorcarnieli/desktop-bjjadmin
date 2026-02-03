@@ -1,3 +1,5 @@
+import uuid
+
 from PySide6.QtCore import QObject, QEvent, Qt, QTime
 from PySide6.QtGui import QPixmap, QPainter, QColor, QStandardItem
 from PySide6.QtSvg import QSvgRenderer
@@ -312,7 +314,12 @@ class AddLessonView(QDialog, Ui_add_lesson):
             path = "profile_photos/lesson"
             FileService.create_folder(path)
             FileService.copy_file(file, path)
-            self.profile_photo_changed = f"{path}/{file.split("/")[-1]}"
+            copied_file_path = f"{path}/{file.split("/")[-1]}"
+            target_file_path = f"{path}/{uuid.uuid4()}.{file.split("/")[-1].split(".")[-1]}"
+            FileService.rename_file(copied_file_path, target_file_path)
+            self.profile_photo_changed = target_file_path
+
+
 
     def update_status(self, message: Message):
         if message.type == MessageType.ERROR:

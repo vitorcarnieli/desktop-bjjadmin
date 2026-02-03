@@ -50,8 +50,7 @@ class MainStudentView:
                 photo_path = Path(add_student_view.profile_photo_changed)
                 new_name = f"{student_dto.id}{photo_path.suffix}"
                 rename = str(photo_path.parent / new_name)
-                FileService.remove_file(rename)
-                FileService.rename_file(add_student_view.profile_photo_changed, rename)
+                FileService.force_rename_file(add_student_view.profile_photo_changed, rename)
 
             self.student_dtos.append(student_dto)
             self.insert_table_students(student_dto)
@@ -77,8 +76,7 @@ class MainStudentView:
                 photo_path = Path(edit_view.profile_photo_changed)
                 new_name = f"{student_dto.id}{photo_path.suffix}"
                 rename = str(photo_path.parent / new_name)
-                FileService.remove_file(rename)
-                FileService.rename_file(edit_view.profile_photo_changed, rename)
+                FileService.force_rename_file(edit_view.profile_photo_changed, rename)
 
             updated = edit_view.saved_student_dto
             self.student_dtos = [

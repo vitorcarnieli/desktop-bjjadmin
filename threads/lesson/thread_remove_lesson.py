@@ -28,7 +28,7 @@ class ThreadRemoveLesson(QThread):
         self.lesson_repository.delete(lesson)
         for file_name in FileService.list_file_names("./profile_photos/lesson"):
             id_in_file_name = int(file_name.split(".")[0])
-            if id_in_file_name == self.id:
+            if id_in_file_name == int(self.id):
                 FileService.remove_file(f"./profile_photos/lesson/{file_name}")
                 break
 
