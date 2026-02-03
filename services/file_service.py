@@ -83,6 +83,18 @@ class FileService:
             return False, str(e)
 
     @staticmethod
+    def force_rename_file(old_name, new_name):
+        try:
+            os.replace(old_name, new_name)
+            return True, ""
+        except FileNotFoundError:
+            return False, "Arquivo não encontrado"
+        except PermissionError:
+            return False, "Sem permissão para renomear/substituir o arquivo"
+        except Exception as e:
+            return False, str(e)
+
+    @staticmethod
     def get_file_extension(path: str):
         file_extension = Path(path).suffix
         return file_extension

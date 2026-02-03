@@ -1,4 +1,5 @@
 import re
+import uuid
 
 from PySide6.QtCore import QDate
 from PySide6.QtGui import QPixmap, QIcon, QPainter, QColor
@@ -114,7 +115,10 @@ class StudentView(QDialog, Ui_AddStudentView):
             path = "profile_photos/student"
             FileService.create_folder(path)
             FileService.copy_file(file, path)
-            self.profile_photo_changed = f"{path}/{file.split("/")[-1]}"
+            copied_file_path = f"{path}/{file.split("/")[-1]}"
+            target_file_path = f"{path}/{uuid.uuid4()}.{file.split("/")[-1].split(".")[-1]}"
+            FileService.rename_file(copied_file_path, target_file_path)
+            self.profile_photo_changed = target_file_path
 
 
     # ThreadGetClasses
