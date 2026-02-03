@@ -96,10 +96,6 @@ class StudentView(QDialog, Ui_AddStudentView):
         else:
             self.start_thread_add_student(student_dto)
 
-    def on_selection_change_radio_belts(self):
-        # TODO
-        return
-
     def on_click_label_perfil_photo(self):
         options = QFileDialog.Options()
         file, _ = QFileDialog.getOpenFileName(
@@ -344,6 +340,10 @@ background:  rgb(255, 255, 255);
 
         belts = [
             ("white", "Branca"),
+            ("gray", "Cinza"),
+            ("yellow", "Amarela"),
+            ("orange", "Laranja"),
+            ("green", "Verde"),
             ("blue", "Azul"),
             ("purple", "Roxa"),
             ("brown", "Marrom"),
