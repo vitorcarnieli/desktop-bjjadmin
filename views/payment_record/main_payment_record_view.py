@@ -463,7 +463,7 @@ class MainPaymentRecordView:
 
     def assemble_ui(self):
         # hidden id column
-        #self.main_view.table_payment_records.setColumnHidden(0, True)
+        self.main_view.table_payment_records.setColumnHidden(0, True)
 
         # assemble action btns
         self.main_view.btn_whatsapp.setIcon(QIcon("views/icons/whatsapp_unfill.png"))
