@@ -50,8 +50,8 @@ build_exe_options = {
 
 setup(
     name="BJJ Admin",
-    version="0.0",
-    description="",
+    version="1.0",
+    description="Sistema de gerenciamento de academias de jiu-jitsu",
     options={"build_exe": build_exe_options},
     executables=executables,
 )
