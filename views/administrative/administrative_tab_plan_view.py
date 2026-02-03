@@ -91,39 +91,43 @@ class AdministrativeTabPlanView:
             # Name
             if not already_exists_on_table:
                 item_name = QTableWidgetItem(plan_dto.name)
-                item_name.setTextAlignment(Qt.AlignCenter)
+
                 self.main_view.table_plan.setItem(row_position, 1, item_name)
             else:
                 item_name = QTableWidgetItem(plan_dto.name)
                 self.main_view.table_plan.setItem(row_position, 1, item_name)
+            item_name.setTextAlignment(Qt.AlignCenter)
 
             # value
             value_str = "GRATUITO" if float(plan_dto.value) < 1 else f"R$ {str(plan_dto.value).replace(".", ",")}"
             if not already_exists_on_table:
                 item_value = QTableWidgetItem(value_str)
-                item_value.setTextAlignment(Qt.AlignCenter)
+
                 self.main_view.table_plan.setItem(row_position, 2, item_value)
             else:
                 item_value = QTableWidgetItem(value_str)
                 self.main_view.table_plan.setItem(row_position, 2, item_value)
+            item_value.setTextAlignment(Qt.AlignCenter)
 
             # details
             if not already_exists_on_table:
                 item_observation = QTableWidgetItem(plan_dto.observation)
-                item_observation.setTextAlignment(Qt.AlignCenter)
+
                 self.main_view.table_plan.setItem(row_position, 4, item_observation)
             else:
                 item_observation = QTableWidgetItem(plan_dto.observation)
                 self.main_view.table_plan.setItem(row_position, 4, item_observation)
+            item_observation.setTextAlignment(Qt.AlignCenter)
 
             # students amount
             if not already_exists_on_table:
                 item_students_amount = QTableWidgetItem(str(len(plan_dto.students)))
-                item_students_amount.setTextAlignment(Qt.AlignCenter)
+
                 self.main_view.table_plan.setItem(row_position, 3, item_students_amount)
             else:
                 item_students_amount = QTableWidgetItem(str(len(plan_dto.students)))
                 self.main_view.table_plan.setItem(row_position, 3, item_students_amount)
+            item_students_amount.setTextAlignment(Qt.AlignCenter)
 
             header = self.main_view.table_plan.horizontalHeader()
             header.setSectionResizeMode(1, QHeaderView.Stretch)
