@@ -86,6 +86,7 @@ class MainStudentView:
                 for dto in self.student_dtos
             ]
             self.insert_table_students(updated)
+            self.main_payment_record_view.reset()
 
     def on_selection_change_table_students(self):
         selected_items = self.main_view.table_students.selectedItems()
@@ -188,6 +189,7 @@ class MainStudentView:
             if self.to_display_student_dtos:
                 self.to_display_student_dtos.remove(c)
             self.set_total_student_label()
+        self.main_payment_record_view.reset()
 
     def start_thread_get_students(self):
         self.thread_get_students = ThreadGetStudents()
