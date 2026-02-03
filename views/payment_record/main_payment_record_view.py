@@ -19,7 +19,7 @@ from views.ui.converted.ui_main_view import Ui_MainWindow
 
 class MainPaymentRecordView:
     def __init__(self, main_view: Ui_MainWindow):
-        self.start_thread_load_payment_records_is_running = None
+        self.thread_load_payment_records_is_running = False
         self.main_view = main_view
         self.main_student_view: MainStudentView = None
 
@@ -128,16 +128,14 @@ class MainPaymentRecordView:
                     toggle_enable_month(combo_model.item(i), True)
 
             if self.assembly_completed:
-                self.start_thread_load_payment_records_is_running = True
                 self.start_thread_load_payment_records(self.get_selected_date())
         except Exception as e:
             print(e)
 
     def on_index_change_comboBox_month(self):
-        if self.assembly_completed and not self.start_thread_load_payment_records_is_running:
+        if self.assembly_completed:
             self.clear_filters()
             self.start_thread_load_payment_records(self.get_selected_date())
-        print(self.main_view.comboBox_month.currentText())
 
     def on_student_filter_change(self):
         if not self.combo_record_filters:
@@ -251,10 +249,11 @@ class MainPaymentRecordView:
 
 
     def start_thread_load_payment_records(self, date):
-        print(date)
-        self.thread_load_payment_records = ThreadLoadPaymentRecords(date)
-        self.thread_load_payment_records.signals.signal_payment_record_dtos.connect(self.on_signal_records)
-        self.thread_load_payment_records.start()
+        if not self.thread_load_payment_records_is_running:
+            self.thread_load_payment_records = ThreadLoadPaymentRecords(date)
+            self.thread_load_payment_records.signals.signal_payment_record_dtos.connect(self.on_signal_records)
+            self.thread_load_payment_records_is_running = True
+            self.thread_load_payment_records.start()
 
     def on_signal_records(self, records):
         try:
@@ -272,7 +271,7 @@ class MainPaymentRecordView:
             else:
                 self.on_student_filter_change()
             self.set_label_values()
-            self.start_thread_load_payment_records_is_running = False
+            self.thread_load_payment_records_is_running = False
         except Exception as e:
             print(e)
 
@@ -525,6 +524,7 @@ class MainPaymentRecordView:
             self.thread_load_payment_records = None
             self.thread_load_student_filters = None
             self.thread_edit_payment_record_status = None
+            self.thread_load_payment_records_is_running = False
 
             self.main_view.label_total_payment_done.setText("Total recebido: R$ 0,00")
             self.main_view.label_total_payment_pedding.setText("Total pendente: R$ 0,00")
@@ -539,7 +539,6 @@ class MainPaymentRecordView:
 
             self.assemble_ui()
             self.clear_filters()
-            if not self.start_thread_load_payment_records_is_running:
-                self.start_thread_load_payment_records(self.to_day)
+            self.start_thread_load_payment_records(self.to_day)
         except Exception as e:
             print(e)
