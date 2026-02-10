@@ -377,6 +377,7 @@ background:  rgb(255, 255, 255);
 
     def assemble_user_photo(self):
         if self.to_edit_student:
+            FileService.create_folder("profile_photos/student")
             for file in FileService.list_file_names("profile_photos/student"):
                 if file.split(".")[0] == str(self.to_edit_student.id):
                     self.profile_photo_path = f"profile_photos/student/{self.to_edit_student.id}.{file.split(".")[-1]}"

@@ -215,6 +215,7 @@ class AddLessonView(QDialog, Ui_add_lesson):
     def assemble_class_photo(self):
         file_path = "views/icons/class.png"
         if self.to_edit_lesson_dto:
+            FileService.create_folder("profile_photos/lesson")
             for file in FileService.list_file_names("profile_photos/lesson"):
                 if file.split(".")[0] == str(self.to_edit_lesson_dto.id):
                     file_path = f"profile_photos/lesson/{self.to_edit_lesson_dto.id}.{file.split(".")[-1]}"
