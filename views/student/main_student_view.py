@@ -55,6 +55,7 @@ class MainStudentView:
             self.student_dtos.append(student_dto)
             self.insert_table_students(student_dto)
             self.main_payment_record_view.reset()
+            self.reset()
 
     def on_click_btn_remove_student(self):
         confirm_view = ConfirmView(parent=self.main_view, title="Apagar",
