@@ -372,10 +372,16 @@ class MainPaymentRecordView:
             # payment
             payment_filter = filters.get("payment")
             if payment_filter is not None:
-                result = [
+                if payment_filter == PaymentStatus.OPEN.value:
+                    result =[
                     s for s in result
-                    if s.payment_status.value == payment_filter
-                ]
+                    if s.payment_status.value == 'Open' or s.payment_status.value == 'Overdue'
+                    ]
+                else:
+                    result = [
+                        s for s in result
+                        if s.payment_status.value == payment_filter
+                    ]
 
             # class
             class_filter = filters.get("class")
