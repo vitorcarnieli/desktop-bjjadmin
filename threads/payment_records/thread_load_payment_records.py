@@ -74,9 +74,9 @@ class ThreadLoadPaymentRecords(QThread):
             year = self.date.year if self.date.month > 1 else self.date.year - 1
             lessons = self.lessons_repository.get_by_month_and_year(year, month)
             students_present_last_month = [s.id for l in lessons for s in l.students]
-            # save if student has created to day
+            # save if student has created to month
             students_away = list(
-                filter(lambda s: s.id not in students_present_last_month and s.created_at.date() != date.today(),
+                filter(lambda s: s.id not in students_present_last_month and ((s.created_at.date().year, s.created_at.date().month) > (date.today().year, date.today().month)),
                        students))
             for s in students_away:
                 s.is_inactive = True
