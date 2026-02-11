@@ -537,8 +537,9 @@ class MainPaymentRecordView:
             self.main_view.comboBox_year.blockSignals(False)
             self.main_view.comboBox_month.blockSignals(False)
 
-            self.assemble_ui()
             self.clear_filters()
+            self.assemble_ui()
+            self.start_thread_load_student_filters()
             self.start_thread_load_payment_records(self.to_day)
         except Exception as e:
             print(e)
