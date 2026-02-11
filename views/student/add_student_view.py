@@ -32,6 +32,7 @@ class StudentView(QDialog, Ui_AddStudentView):
         self.thread_edit_student = None
         self.setupUi(self)
         self.setEnabled(False)
+        self.table_frequency.hide()
 
         self.save_btn.clicked.connect(self.on_click_save_btn)
         self.line_phone.textChanged.connect(self.on_text_changed_line_phone)
@@ -64,6 +65,7 @@ class StudentView(QDialog, Ui_AddStudentView):
 
     def assemble_table_frequency(self,dto):
         try:
+            self.table_frequency.show()
             if not dto:
                 self.table_frequency.hide()
                 return
