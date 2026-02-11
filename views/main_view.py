@@ -31,7 +31,7 @@ class MainView(QMainWindow, Ui_MainWindow):
         label.setCursor(Qt.CursorShape.PointingHandCursor)
 
         # opening window in maximized size
-        # self.showMaximized()
+        self.showMaximized()
 
         self.btn_menu_lessons.clicked.connect(self.on_click_btn_menu_lessons)
         self.btn_menu_student.clicked.connect(self.on_click_btn_menu_student)
