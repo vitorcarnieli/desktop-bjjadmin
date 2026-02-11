@@ -58,7 +58,7 @@ class ThreadLoadPaymentRecords(QThread):
         try:
             records = self.payment_record_repository.get_payments_by_month(self.date)
             for record in records:
-                if date.today() >= record.due_date:
+                if date.today() >= record.due_date and record.payment_status is PaymentStatus.OPEN:
                     record.payment_status = PaymentStatus.OVERDUE
                     self.payment_record_repository.update(record)
 
