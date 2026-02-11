@@ -74,10 +74,7 @@ class ThreadGetStudents(QThread):
         today = date.today()
 
         def months_diff(d1, d2):
-            months = (d1.year - d2.year) * 12 + (d1.month - d2.month)
-            if d1.day < d2.day:
-                months -= 1
-            return months
+            return (d1.year - d2.year) * 12 + (d1.month - d2.month)
 
         return [
             l for l in lessons

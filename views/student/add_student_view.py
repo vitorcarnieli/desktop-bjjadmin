@@ -17,6 +17,7 @@ from services.file_service import FileService
 from threads.lesson_class.thread_get_classes import ThreadGetClasses
 from threads.plan.thread_get_plans import ThreadGetPlans
 from threads.student.thread_edit_student import ThreadEditStudent
+from threads.student.thread_get_student import ThreadGetStudent
 from threads.student.thread_save_student import ThreadAddStudent
 from views.styles.label_style import LabelStyle
 from views.ui.converted.student.ui_add_student_view import Ui_AddStudentView
@@ -26,6 +27,7 @@ class StudentView(QDialog, Ui_AddStudentView):
 
     def __init__(self, parent, to_edit_student: StudentDto = None):
         super(StudentView, self).__init__(parent)
+        self.thread_get_student = None
         self.profile_photo_path = "views/icons/user_without_photo.png"
         self.thread_edit_student = None
         self.setupUi(self)
@@ -54,11 +56,11 @@ class StudentView(QDialog, Ui_AddStudentView):
         self.start_thread_get_plans()
         self.table_frequency.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
         self.dateEdit.setDisplayFormat("dd/MM/yyyy")
-        self.assemble_table_frequency(self.to_edit_student)
         if not self.to_edit_student:
             self.inactive_student_check.hide()
         else:
             self.inactive_student_check.show()
+            self.start_thread_get_student()
 
     def assemble_table_frequency(self,dto):
         try:
@@ -196,6 +198,13 @@ background:  rgb(255, 255, 255);
         self.saved_student_dto = student_dto
         self.accept()
 
+    def on_signal_student_dto_loaded(self, dto):
+        if dto:
+            self.to_edit_student = dto
+            self.assemble_table_frequency(self.to_edit_student)
+            self.set_form_data()
+
+
     def start_thread_edit_student(self, student_dto):
         self.thread_edit_student = ThreadEditStudent(student_dto)
         self.thread_edit_student.signals.signal_student_dto.connect(self.on_signal_student_dto)
@@ -208,7 +217,7 @@ background:  rgb(255, 255, 255);
             if event.type() == QEvent.Type.MouseButtonPress:
                 if event.button() == Qt.MouseButton.LeftButton:
                     self.on_click_label_perfil_photo()
-                    return True  # evento tratado
+                    return True
 
         return super().eventFilter(obj, event)
 
@@ -446,3 +455,8 @@ background:  rgb(255, 255, 255);
         elif message.type == MessageType.SUCCESS:
             self.label.setStyleSheet(LabelStyle.Success)
             self.label.setText(message.payload)
+
+    def start_thread_get_student(self):
+        self.thread_get_student = ThreadGetStudent(self.to_edit_student.id)
+        self.thread_get_student.signals.signal_student_dto.connect(self.on_signal_student_dto_loaded)
+        self.thread_get_student.start()
