@@ -95,7 +95,7 @@ class ThreadLoadPaymentRecords(QThread):
                 record.opened_at = date(self.date.year, self.date.month, 1)
                 record.due_date = date(self.date.year, self.date.month, 10)
                 record.value = student.plan.value
-                record.payment_status = PaymentStatus.OPEN
+                record.payment_status = PaymentStatus.OPEN if float(student.plan.value) > 0 else PaymentStatus.PAID
                 self.payment_record_repository.add(record)
                 return record
             except Exception as e:
