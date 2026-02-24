@@ -23,14 +23,17 @@ class ThreadLoadStudentFilters(QThread):
         self.student_repository: StudentRepository = None
 
     def run(self):
-        self.session = Session()
-        class_repo = ClassRepository(self.session)
-        plan_repo = PlanRepository(self.session)
+        try:
+            self.session = Session()
+            class_repo = ClassRepository(self.session)
+            plan_repo = PlanRepository(self.session)
 
-        filters = {
-            "class": [ClassService.get_dto(c) for c in class_repo.get_all()],
-            "plan": [PlanService.get_dto(p) for p in plan_repo.get_all()]
-        }
-        self.signals.signal_filters.emit(filters)
+            filters = {
+                "class": [ClassService.get_dto(c) for c in class_repo.get_all()],
+                "plan": [PlanService.get_dto(p) for p in plan_repo.get_all()]
+            }
+            self.signals.signal_filters.emit(filters)
 
-        Session.remove()
+            Session.remove()
+        except Exception as e:
+            print(e)

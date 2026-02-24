@@ -18,13 +18,16 @@ from views.ui.converted.ui_main_view import Ui_MainWindow
 
 
 class MainStudentView:
-    def __init__(self, main_view: Ui_MainWindow, main_payment_record_view):
+    def __init__(self, main_view: Ui_MainWindow, main_payment_record_view, main_home_view):
+        self.thread_load_student_filters_running = False
+        self.thread_get_students_running = False
         self.filters_on = None
         self.combo_student_filters:CheckableComboBox = None
         self.thread_load_student_filters = None
         self.thread_delete_student = None
         self.thread_get_students = None
         self.main_view = main_view
+        self.main_home_view = main_home_view
         self.selected_item = None
         self.main_payment_record_view = main_payment_record_view
 
@@ -54,6 +57,7 @@ class MainStudentView:
 
             self.student_dtos.append(student_dto)
             self.insert_table_students(student_dto)
+            self.main_home_view.reset_view()
             self.main_payment_record_view.reset()
             self.reset()
 
@@ -86,6 +90,7 @@ class MainStudentView:
             ]
             self.insert_table_students(updated)
             self.main_payment_record_view.reset()
+            self.main_home_view.reset_view()
 
     def on_selection_change_table_students(self):
         selected_items = self.main_view.table_students.selectedItems()
@@ -191,22 +196,29 @@ class MainStudentView:
         self.main_payment_record_view.reset()
 
     def start_thread_get_students(self):
+        self.thread_get_students_running = True
         self.thread_get_students = ThreadGetStudents()
         self.thread_get_students.signals.signal_student_dtos.connect(self.on_signal_student_dtos)
         self.thread_get_students.start()
+        print('start_thread_get_students')
 
     def on_signal_student_dtos(self, student_dtos):
+        self.thread_get_students_running = False
         self.student_dtos = student_dtos
         self.to_display_student_dtos = student_dtos
         for student in student_dtos:
             self.insert_table_students(student)
-        self.start_thread_load_student_filters()
+        if not self.thread_load_student_filters_running:
+            self.start_thread_load_student_filters()
+
 
     # thread events
     def start_thread_load_student_filters(self):
+        self.thread_load_student_filters_running = True
         self.thread_load_student_filters = ThreadLoadStudentFilters()
         self.thread_load_student_filters.signals.signal_filters.connect(self.on_signal_filters)
         self.thread_load_student_filters.start()
+        print("start_thread_load_student_filters")
 
     def on_student_filter_change(self):
         combo = self.combo_student_filters
@@ -318,6 +330,7 @@ class MainStudentView:
 
 
         self.main_view.student_filter_layout.addWidget(self.combo_student_filters)
+        self.thread_load_student_filters_running = False
 
     def apply_student_filters(self, filters: dict[str, bool | int | None]):
         result = list(self.student_dtos)
@@ -402,30 +415,34 @@ class MainStudentView:
             self.main_view.label_student_filter.setText(f"Total: {len(self.student_dtos)}")
 
     def reset(self):
-        # limpa tabela
-        self.main_view.table_students.setRowCount(0)
-        self.main_view.table_students.clearSelection()
+        try:
+            # limpa tabela
+            self.main_view.table_students.setRowCount(0)
+            self.main_view.table_students.clearSelection()
 
-        # remove combo de filtros
-        if self.combo_student_filters:
-            self.combo_student_filters.setParent(None)
-            self.combo_student_filters.deleteLater()
-            self.combo_student_filters = None
+            # remove combo de filtros
+            if self.combo_student_filters:
+                self.combo_student_filters.setParent(None)
+                self.combo_student_filters.deleteLater()
+                self.combo_student_filters = None
 
-        # estado interno
-        self.selected_item = None
-        self.student_dtos = []
-        self.to_display_student_dtos = []
+            # estado interno
+            self.selected_item = None
+            self.student_dtos = []
+            self.to_display_student_dtos = []
 
-        # threads
-        self.thread_load_student_filters = None
-        self.thread_delete_student = None
-        self.thread_get_students = None
+            # threads
+            self.thread_load_student_filters = None
+            self.thread_delete_student = None
+            self.thread_get_students = None
 
-        # labels
-        self.main_view.label_student_filter.setText("Total: 0")
-        self.main_view.btn_remove_student.setEnabled(False)
+            # labels
+            self.main_view.label_student_filter.setText("Total: 0")
+            self.main_view.btn_remove_student.setEnabled(False)
 
-        # recarrega tudo
-        self.start_thread_get_students()
+            # recarrega tudo
+            if not self.thread_get_students_running:
+                self.start_thread_get_students()
+        except Exception as e:
+            print(e)
 
