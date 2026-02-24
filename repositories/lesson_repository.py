@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 
 from engine import Session
 from models import Lesson
@@ -71,5 +71,21 @@ class LessonRepository(BaseRepository):
             .query(Lesson.date)
             .distinct()
             .order_by(Lesson.date)
+            .all()
+        )
+
+    def get_current_week(self):
+
+        today = date.today()
+
+        start = today - timedelta(days=today.weekday())
+
+        end = start + timedelta(days=7)
+
+        return (
+            self.session
+            .query(Lesson)
+            .filter(Lesson.date >= start)
+            .filter(Lesson.date < end)
             .all()
         )
