@@ -59,7 +59,7 @@ class MainView(QMainWindow, Ui_MainWindow):
 
 
         # Set Version
-        self.label_copywrite.setText(f"Versão: 1.1")
+        self.label_copywrite.setText(f"Versão: 1.2")
 
         self.calendarWidget.setStyleSheet("""
         /* QCalendarWidget - Estilo Moderno */
