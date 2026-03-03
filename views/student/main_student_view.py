@@ -200,7 +200,6 @@ class MainStudentView:
         self.thread_get_students = ThreadGetStudents()
         self.thread_get_students.signals.signal_student_dtos.connect(self.on_signal_student_dtos)
         self.thread_get_students.start()
-        print('start_thread_get_students')
 
     def on_signal_student_dtos(self, student_dtos):
         self.thread_get_students_running = False
@@ -218,7 +217,6 @@ class MainStudentView:
         self.thread_load_student_filters = ThreadLoadStudentFilters()
         self.thread_load_student_filters.signals.signal_filters.connect(self.on_signal_filters)
         self.thread_load_student_filters.start()
-        print("start_thread_load_student_filters")
 
     def on_student_filter_change(self):
         combo = self.combo_student_filters
