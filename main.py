@@ -1,5 +1,4 @@
 import shiboken6
-print(shiboken6.__file__)
 
 import os
 import sys

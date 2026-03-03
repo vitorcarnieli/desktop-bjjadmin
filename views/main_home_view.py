@@ -12,12 +12,22 @@ from views.week_column_chart_widget import WeekColumnChartWidget
 
 class MainHomeView:
     def __init__(self, main_view: Ui_MainWindow):
+        self.payment_pie_chart = None
+        self.pie_chart = None
+        self.column_chart = None
         self.profile_photo_path = None
         self._user_photo_pixmap = None
         self.thread_load_home = None
         self.thread_load_payment_records_is_running = False
-        self.main_view = main_view
 
+        self.main_view = main_view
+        self.main_view.refresh_home_btn.clicked.connect(self.on_click_refresh_home_btn)
+        self.reset()
+
+        self.start_thread_load_home()
+
+    def on_click_refresh_home_btn(self):
+        self.reset()
         self.start_thread_load_home()
 
     def start_thread_load_home(self):
@@ -29,19 +39,35 @@ class MainHomeView:
         self.thread_load_home.start()
 
     def on_signal_lessons_infos(self, data):
-        chart = WeekColumnChartWidget(
+        self.column_chart = WeekColumnChartWidget(
             title="Aulas por dia",
-            data=data
+            data=data,
+            background_color="#1e1e1e",
+            text_color="#c8c8c8"
         )
 
-        self.main_view.column_layout.addWidget(chart)
+        self.main_view.column_layout.addWidget(self.column_chart)
+
+    def on_signal_students_payment_percent_infos(self, data):
+        self.payment_pie_chart = PieChartWidget(
+            title="Pagamento",
+            data=data,
+            background_color="#1e1e1e",
+            label_color="#c8c8c8",
+            title_color="#c8c8c8"
+        )
+        self.main_view.payment_pie_layout.addWidget(self.payment_pie_chart)
 
     def on_signal_classes_infos(self, data):
-        self.chart = PieChartWidget(
+        data = list(filter(lambda x: x["label"] != "Padrão", data))
+        self.pie_chart = PieChartWidget(
             title="Alunos por turma",
-            data=data
+            data=data,
+            background_color="#1e1e1e",
+            label_color="#c8c8c8",
+            title_color="#c8c8c8"
         )
-        self.main_view.pie_layout.addWidget(self.chart)
+        self.main_view.pie_layout.addWidget(self.pie_chart)
 
     def format_date_to_portuguese(self, date_of_birth) -> str:
         weekdays_pt = [
@@ -116,8 +142,9 @@ class MainHomeView:
             self.insert_table(student_dto)
 
     def on_signal_payment_infos(self, infos):
+
         def format_value(value):
-            if not("." in str(value)):
+            if not ("." in str(value)):
                 return f"R$ {value},00"
             else:
                 value_split = str(value).split(".")
@@ -125,39 +152,79 @@ class MainHomeView:
                     value_split[-1] = f"{value_split[-1]}0"
                 return f"R$ {value_split[0]},{value_split[-1]}"
 
-        self.main_view.total_num.setText(str(infos["total"]))
-        self.main_view.paied_num.setText(format_value(infos["paid"]))
-        self.main_view.peding_num.setText(format_value(infos["pending"]))
+        total = infos["total"]
+        paid = infos["paid"]
+        pending = infos["pending"]
 
-    def reset_view(self):
-        # 1. Parar thread atual com segurança
+        self.main_view.total_num.setText(str(total))
+        self.main_view.paied_num.setText(format_value(paid))
+        self.main_view.peding_num.setText(format_value(pending))
+
+        if total > 0:
+            paid_percent = (paid / total) * 100
+            pending_percent = (pending / total) * 100
+        else:
+            paid_percent = 0
+            pending_percent = 0
+
+        data = [
+            {
+                "label": "Pagantes",
+                "percent": paid_percent,
+                "color": "#008000"
+            },
+            {
+                "label": "Devedores",
+                "percent": pending_percent,
+                "color": "#FF0000"
+            }
+        ]
+
+        self.payment_pie_chart = PieChartWidget(
+            title="Pagamentos",
+            data=data,
+            background_color="#1e1e1e",
+            label_color="#c8c8c8",
+            title_color="#c8c8c8"
+        )
+
+        self.main_view.payment_pie_layout.addWidget(self.payment_pie_chart)
+
+    def reset(self):
         if self.thread_load_home and self.thread_load_home.isRunning():
-            try:
-                self.thread_load_home.quit()
-                self.thread_load_home.wait()
-            except Exception:
-                pass
+            self.thread_load_home.quit()
+            self.thread_load_home.wait()
 
-        self.thread_load_home = None
+        if self.pie_chart:
+            self.pie_chart.setParent(None)
+            self.pie_chart.deleteLater()
+            self.pie_chart = None
 
-        # 2. Limpar layout de gráfico de colunas
+        if self.column_chart:
+            self.column_chart.setParent(None)
+            self.column_chart.deleteLater()
+            self.column_chart = None
+
+        if self.payment_pie_chart:
+            self.payment_pie_chart.setParent(None)
+            self.payment_pie_chart.deleteLater()
+            self.payment_pie_chart = None
+
         self._clear_layout(self.main_view.column_layout)
 
-        # 3. Limpar layout de gráfico de pizza
         self._clear_layout(self.main_view.pie_layout)
 
-        # 4. Limpar tabela
+        self._clear_layout(self.main_view.payment_pie_layout)
+
         self.main_view.table_birthday.setRowCount(0)
 
-        # 5. Resetar labels
         self.main_view.total_num.setText("0")
         self.main_view.paied_num.setText("R$ 0,00")
         self.main_view.peding_num.setText("R$ 0,00")
 
-        # 6. Reiniciar carregamento
-        self.start_thread_load_home()
-
     def _clear_layout(self, layout):
+        if not layout:
+            return
         while layout.count():
             item = layout.takeAt(0)
 
