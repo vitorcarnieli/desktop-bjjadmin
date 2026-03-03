@@ -385,17 +385,25 @@ QPushButton:hover {
            </spacer>
           </item>
           <item>
-           <widget class="QLabel" name="label_7">
-            <property name="font">
-             <font>
-              <pointsize>7</pointsize>
-             </font>
+           <widget class="QPushButton" name="refresh_home_btn">
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">color: rgb(255, 255, 255);</string>
+             <string notr="true">QPushButton {
+    background-color: rgb(33, 33, 33);
+	border-radius: 10px;
+}</string>
             </property>
             <property name="text">
-             <string>Essas informações são referentes ao mês atual</string>
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../../icons/refresh_white.png</normaloff>../../icons/refresh_white.png</iconset>
             </property>
            </widget>
           </item>
@@ -546,6 +554,19 @@ QPushButton:hover {
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_9">
           <item>
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <layout class="QVBoxLayout" name="verticalLayout_12">
             <item>
              <spacer name="verticalSpacer_3">
@@ -561,7 +582,7 @@ QPushButton:hover {
              </spacer>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="pie_layout"/>
+             <layout class="QHBoxLayout" name="payment_pie_layout"/>
             </item>
             <item>
              <spacer name="verticalSpacer_2">
@@ -594,7 +615,7 @@ QPushButton:hover {
              </spacer>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="column_layout"/>
+             <layout class="QHBoxLayout" name="pie_layout"/>
             </item>
             <item>
              <spacer name="verticalSpacer_4">
@@ -610,6 +631,52 @@ QPushButton:hover {
              </spacer>
             </item>
            </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_20">
+            <item>
+             <spacer name="verticalSpacer_6">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="column_layout"/>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_12">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
