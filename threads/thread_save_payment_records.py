@@ -55,8 +55,8 @@ class ThreadSavePaymentRecords(QThread):
             self.signals.signal_lesson_dto.emit(self.lesson_dto)
 
         except Exception as e:
-            self.session.rollback()
             print(e)
+            self.session.rollback()
             self.signals.signal_message.emit(Message(MessageType.ERROR, str(e)))
 
         finally:

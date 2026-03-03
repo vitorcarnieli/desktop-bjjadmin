@@ -12,6 +12,7 @@ from threads.payment_records.thread_load_payment_records import ThreadLoadPaymen
 from threads.payment_records.thread_edit_payment_record import ThreadEditPaymentRecord
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
 from views.checkable_combo_box import CheckableComboBox
+from views.main_home_view import MainHomeView
 from views.payment_record.edit_record_value import EditRecordValue
 from views.student.main_student_view import MainStudentView
 from views.ui.converted.ui_main_view import Ui_MainWindow
@@ -21,7 +22,7 @@ class MainPaymentRecordView:
     def __init__(self, main_view: Ui_MainWindow):
         self.thread_load_payment_records_is_running = False
         self.main_view = main_view
-        self.main_student_view: MainStudentView = None
+        self._clear_layout(self.main_view.layout_filter_records)
 
 
         self.forgiven_value = None
@@ -209,7 +210,7 @@ class MainPaymentRecordView:
         self.clear_table_records_selection()
 
         self.set_label_values()
-        self.main_student_view.reset()
+        self.reset()
 
 
     def start_thread_load_student_filters(self):
@@ -372,10 +373,16 @@ class MainPaymentRecordView:
             # payment
             payment_filter = filters.get("payment")
             if payment_filter is not None:
-                result = [
+                if payment_filter == PaymentStatus.OPEN.value:
+                    result =[
                     s for s in result
-                    if s.payment_status.value == payment_filter
-                ]
+                    if s.payment_status.value == 'Open' or s.payment_status.value == 'Overdue'
+                    ]
+                else:
+                    result = [
+                        s for s in result
+                        if s.payment_status.value == payment_filter
+                    ]
 
             # class
             class_filter = filters.get("class")
@@ -504,41 +511,27 @@ class MainPaymentRecordView:
 
     def reset(self):
         try:
-            self.main_view.table_payment_records.setRowCount(0)
-            self.main_view.table_payment_records.clearSelection()
-
             if self.combo_record_filters:
                 self.combo_record_filters.setParent(None)
                 self.combo_record_filters.deleteLater()
+                self.main_view.layout_filter_records.removeWidget(self.combo_record_filters)
                 self.combo_record_filters = None
 
-            self.forgiven_value = None
-            self.pending_value = None
-            self.payed_value = None
-
-            self.records = None
-            self.display_records = None
-            self.selected_item = None
-            self.to_day = date.today()
-
-            self.thread_load_payment_records = None
-            self.thread_load_student_filters = None
-            self.thread_edit_payment_record_status = None
-            self.thread_load_payment_records_is_running = False
-
-            self.main_view.label_total_payment_done.setText("Total recebido: R$ 0,00")
-            self.main_view.label_total_payment_pedding.setText("Total pendente: R$ 0,00")
-            self.main_view.label_3.setText("Total perdoado: R$ 0,00")
-            self.main_view.label_record_total_records.setText("Total: 0")
-
-            self.main_view.comboBox_year.blockSignals(True)
-            self.main_view.comboBox_month.blockSignals(True)
-            self.main_view.comboBox_year.clear()
-            self.main_view.comboBox_year.blockSignals(False)
-            self.main_view.comboBox_month.blockSignals(False)
-
-            self.assemble_ui()
-            self.clear_filters()
-            self.start_thread_load_payment_records(self.to_day)
+            self.main_view.reset_student()
         except Exception as e:
             print(e)
+
+    def _clear_layout(self, layout):
+        if not layout:
+            return
+        while layout.count():
+            item = layout.takeAt(0)
+
+            widget = item.widget()
+            if widget is not None:
+                widget.setParent(None)
+                widget.deleteLater()
+
+            child_layout = item.layout()
+            if child_layout is not None:
+                self._clear_layout(child_layout)

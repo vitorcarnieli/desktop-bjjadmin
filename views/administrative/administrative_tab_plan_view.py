@@ -67,7 +67,7 @@ class AdministrativeTabPlanView:
             if result == QMessageBox.Yes:
                 self.start_thread_delete_plan(plan_id)
 
-    def insert_table_plan(self, plan_dto: PlanDto):
+    def insert_table_plan(self, plan_dto):
         try:
             row_position = None
             already_exists_on_table = False

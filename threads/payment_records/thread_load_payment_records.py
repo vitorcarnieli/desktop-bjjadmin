@@ -58,7 +58,7 @@ class ThreadLoadPaymentRecords(QThread):
         try:
             records = self.payment_record_repository.get_payments_by_month(self.date)
             for record in records:
-                if date.today() >= record.due_date:
+                if date.today() >= record.due_date and record.payment_status is PaymentStatus.OPEN:
                     record.payment_status = PaymentStatus.OVERDUE
                     self.payment_record_repository.update(record)
 
@@ -74,9 +74,9 @@ class ThreadLoadPaymentRecords(QThread):
             year = self.date.year if self.date.month > 1 else self.date.year - 1
             lessons = self.lessons_repository.get_by_month_and_year(year, month)
             students_present_last_month = [s.id for l in lessons for s in l.students]
-            # save if student has created to day
+            # save if student has created to month
             students_away = list(
-                filter(lambda s: s.id not in students_present_last_month and s.created_at.date() != date.today(),
+                filter(lambda s: s.id not in students_present_last_month and ((s.created_at.date().year, s.created_at.date().month) > (date.today().year, date.today().month)),
                        students))
             for s in students_away:
                 s.is_inactive = True
@@ -95,7 +95,7 @@ class ThreadLoadPaymentRecords(QThread):
                 record.opened_at = date(self.date.year, self.date.month, 1)
                 record.due_date = date(self.date.year, self.date.month, 10)
                 record.value = student.plan.value
-                record.payment_status = PaymentStatus.OPEN
+                record.payment_status = PaymentStatus.OPEN if float(student.plan.value) > 0 else PaymentStatus.PAID
                 self.payment_record_repository.add(record)
                 return record
             except Exception as e:

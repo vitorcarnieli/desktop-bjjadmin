@@ -26,30 +26,29 @@ class ThreadGetStudents(QThread):
         self.lessons = None
 
     def run(self):
-        self.session = Session()
-        self.student_repository = StudentRepository(self.session)
-        self.lesson_repository = LessonRepository(self.session)
+        try:
+            self.session = Session()
+            self.student_repository = StudentRepository(self.session)
+            self.lesson_repository = LessonRepository(self.session)
 
+            students = self.student_repository.get_all()
+            student_dtos = [StudentService.get_dto(student) for student in students]
 
-        students = self.student_repository.get_all()
-        student_dtos = [StudentService.get_dto(student) for student in students]
+            self.lessons = self.lesson_repository.get_all()
+            for dto in student_dtos:
+                student = next((s for s in students if s.id == dto.id), None)
+                if not student.is_inactive and student.payment_records:
+                    latest_record = self._most_recent_payment_record(student.payment_records)
+                    dto.latest_payment_status = latest_record.payment_status
+                else:
+                    dto.latest_payment_status = None
+                dto.frequency = self.get_frequency(dto)
 
-        self.lessons = self.lesson_repository.get_all()
-        for dto in student_dtos:
-            student = next((s for s in students if s.id == dto.id), None)
-            if not student.is_inactive and student.payment_records:
-                latest_record = self._most_recent_payment_record(student.payment_records)
-                dto.latest_payment_status = latest_record.payment_status
-            else:
-                dto.latest_payment_status = None
-            dto.frequency = self.get_frequency(dto)
+            self.signals.signal_student_dtos.emit(student_dtos)
+            Session.remove()
+        except Exception as e:
+            print(e)
 
-
-
-
-
-        self.signals.signal_student_dtos.emit(student_dtos)
-        Session.remove()
 
     def _most_recent_payment_record(self, records):
         if records:
@@ -74,10 +73,7 @@ class ThreadGetStudents(QThread):
         today = date.today()
 
         def months_diff(d1, d2):
-            months = (d1.year - d2.year) * 12 + (d1.month - d2.month)
-            if d1.day < d2.day:
-                months -= 1
-            return months
+            return (d1.year - d2.year) * 12 + (d1.month - d2.month)
 
         return [
             l for l in lessons
