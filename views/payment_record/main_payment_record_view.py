@@ -22,8 +22,7 @@ class MainPaymentRecordView:
     def __init__(self, main_view: Ui_MainWindow):
         self.thread_load_payment_records_is_running = False
         self.main_view = main_view
-        self.main_student_view: MainStudentView = None
-        self.main_home_view: MainHomeView = None
+        self._clear_layout(self.main_view.layout_filter_records)
 
 
         self.forgiven_value = None
@@ -211,8 +210,7 @@ class MainPaymentRecordView:
         self.clear_table_records_selection()
 
         self.set_label_values()
-        self.main_student_view.reset()
-        self.main_home_view.reset_view()
+        self.reset()
 
 
     def start_thread_load_student_filters(self):
@@ -513,42 +511,27 @@ class MainPaymentRecordView:
 
     def reset(self):
         try:
-            self.main_view.table_payment_records.setRowCount(0)
-            self.main_view.table_payment_records.clearSelection()
-
             if self.combo_record_filters:
                 self.combo_record_filters.setParent(None)
                 self.combo_record_filters.deleteLater()
+                self.main_view.layout_filter_records.removeWidget(self.combo_record_filters)
                 self.combo_record_filters = None
 
-            self.forgiven_value = None
-            self.pending_value = None
-            self.payed_value = None
-
-            self.records = None
-            self.display_records = None
-            self.selected_item = None
-            self.to_day = date.today()
-
-            self.thread_load_payment_records = None
-            self.thread_load_student_filters = None
-            self.thread_edit_payment_record_status = None
-            self.thread_load_payment_records_is_running = False
-
-            self.main_view.label_total_payment_done.setText("Total recebido: R$ 0,00")
-            self.main_view.label_total_payment_pedding.setText("Total pendente: R$ 0,00")
-            self.main_view.label_3.setText("Total perdoado: R$ 0,00")
-            self.main_view.label_record_total_records.setText("Total: 0")
-
-            self.main_view.comboBox_year.blockSignals(True)
-            self.main_view.comboBox_month.blockSignals(True)
-            self.main_view.comboBox_year.clear()
-            self.main_view.comboBox_year.blockSignals(False)
-            self.main_view.comboBox_month.blockSignals(False)
-
-            self.clear_filters()
-            self.assemble_ui()
-            self.start_thread_load_student_filters()
-            self.start_thread_load_payment_records(self.to_day)
+            self.main_view.reset_student()
         except Exception as e:
             print(e)
+
+    def _clear_layout(self, layout):
+        if not layout:
+            return
+        while layout.count():
+            item = layout.takeAt(0)
+
+            widget = item.widget()
+            if widget is not None:
+                widget.setParent(None)
+                widget.deleteLater()
+
+            child_layout = item.layout()
+            if child_layout is not None:
+                self._clear_layout(child_layout)

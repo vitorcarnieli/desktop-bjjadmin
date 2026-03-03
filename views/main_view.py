@@ -47,15 +47,14 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.main_administrative_view = AdministrativeMainView(self)
         self.main_lesson_view = MainLessonView(self)
         self.main_payment_record_view = MainPaymentRecordView(self)
-        self.main_student_view = MainStudentView(self, self.main_payment_record_view, self.main_home_view )
-        self.main_payment_record_view.main_student_view = self.main_student_view
-        self.main_payment_record_view.main_home_view = self.main_home_view
+        self.main_student_view = MainStudentView(self)
 
         self.btn_home.setIcon(QIcon("views/icons/home.png"))
         self.btn_menu_lessons.setIcon(QIcon("views/icons/lesson.png"))
         self.btn_menu_student.setIcon(QIcon("views/icons/groups-white.png"))
         self.btn_menu_message_forwarding.setIcon(QIcon("views/icons/administrative.png"))
         self.btn_registers.setIcon(QIcon("views/icons/record_fill.png"))
+        self.refresh_home_btn.setIcon(QIcon("views/icons/refresh_white.png"))
 
 
 
@@ -323,3 +322,22 @@ QCalendarWidget QScrollBar::sub-line:vertical {
             self.btn_registers.setStyleSheet(menu_button_style.checked_menu)
         else:
             self.btn_registers.setStyleSheet(menu_button_style.unchecked_menu)
+
+    def reset_all(self):
+        self.setEnabled(False)
+        self.main_administrative_view = AdministrativeMainView(self)
+        self.main_lesson_view = MainLessonView(self)
+        self.main_payment_record_view = MainPaymentRecordView(self)
+        self.main_student_view = MainStudentView(self)
+        self.main_home_view = MainHomeView(self)
+        self.setEnabled(True)
+
+    def reset_student(self):
+        self.setEnabled(False)
+        self.main_student_view = MainStudentView(self)
+        self.setEnabled(True)
+
+    def reset_payment_record(self):
+        self.setEnabled(False)
+        self.main_payment_record_view = MainPaymentRecordView(self)
+        self.setEnabled(True)
