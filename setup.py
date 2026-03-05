@@ -4,7 +4,7 @@ from cx_Freeze import setup, Executable
 base = "Win32GUI" if sys.platform == "win32" else None
 
 executables = [
-    Executable("main.py", base=base, target_name="bjj-system.exe", icon="./views/icons/window_icon.ico"),
+    Executable("main.py", base=base, target_name="bjj-admin.exe", icon="./views/icons/window_icon.ico"),
 ]
 
 packages = [
@@ -50,7 +50,7 @@ build_exe_options = {
 
 setup(
     name="BJJ Admin",
-    version="1.0",
+    version="1.3",
     description="Sistema de gerenciamento de academias de jiu-jitsu",
     options={"build_exe": build_exe_options},
     executables=executables,
