@@ -55,11 +55,13 @@ class MainView(QMainWindow, Ui_MainWindow):
         self.btn_menu_message_forwarding.setIcon(QIcon("views/icons/administrative.png"))
         self.btn_registers.setIcon(QIcon("views/icons/record_fill.png"))
         self.refresh_home_btn.setIcon(QIcon("views/icons/refresh_white.png"))
-
+        self.refresh_home_btn.setIcon(QIcon("views/icons/refresh_white.png"))
+        self.btn_student_view_card.setIcon(QIcon("views/icons/cards.png"))
+        self.btn_student_view_table.setIcon(QIcon("views/icons/list.png"))
 
 
         # Set Version
-        self.label_copywrite.setText(f"Versão: 1.1")
+        self.label_copywrite.setText(f"Versão: 1.3")
 
         self.calendarWidget.setStyleSheet("""
         /* QCalendarWidget - Estilo Moderno */
