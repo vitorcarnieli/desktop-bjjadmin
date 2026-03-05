@@ -440,10 +440,12 @@ class MainStudentView:
         if not self._active:
             return
         try:
+            label = self.main_view.label_student_filter
+            _ = label.objectName()
             if self.to_display_student_dtos or self.filters_on:
-                self.main_view.label_student_filter.setText(f"Total: {len(self.to_display_student_dtos)}")
+                label.setText(f"Total: {len(self.to_display_student_dtos)}")
             else:
-                self.main_view.label_student_filter.setText(f"Total: {len(self.student_dtos)}")
+                label.setText(f"Total: {len(self.student_dtos)}")
         except RuntimeError:
             pass
 
@@ -461,6 +463,8 @@ class MainStudentView:
             self.main_view.reset_all()
         except Exception as e:
             print(e)
+        finally:
+            self._active = True
 
     def _clear_layout(self, layout):
         if not layout:
@@ -469,6 +473,9 @@ class MainStudentView:
             item = layout.takeAt(0)
             widget = item.widget()
             if widget is not None:
+                if widget is self.main_view.label_student_filter:
+                    layout.addWidget(widget)
+                    break
                 try:
                     widget.blockSignals(True)
                 except RuntimeError:
