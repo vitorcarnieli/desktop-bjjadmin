@@ -1300,7 +1300,83 @@ QCalendarWidget QScrollBar::sub-line:vertical {
             </property>
            </spacer>
           </item>
+          <item>
+           <widget class="QPushButton" name="btn_student_view_card">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+background-color: #2f2f2f; border-radius: 6px;
+                            }</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_student_view_table">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+background-color: #2f2f2f; border-radius: 6px;
+                            }</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QScrollArea" name="cards_scroll_area">
+          <property name="styleSheet">
+           <string notr="true">border:none;</string>
+          </property>
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="cards_container">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>744</width>
+             <height>320</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_22"/>
+          </widget>
+         </widget>
         </item>
         <item>
          <widget class="QTableWidget" name="table_students">

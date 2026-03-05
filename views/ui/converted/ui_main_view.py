@@ -17,9 +17,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCalendarWidget, QComboBox,
     QFrame, QHBoxLayout, QHeaderView, QLabel,
-    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
-    QStackedWidget, QTabWidget, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+    QMainWindow, QPushButton, QScrollArea, QSizePolicy,
+    QSpacerItem, QStackedWidget, QTabWidget, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -873,8 +873,48 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_8.addItem(self.horizontalSpacer_11)
 
+        self.btn_student_view_card = QPushButton(self.page_student)
+        self.btn_student_view_card.setObjectName(u"btn_student_view_card")
+        self.btn_student_view_card.setEnabled(True)
+        self.btn_student_view_card.setMinimumSize(QSize(30, 30))
+        self.btn_student_view_card.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btn_student_view_card.setStyleSheet(u"QPushButton {\n"
+"background-color: #2f2f2f; border-radius: 6px;\n"
+"                            }")
+
+        self.horizontalLayout_8.addWidget(self.btn_student_view_card)
+
+        self.btn_student_view_table = QPushButton(self.page_student)
+        self.btn_student_view_table.setObjectName(u"btn_student_view_table")
+        self.btn_student_view_table.setEnabled(True)
+        self.btn_student_view_table.setMinimumSize(QSize(30, 30))
+        self.btn_student_view_table.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.btn_student_view_table.setStyleSheet(u"QPushButton {\n"
+"background-color: #2f2f2f; border-radius: 6px;\n"
+"                            }")
+
+        self.horizontalLayout_8.addWidget(self.btn_student_view_table)
+
+        self.label_7 = QLabel(self.page_student)
+        self.label_7.setObjectName(u"label_7")
+
+        self.horizontalLayout_8.addWidget(self.label_7)
+
 
         self.verticalLayout_16.addLayout(self.horizontalLayout_8)
+
+        self.cards_scroll_area = QScrollArea(self.page_student)
+        self.cards_scroll_area.setObjectName(u"cards_scroll_area")
+        self.cards_scroll_area.setStyleSheet(u"border:none;")
+        self.cards_scroll_area.setWidgetResizable(True)
+        self.cards_container = QWidget()
+        self.cards_container.setObjectName(u"cards_container")
+        self.cards_container.setGeometry(QRect(0, 0, 744, 320))
+        self.verticalLayout_22 = QVBoxLayout(self.cards_container)
+        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.cards_scroll_area.setWidget(self.cards_container)
+
+        self.verticalLayout_16.addWidget(self.cards_scroll_area)
 
         self.table_students = QTableWidget(self.page_student)
         if (self.table_students.columnCount() < 5):
@@ -1591,6 +1631,9 @@ class Ui_MainWindow(object):
         self.btn_add_student.setText(QCoreApplication.translate("MainWindow", u"Adicionar", None))
         self.btn_remove_student.setText(QCoreApplication.translate("MainWindow", u"Remover", None))
         self.label_student_filter.setText(QCoreApplication.translate("MainWindow", u"Total:.", None))
+        self.btn_student_view_card.setText("")
+        self.btn_student_view_table.setText("")
+        self.label_7.setText("")
         ___qtablewidgetitem2 = self.table_students.horizontalHeaderItem(0)
         ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"id", None));
         ___qtablewidgetitem3 = self.table_students.horizontalHeaderItem(1)
