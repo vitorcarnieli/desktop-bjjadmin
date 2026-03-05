@@ -17,9 +17,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCalendarWidget, QComboBox,
     QFrame, QHBoxLayout, QHeaderView, QLabel,
-    QMainWindow, QPushButton, QScrollArea, QSizePolicy,
-    QSpacerItem, QStackedWidget, QTabWidget, QTableWidget,
-    QTableWidgetItem, QVBoxLayout, QWidget)
+    QLineEdit, QMainWindow, QPushButton, QScrollArea,
+    QSizePolicy, QSpacerItem, QStackedWidget, QTabWidget,
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -856,18 +856,42 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_16.addLayout(self.layout_buttons_manage_students)
 
-        self.horizontalLayout_8 = QHBoxLayout()
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.student_filter_layout = QVBoxLayout()
-        self.student_filter_layout.setObjectName(u"student_filter_layout")
+        self.horizontalLayout_12 = QHBoxLayout()
+        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
         self.label_student_filter = QLabel(self.page_student)
         self.label_student_filter.setObjectName(u"label_student_filter")
         self.label_student_filter.setStyleSheet(u"color: rgb(255, 255, 255);")
 
-        self.student_filter_layout.addWidget(self.label_student_filter)
+        self.horizontalLayout_12.addWidget(self.label_student_filter)
 
+        self.horizontalSpacer_13 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_12.addItem(self.horizontalSpacer_13)
+
+
+        self.verticalLayout_16.addLayout(self.horizontalLayout_12)
+
+        self.horizontalLayout_8 = QHBoxLayout()
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.student_filter_layout = QHBoxLayout()
+        self.student_filter_layout.setObjectName(u"student_filter_layout")
 
         self.horizontalLayout_8.addLayout(self.student_filter_layout)
+
+        self.student_search_by_name = QLineEdit(self.page_student)
+        self.student_search_by_name.setObjectName(u"student_search_by_name")
+        self.student_search_by_name.setMinimumSize(QSize(125, 30))
+        self.student_search_by_name.setMaximumSize(QSize(250, 16777215))
+        self.student_search_by_name.setStyleSheet(u"QLineEdit {\n"
+"    border: 1px solid #aaa;\n"
+"    border-radius: 6px;\n"
+"    padding: 4px 8px;\n"
+"    background: #ffffff;\n"
+"    color: #333333;\n"
+"}\n"
+"")
+
+        self.horizontalLayout_8.addWidget(self.student_search_by_name)
 
         self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
@@ -909,7 +933,7 @@ class Ui_MainWindow(object):
         self.cards_scroll_area.setWidgetResizable(True)
         self.cards_container = QWidget()
         self.cards_container.setObjectName(u"cards_container")
-        self.cards_container.setGeometry(QRect(0, 0, 744, 320))
+        self.cards_container.setGeometry(QRect(0, 0, 744, 306))
         self.verticalLayout_22 = QVBoxLayout(self.cards_container)
         self.verticalLayout_22.setObjectName(u"verticalLayout_22")
         self.cards_scroll_area.setWidget(self.cards_container)
@@ -1341,13 +1365,37 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addLayout(self.horizontalLayout)
 
-        self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_13 = QHBoxLayout()
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
         self.layout_filter_records = QVBoxLayout()
         self.layout_filter_records.setObjectName(u"layout_filter_records")
 
-        self.horizontalLayout_4.addLayout(self.layout_filter_records)
+        self.horizontalLayout_13.addLayout(self.layout_filter_records)
 
+        self.records_search_by_name = QLineEdit(self.page_records)
+        self.records_search_by_name.setObjectName(u"records_search_by_name")
+        self.records_search_by_name.setMinimumSize(QSize(0, 30))
+        self.records_search_by_name.setMaximumSize(QSize(250, 16777215))
+        self.records_search_by_name.setStyleSheet(u"QLineEdit {\n"
+"    border: 1px solid #aaa;\n"
+"    border-radius: 6px;\n"
+"    padding: 4px 8px;\n"
+"    background: #ffffff;\n"
+"    color: #333333;\n"
+"}\n"
+"")
+
+        self.horizontalLayout_13.addWidget(self.records_search_by_name)
+
+        self.horizontalSpacer_16 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_13.addItem(self.horizontalSpacer_16)
+
+
+        self.verticalLayout_6.addLayout(self.horizontalLayout_13)
+
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalSpacer_14 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_4.addItem(self.horizontalSpacer_14)
@@ -1631,6 +1679,8 @@ class Ui_MainWindow(object):
         self.btn_add_student.setText(QCoreApplication.translate("MainWindow", u"Adicionar", None))
         self.btn_remove_student.setText(QCoreApplication.translate("MainWindow", u"Remover", None))
         self.label_student_filter.setText(QCoreApplication.translate("MainWindow", u"Total:.", None))
+        self.student_search_by_name.setText("")
+        self.student_search_by_name.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Buscar por nome", None))
         self.btn_student_view_card.setText("")
         self.btn_student_view_table.setText("")
         self.label_7.setText("")
@@ -1680,6 +1730,7 @@ class Ui_MainWindow(object):
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Total perdoado:", None))
         self.label_5.setText("")
         self.label_total_payment_pedding.setText(QCoreApplication.translate("MainWindow", u"Total pendente:", None))
+        self.records_search_by_name.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Buscar por nome", None))
         self.comboBox_month.setItemText(0, QCoreApplication.translate("MainWindow", u"Janeiro", None))
         self.comboBox_month.setItemText(1, QCoreApplication.translate("MainWindow", u"Fevereiro", None))
         self.comboBox_month.setItemText(2, QCoreApplication.translate("MainWindow", u"Mar\u00e7o", None))

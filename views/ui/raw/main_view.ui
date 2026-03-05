@@ -1272,20 +1272,68 @@ QCalendarWidget QScrollBar::sub-line:vertical {
          </layout>
         </item>
         <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item>
+           <widget class="QLabel" name="label_student_filter">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>Total:.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_13">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
-           <layout class="QVBoxLayout" name="student_filter_layout">
-            <item>
-             <widget class="QLabel" name="label_student_filter">
-              <property name="styleSheet">
-               <string notr="true">color: rgb(255, 255, 255);</string>
-              </property>
-              <property name="text">
-               <string>Total:.</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <layout class="QHBoxLayout" name="student_filter_layout"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="student_search_by_name">
+            <property name="minimumSize">
+             <size>
+              <width>125</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    padding: 4px 8px;
+    background: #ffffff;
+    color: #333333;
+}
+</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>Buscar por nome</string>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="horizontalSpacer_11">
@@ -1371,7 +1419,7 @@ background-color: #2f2f2f; border-radius: 6px;
              <x>0</x>
              <y>0</y>
              <width>744</width>
-             <height>320</height>
+             <height>306</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_22"/>
@@ -2075,10 +2123,56 @@ QTabWidget::tab-bar {
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
           <item>
            <layout class="QVBoxLayout" name="layout_filter_records"/>
           </item>
+          <item>
+           <widget class="QLineEdit" name="records_search_by_name">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    padding: 4px 8px;
+    background: #ffffff;
+    color: #333333;
+}
+</string>
+            </property>
+            <property name="placeholderText">
+             <string>Buscar por nome</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_16">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <spacer name="horizontalSpacer_14">
             <property name="orientation">
