@@ -43,6 +43,7 @@ class MainStudentView:
         self.main_view.btn_remove_student.clicked.connect(self.on_click_btn_remove_student)
         self.main_view.table_students.doubleClicked.connect(self.on_double_click_table_students)
         self.main_view.table_students.itemSelectionChanged.connect(self.on_selection_change_table_students)
+        self.main_view.student_search_by_name.textChanged.connect(self.on_search_by_name)
         self.main_view.btn_student_view_card.clicked.connect(
             lambda: self.on_change_student_view(True)
         )
@@ -57,6 +58,25 @@ class MainStudentView:
         self.start_thread_get_students()
 
     # view handlers
+
+    def on_search_by_name(self, text: str):
+        text = text.strip().lower()
+        if not text:
+            result = self.student_dtos
+        else:
+            result = [
+                s for s in self.student_dtos
+                if text in s.name.lower()
+            ]
+
+        self.to_display_student_dtos = result
+        self.set_total_student_label()
+
+        self.main_view.table_students.setRowCount(0)
+        for s in result:
+            self.insert_table_students(s)
+
+        self.create_cards(result)
 
     def on_change_student_view(self, is_card):
         if is_card:
@@ -217,9 +237,12 @@ class MainStudentView:
         if row_position is not None:
             self.main_view.table_students.removeRow(row_position)
             c = next((c for c in self.student_dtos if c.id == cod), None)
-            self.student_dtos.remove(c)
-            if self.to_display_student_dtos:
-                self.to_display_student_dtos.remove(c)
+            try:
+                self.student_dtos.remove(c)
+                if self.to_display_student_dtos:
+                    self.to_display_student_dtos.remove(c)
+            except Exception:
+                pass
             self.set_total_student_label()
             self.create_cards(self.to_display_student_dtos)
 
