@@ -1,5 +1,3 @@
-import copy
-from calendar import month
 from datetime import date
 
 from PySide6.QtCore import Qt
@@ -12,9 +10,7 @@ from threads.payment_records.thread_load_payment_records import ThreadLoadPaymen
 from threads.payment_records.thread_edit_payment_record import ThreadEditPaymentRecord
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
 from views.checkable_combo_box import CheckableComboBox
-from views.main_home_view import MainHomeView
 from views.payment_record.edit_record_value import EditRecordValue
-from views.student.main_student_view import MainStudentView
 from views.ui.converted.ui_main_view import Ui_MainWindow
 
 
@@ -48,6 +44,7 @@ class MainPaymentRecordView:
         self.main_view.comboBox_year.currentIndexChanged.connect(self.on_index_change_comboBox_year)
         self.main_view.table_payment_records.itemSelectionChanged.connect(self.on_itemSelectionChanged_table_payment_records)
         self.main_view.table_payment_records.itemDoubleClicked.connect(self.on_double_click_table_payment_records)
+        self.main_view.records_search_by_name.textChanged.connect(self.on_search_by_name)
         self.combo_record_filters: CheckableComboBox = None
 
 
@@ -55,6 +52,26 @@ class MainPaymentRecordView:
         self.start_thread_load_payment_records(self.to_day)
 
     # views events
+    def on_search_by_name(self, text: str):
+        text = text.strip().lower()
+        base = self.display_records if self.display_records else self.records
+
+        if not base:
+            return
+
+        if not text:
+            result = base
+        else:
+            result = [
+                r for r in base
+                if text in r.student.name.lower()
+            ]
+
+        self.main_view.label_record_total_records.setText(f"Total: {len(result)}")
+        self.main_view.table_payment_records.setRowCount(0)
+        for r in result:
+            self.insert_table_records(r)
+
     def on_double_click_table_payment_records(self):
         row = self.main_view.table_payment_records.currentIndex().row()
         cod = int(self.main_view.table_payment_records.item(row, 0).text())
@@ -104,8 +121,10 @@ class MainPaymentRecordView:
         return None
 
     def on_click_action_btns(self, status):
-        self.selected_item.payment_status = status
-        self.start_thread_edit_payment_record_status()
+        selected_item = self.selected_item
+        selected_item.payment_status = status
+        self.main_view.records_search_by_name.setText("")
+        self.start_thread_edit_payment_record_status(selected_item)
 
     def on_index_change_comboBox_year(self, i):
         try:
@@ -198,8 +217,8 @@ class MainPaymentRecordView:
 
 
     # threads
-    def start_thread_edit_payment_record_status(self):
-        self.thread_edit_payment_record_status = ThreadEditPaymentRecord(self.selected_item)
+    def start_thread_edit_payment_record_status(self, selected_item):
+        self.thread_edit_payment_record_status = ThreadEditPaymentRecord(selected_item)
         self.thread_edit_payment_record_status.signals.signal_updated_record_dto.connect(self.on_signal_updated_record_dto)
         self.thread_edit_payment_record_status.start()
 
