@@ -583,6 +583,8 @@ class MainStudentView:
 
 
     def _open_edit_card(self, student_dto: StudentDto):
+        if not student_dto:
+            return
         edit_view = StudentView(self.main_view, student_dto)
         edit_view.exec()
         if edit_view.saved_student_dto:
