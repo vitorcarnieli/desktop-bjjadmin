@@ -304,6 +304,30 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_7.addWidget(self.frame_paied)
 
+        self.frame_forgiven = QFrame(self.page_home)
+        self.frame_forgiven.setObjectName(u"frame_forgiven")
+        self.frame_forgiven.setStyleSheet(u"background-color: #00838F;")
+        self.frame_forgiven.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_forgiven.setFrameShadow(QFrame.Shadow.Raised)
+        self.verticalLayout_22 = QVBoxLayout(self.frame_forgiven)
+        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.label_forgiven = QLabel(self.frame_forgiven)
+        self.label_forgiven.setObjectName(u"label_forgiven")
+        self.label_forgiven.setFont(font2)
+        self.label_forgiven.setStyleSheet(u"color: rgb(255, 255, 255);")
+
+        self.verticalLayout_22.addWidget(self.label_forgiven)
+
+        self.forgiven_num = QLabel(self.frame_forgiven)
+        self.forgiven_num.setObjectName(u"forgiven_num")
+        self.forgiven_num.setFont(font3)
+        self.forgiven_num.setStyleSheet(u"color: rgb(255, 255, 255);")
+
+        self.verticalLayout_22.addWidget(self.forgiven_num)
+
+
+        self.horizontalLayout_7.addWidget(self.frame_forgiven)
+
         self.frame_peding = QFrame(self.page_home)
         self.frame_peding.setObjectName(u"frame_peding")
         self.frame_peding.setStyleSheet(u"background-color: rgb(255, 0, 0);")
@@ -1665,6 +1689,8 @@ class Ui_MainWindow(object):
         self.refresh_home_btn.setText("")
         self.label.setText(QCoreApplication.translate("MainWindow", u"Total de Alunos", None))
         self.total_num.setText(QCoreApplication.translate("MainWindow", u"000", None))
+        self.label_forgiven.setText(QCoreApplication.translate("MainWindow", u"Total perdoado", None))
+        self.forgiven_num.setText(QCoreApplication.translate("MainWindow", u"R$ 00000,00", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Total de Pagamentos", None))
         self.paied_num.setText(QCoreApplication.translate("MainWindow", u"R$ 00000,00", None))
         self.label_23232.setText(QCoreApplication.translate("MainWindow", u"Total de Pend\u00eancias", None))
