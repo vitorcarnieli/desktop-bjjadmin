@@ -153,25 +153,36 @@ class MainHomeView:
                 return f"R$ {value_split[0]},{value_split[-1]}"
 
         total = infos["total"]
+        forgiven = infos["forgiven"]
         paid = infos["paid"]
         pending = infos["pending"]
 
         self.main_view.total_num.setText(str(total))
+        self.main_view.forgiven_num.setText(format_value(forgiven))
         self.main_view.paied_num.setText(format_value(paid))
         self.main_view.peding_num.setText(format_value(pending))
 
-        if total > 0:
-            paid_percent = (paid / total) * 100
-            pending_percent = (pending / total) * 100
+        total_amount = paid + forgiven + pending
+
+        if total_amount > 0:
+            paid_percent = (paid / total_amount) * 100
+            forgiven_percent = (forgiven / total_amount) * 100
+            pending_percent = (pending / total_amount) * 100
         else:
             paid_percent = 0
+            forgiven_percent = 0
             pending_percent = 0
 
         data = [
             {
-                "label": "Pagantes",
+                "label": "Pagos",
                 "percent": paid_percent,
                 "color": "#008000"
+            },
+            {
+                "label": "Perdoados",
+                "percent": forgiven_percent,
+                "color": "#00838F"
             },
             {
                 "label": "Devedores",
@@ -219,6 +230,7 @@ class MainHomeView:
         self.main_view.table_birthday.setRowCount(0)
 
         self.main_view.total_num.setText("0")
+        self.main_view.forgiven_num.setText("R$ 0,00")
         self.main_view.paied_num.setText("R$ 0,00")
         self.main_view.peding_num.setText("R$ 0,00")
 

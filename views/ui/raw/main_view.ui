@@ -504,6 +504,52 @@ QPushButton:hover {
            </widget>
           </item>
           <item>
+           <widget class="QFrame" name="frame_forgiven">
+            <property name="styleSheet">
+             <string notr="true">background-color: #00838F;</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_22">
+             <item>
+              <widget class="QLabel" name="label_forgiven">
+               <property name="font">
+                <font>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);</string>
+               </property>
+               <property name="text">
+                <string>Total perdoado</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="forgiven_num">
+               <property name="font">
+                <font>
+                 <pointsize>16</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);</string>
+               </property>
+               <property name="text">
+                <string>R$ 00000,00</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
            <widget class="QFrame" name="frame_peding">
             <property name="styleSheet">
              <string notr="true">background-color: rgb(255, 0, 0);</string>

@@ -53,11 +53,20 @@ class ThreadLoadHome(QThread):
         records = self.payment_record_repository.get_payments_by_month(date.today())
         return {
             "total": len(records),
+            "forgiven": sum(
+                map(
+                    lambda r: float(r.value),
+                    filter(
+                        lambda r: r.payment_status == PaymentStatus.FORGIVEN,
+                        records
+                    )
+                )
+            ),
             "paid": sum(
                         map(
                             lambda r: float(r.value),
                             filter(
-                                lambda r: r.payment_status in (PaymentStatus.PAID, PaymentStatus.FORGIVEN),
+                                lambda r: r.payment_status == PaymentStatus.PAID,
                                 records
                             )
                         )
