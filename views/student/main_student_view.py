@@ -5,8 +5,10 @@ from PySide6.QtCore import Qt, QObject, QEvent
 from PySide6.QtGui import QColor, QPixmap, QPainter
 from PySide6.QtWidgets import QTableWidgetItem, QMessageBox, QHeaderView, QWidget, QSizePolicy
 
+from dtos.message import Message
 from dtos.student_dto import StudentDto
 from enums.payment_status import PaymentStatus
+from enums.message_type import MessageType
 from services.file_service import FileService
 from threads.student.thread_get_students import ThreadGetStudents
 from threads.student.thread_load_student_filters import ThreadLoadStudentFilters
@@ -129,6 +131,10 @@ class MainStudentView:
             self.reset()
 
     def on_click_btn_remove_student(self):
+        if not self.selected_item:
+            self.main_view.btn_remove_student.setEnabled(False)
+            return
+
         confirm_view = ConfirmView(parent=self.main_view, title="Apagar",
                                        text=f"Tem certeza que deseja apara o aluno '{self.selected_item.name}'?")
         result = confirm_view.exec()
@@ -239,7 +245,12 @@ class MainStudentView:
 
     # threads
     def start_thread_delete_student(self):
+        if not self.selected_item:
+            return
+
+        self.main_view.btn_remove_student.setEnabled(False)
         self.thread_delete_student = ThreadRemoveStudent(self.selected_item.id)
+        self.thread_delete_student.signals.signal_message.connect(self.on_signal_delete_student_message)
         self.thread_delete_student.signals.signal_finished.connect(self.on_signal_delete_student_finished)
         self.thread_delete_student.start()
 
@@ -260,8 +271,15 @@ class MainStudentView:
                     self.to_display_student_dtos.remove(c)
             except Exception:
                 pass
+            self.selected_item = None
+            self.main_view.btn_remove_student.setEnabled(False)
             self.set_total_student_label()
             self.create_cards(self.to_display_student_dtos)
+
+    def on_signal_delete_student_message(self, message: Message):
+        if message.type == MessageType.ERROR:
+            QMessageBox.critical(self.main_view, "Erro", message.payload)
+        self.main_view.btn_remove_student.setEnabled(self.selected_item is not None)
 
     def start_thread_get_students(self):
         self.thread_get_students_running = True
