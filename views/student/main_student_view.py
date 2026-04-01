@@ -39,6 +39,29 @@ class MainStudentView:
         self.main_view.btn_student_view_table.setStyleSheet(self.UNSELECTED_STYLE)
         self._selected_card = None
 
+        self._bind_ui_signals()
+
+        self.main_view.table_students.setColumnHidden(0, True)
+
+        self.student_dtos = []
+        self.to_display_student_dtos = []
+        self.start_thread_get_students()
+
+    def _disconnect_signal(self, signal):
+        try:
+            signal.disconnect()
+        except (RuntimeError, TypeError):
+            pass
+
+    def _bind_ui_signals(self):
+        self._disconnect_signal(self.main_view.btn_add_student.clicked)
+        self._disconnect_signal(self.main_view.btn_remove_student.clicked)
+        self._disconnect_signal(self.main_view.table_students.doubleClicked)
+        self._disconnect_signal(self.main_view.table_students.itemSelectionChanged)
+        self._disconnect_signal(self.main_view.student_search_by_name.textChanged)
+        self._disconnect_signal(self.main_view.btn_student_view_card.clicked)
+        self._disconnect_signal(self.main_view.btn_student_view_table.clicked)
+
         self.main_view.btn_add_student.clicked.connect(self.on_click_btn_add_student)
         self.main_view.btn_remove_student.clicked.connect(self.on_click_btn_remove_student)
         self.main_view.table_students.doubleClicked.connect(self.on_double_click_table_students)
@@ -50,12 +73,6 @@ class MainStudentView:
         self.main_view.btn_student_view_table.clicked.connect(
             lambda: self.on_change_student_view(False)
         )
-
-        self.main_view.table_students.setColumnHidden(0, True)
-
-        self.student_dtos = []
-        self.to_display_student_dtos = []
-        self.start_thread_get_students()
 
     # view handlers
 
